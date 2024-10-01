@@ -16,8 +16,8 @@ python \VAD\inference.py --inference_model='shanghaitech.pkl'
 
 | Dataset       | Best AUC | Model Link  |
 | --------------| ---------| ------------|
-| ShanghaiTech  | 97.91%   | [model]([https://Baidu](https://pan.baidu.com)) |
-| UBnormal      | 70.91%   | [model]([https://Baidu](https://pan.baidu.com)) |
+| ShanghaiTech  | 97.91%   | [Pre-trained Models]([https://Baidu](https://pan.baidu.com)) |
+| UBnormal      | 70.91%   | [Pre-trained Models]([https://Baidu](https://pan.baidu.com)) |
 
 code: mda2
 
