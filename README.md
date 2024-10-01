@@ -16,8 +16,8 @@ python \VAD\inference.py --inference_model='shanghaitech.pkl'
 
 | Dataset       | Best AUC | Model Link  |
 | --------------| ---------| ------------|
-| ShanghaiTech  | 97.91%   | [model](https://pan.baidu.com/s/1nYz0VatkQGyuTNvbQRMdZg) |
-| UBnormal      | 70.91%   | [model](https://pan.baidu.com/s/1nYz0VatkQGyuTNvbQRMdZg) |
+| ShanghaiTech  | 97.91%   | [model]([https://Baidu](https://pan.baidu.com)) |
+| UBnormal      | 70.91%   | [model]([https://Baidu](https://pan.baidu.com)) |
 
 code: mda2
 
@@ -25,7 +25,7 @@ code: mda2
 
 
 🚀️🚀️🚀️
-
+* Pre-trained Models
 * Dataset features
 * How to use the backbone for feature extraction
 * Edge device deployment and federated training code reproduction details
