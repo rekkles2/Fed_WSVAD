@@ -21,7 +21,7 @@ import time
 import copy
 from SALA import SALA
 
-# 超参数
+
 parser = argparse.ArgumentParser(description="Flower Embedded devices")
 parser.add_argument("--server_address", type=str, default="192.168.0.104:8080",help=f"gRPC server address (deafault '192.168.31.238:8080')",)
 parser.add_argument("--cid",type=int, required=True, help="Client id. Should be an integer between 0 and NUM_CLIENTS",)
