@@ -30,4 +30,4 @@ python \VAD\inference.py --inference_model='shanghaitech.pkl'
 * How to use the backbone for feature extraction
 * Edge device deployment and federated training code reproduction details
 
-Stay tuned!!!
+***Stay tuned!!!***
