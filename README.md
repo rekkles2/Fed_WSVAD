@@ -14,22 +14,20 @@ To evaluate the model, use the following command:
 python \VAD\inference.py --inference_model='shanghaitech.pkl'
 ```
 
-| Dataset       | Best AUC | Model Link  |
-| --------------| ---------| ------------|
-| ShanghaiTech  | 97.91%   | [Pre-trained Models]([https://Baidu](https://pan.baidu.com)) |
-| UBnormal      | 70.91%   | [Pre-trained Models]([https://Baidu](https://pan.baidu.com)) |
+| Dataset       | Best AUC | By FedSSALA | Model Link  |
+| --------------| ---------| ---------| -------------
+| ShanghaiTech  | 97.91%   | 97.86%   | [model](https://pan.baidu.com/s/1nYz0VatkQGyuTNvbQRMdZg) |
+| UBnormal      | 70.91%   | 76.51%   | [model](https://pan.baidu.com/s/1nYz0VatkQGyuTNvbQRMdZg) |
 
+Link:Stay tuned!!!
 code: mda2
 
 # 📋 Due to the double-blind review process, we are unable to upload the dataset or provide further details at this time.
 
-
 🚀️🚀️🚀️
-* Pre-trained Models
+
 * Dataset features
 * How to use the backbone for feature extraction
 * Edge device deployment and federated training code reproduction details
 
-✨✨✨
-
-**Stay tuned!!!**
+Stay tuned!!!
