@@ -19,8 +19,8 @@ python \VAD\inference.py --inference_model='shanghaitech.pkl'
 | ShanghaiTech  | 97.91%   | 97.86%   | [model](https://pan.baidu.com/s/1nYz0VatkQGyuTNvbQRMdZg) |
 | UBnormal      | 70.91%   | 76.51%   | [model](https://pan.baidu.com/s/1nYz0VatkQGyuTNvbQRMdZg) |
 
-Link:Stay tuned!!!
-code: mda2
+* Link:Stay tuned!!!
+* Code: mda2
 
 # 📋 Due to the double-blind review process, we are unable to upload the dataset or provide further details at this time.
 
