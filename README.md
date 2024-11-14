@@ -31,6 +31,4 @@ python \VAD\inference.py --inference_model='shanghaitech.pkl'
 * Edge device deployment and federated training code reproduction details
 
 ***Stay tuned!!!***
-## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=rekkles2/Fed_WSVAD&type=Date)](https://star-history.com/#rekkles2/Fed_WSVAD&Date)
