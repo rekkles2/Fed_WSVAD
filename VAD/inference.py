@@ -44,7 +44,7 @@ if __name__ == '__main__':
                                 num_workers=0, shuffle=False)
     all_test_loader = [train2test_loader, test_loader]
 
-    checkpoint = torch.load(args.inference)
+    checkpoint = torch.load(args.inference_model)
     model_dict = model.state_dict()
     pretrained_dict = {k: v for k, v in checkpoint.items() if k in model_dict}
     model.load_state_dict(pretrained_dict, strict=False)
