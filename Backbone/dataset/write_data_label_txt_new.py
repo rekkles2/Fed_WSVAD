@@ -15,7 +15,7 @@ def main(original_video_dict, dataset, dataset_mode):
     with open(file='./dataset/{}/{}/rgb_list.txt'.format(dataset, dataset_mode), mode='w', encoding='utf-8') as f:
         with open(file='./dataset/{}/{}/label.txt'.format(dataset, dataset_mode), mode='w', encoding='utf-8') as t:
             for k, v in original_video_dict.items():
-                # 获取所有img_开头的jpg文件
+                
                 frames = glob.glob(os.path.join(v, 'img_*.jpg'))
                 frames_number = len(frames)
                 framegt = np.zeros(shape=(frames_number), dtype='int8')
