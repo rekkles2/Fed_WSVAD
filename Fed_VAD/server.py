@@ -4,28 +4,33 @@ from model import model_generater
 import flwr as fl
 from flwr.common import Metrics
 import torch
+
 import flwr as fl
 from flwr.common import ndarray_to_bytes, Parameters
 
 parser = argparse.ArgumentParser(description="Flower Embedded devices")
+
 parser.add_argument(
     "--server_address",
     type=str,
-    default="192.168.0.102:8080",
-    help=f"gRPC server address (deafault '192.168.0.101:8080')",
+    default="",
+    help=f"gRPC server address (deafault 'IPv4-address')",
 )
+
 parser.add_argument(
     "--rounds",
     type=int,
-    default=6,
-    help="Number of rounds of federated learning (default: 5)",
+    default=10,
+    help="Number of rounds of federated learning (default: 10)",
 )
+
 parser.add_argument(
     "--sample_fraction",
     type=float,
     default=1.0,
     help="Fraction of available clients used for fit/evaluate (default: 1.0)",
 )
+
 parser.add_argument(
     "--min_num_clients",
     type=int,
@@ -60,7 +65,7 @@ def main():
     # Start Flower server
     fl.server.start_server(
         server_address=args.server_address,
-        config=fl.server.ServerConfig(num_rounds=6),
+        config=fl.server.ServerConfig(num_rounds=10),
         strategy=strategy,
         grpc_max_message_length=736870912,
     )
