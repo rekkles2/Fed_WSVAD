@@ -14,10 +14,10 @@ To evaluate the model, use the following command:
 python \VAD\inference.py --inference_model='shanghaitech.pkl'
 ```
 
-| Dataset       | Best AUC | By FedSSALA | Model Link  |
+| Dataset       | AUC(FAR) | By FedSSALA(FAR) | Model Link  |
 | --------------| ---------| ---------| -------------
-| ShanghaiTech  | 97.91%   | 97.86%   | [model](https://pan.baidu.com/s/1nYz0VatkQGyuTNvbQRMdZg) |
-| UBnormal      | 70.91%   | 76.51%   | [model](https://pan.baidu.com/s/1nYz0VatkQGyuTNvbQRMdZg) |
+| ShanghaiTech  | 97.91%(0.04%)   | 97.86%(0.03%)   | [model](https://pan.baidu.com/s/1nYz0VatkQGyuTNvbQRMdZg) |
+| UBnormal      | 70.91%(0.00%)   | 76.51%(0.00%)   | [model](https://pan.baidu.com/s/1nYz0VatkQGyuTNvbQRMdZg) |
 
 * Link: Stay tuned!!!
 * Code: mda2
