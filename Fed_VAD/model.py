@@ -22,55 +22,58 @@ class Model_single(torch.nn.Module):
         self.sigmoid = nn.Sigmoid()
         self.dropout = nn.Dropout(0.75)
         self.CSAD = CSAD(in_channel=3)
-        self.AF = AF(in_channel=1408)
+        self.ADRM = ADRM(in_channel=1408)
         self.apply(weights_init)
 
     def forward(self, inputs, is_training=True):
         # [B , T, 3, 1408]
         # -> mean, std, max
         mean = inputs[:, :, 0, :]
-        r_mean = mean
-        r_mean = F.relu(self.fc1(r_mean))
-        r1 = torch.tanh(self.classifier1(r_mean))
+        ft_mean = mean
+        ft_mean = F.relu(self.fc1(ft_mean))
+        alpha = torch.tanh(self.classifier1(ft_mean))
         if is_training:
-            r_mean = self.dropout(r_mean)
-        mean_score = self.sigmoid(self.classifier1(r_mean))
+            ft_mean = self.dropout(ft_mean)
+        s = self.sigmoid(self.classifier1(ft_mean))
 
-        inputs = inputs.permute(0, 2, 1, 3)
-        channel_ft = self.CSAD(inputs)
-        channel_ft = torch.squeeze(channel_ft, dim=1)
+        ft_stats = inputs.permute(0, 2, 1, 3)
+        ft_map = self.CSAD(ft_stats)
+        ft_map = torch.squeeze(ft_map, dim=1)
         #channel_score = F.sigmoid(self.classifier2(r_ft))
         #r2 = F.tanh(self.classifier2(r_ft))
-        channel_ft = torch.cat((mean, channel_ft), dim=2)
-        all_score = F.relu(self.fc2(channel_ft))
-        r2 = torch.tanh(self.classifier2(all_score))
-        all_score = self.sigmoid(self.classifier2(all_score))
-        score, r = self.AF(mean_score, all_score, r1, r2,)
+        ft_map = torch.cat((mean, ft_map), dim=2)
+        ft_map = F.relu(self.fc2(ft_map))
+        beta = torch.tanh(self.classifier2(ft_map))
+        s_ = self.sigmoid(self.classifier2(ft_map))
+        score, r = self.ADRM(s, s_, alpha, beta,)
 
-        return mean_score, all_score, score, r
+        return s, s_, score, r
 
-class AF(nn.Module):
+class ADRM(nn.Module):
 
     def __init__(self, in_channel):
-        super(AF, self).__init__()
+        super(ADRM, self).__init__()
         self.max_pool = nn.AdaptiveMaxPool2d(output_size=1)
 
-    def forward(self, mean, channel, r1, r2):
+    def forward(self, mean, stats, r1, r2):
 
         x1 = mean + r1 * (torch.pow(mean, 2) - mean)
         x2 = x1 + r2 * (torch.pow(x1, 2) - x1)
-        x3 = channel + r1 * (torch.pow(channel, 2) - channel)
+
+        x3 = stats + r1 * (torch.pow(stats, 2) - stats)
         x4 = x3 + r2 * (torch.pow(x3, 2) - x3)
+
+        # EN
         x5 = x2 * x4
         r = torch.cat([r1, r2], 1)
 
         return x5, r
 
 # ---------------------------------------------------- #
-# （1）Channel_attention
-class channel_attention(nn.Module):
+# （1）channel attention mechanism
+class CAM(nn.Module):
     def __init__(self, in_channel, ratio=4):
-        super(channel_attention, self).__init__()
+        super(CAM, self).__init__()
 
         # [b,c,h,w]==>[b,c,1,1]
         self.max_pool = nn.AdaptiveMaxPool2d(output_size=1)
@@ -119,11 +122,11 @@ class channel_attention(nn.Module):
 
 
 # ---------------------------------------------------- #
-# （2）Spatial attention
-class spatial_attention(nn.Module):
+# （2）temporal attention mechanism
+class TAM(nn.Module):
 
     def __init__(self, kernel_size=7):
-        super(spatial_attention, self).__init__()
+        super(TAM, self).__init__()
 
         padding = kernel_size // 2
         #[b,2,h,w]==>[b,1,h,w]
@@ -151,8 +154,8 @@ class CSAD(nn.Module):
 
         super(CSAD, self).__init__()
 
-        self.CAM = channel_attention(in_channel=in_channel, ratio=ratio)
-        self.TAM = spatial_attention(kernel_size=kernel_size)
+        self.CAM = CAM(in_channel=in_channel, ratio=ratio)
+        self.TAM = TAM(kernel_size=kernel_size)
 
         # In order to keep the shape of the feature map before and after convolution the same, padding is required during convolution
         padding = kernel_size // 2
@@ -173,32 +176,6 @@ class CSAD(nn.Module):
 
         return x
 
-class Model_single1(torch.nn.Module):
-    def __init__(self, n_feature):
-        super(Model_single1, self).__init__()
-        self.fc = nn.Linear(n_feature*2, n_feature*2)
-        self.fc1 = nn.Linear(n_feature, 512)
-        self.classifier = nn.Linear(n_feature*2, 1)
-        self.sigmoid = nn.Sigmoid()
-        self.dropout = nn.Dropout(0.70)
-        self.CSAD = CSAD(in_channel=3)
-        self.AF = AF(in_channel=3)
-        self.apply(weights_init)
-
-    def forward(self, inputs, is_training=True):
-        # [B , T, 8, 1408]
-        # -> mean, std, 4-max, 2-min
-        mean = inputs[:, :, 0, :]
-        inputs = inputs.permute(0, 2, 1, 3)
-        channel_score = self.CSAD(inputs)
-        channel_score = torch.squeeze(channel_score, dim=1)
-        channel = torch.cat((mean, channel_score), dim=2)
-        channel_ = F.relu(self.fc(channel))
-        if is_training:
-            channel_ = self.dropout(channel_)
-        score = self.sigmoid(self.classifier(channel_))
-
-        return mean, score
 
 
 
@@ -206,8 +183,6 @@ class Model_single1(torch.nn.Module):
 def model_generater(model_name, feature_size):
     if model_name == 'model_single':
         model = Model_single(feature_size)  # for anomaly detection, only one class, anomaly, is needed.
-    elif model_name == 'model_single1':
-        model = Model_single1(feature_size)
     else:
         raise ('model_name is out of option')
     return model
