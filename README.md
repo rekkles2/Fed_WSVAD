@@ -1,5 +1,5 @@
 # Dual-detector Re-optimization for Federated Weakly Supervised Video Anomaly Detection Via Adaptive Dynamic Recursive Mapping
-# Requirements
+## Requirements
 
 To set up the dependency environment, run:
 
@@ -7,7 +7,7 @@ To set up the dependency environment, run:
 conda env create -f VAD\environment.yml
 ```
 
-# Evaluation
+## Evaluation
 
 To evaluate the model, use the following command:
 
@@ -23,7 +23,7 @@ python \VAD\inference.py --inference_model='shanghaitech.pkl'
 * Link: Stay tuned!!!
 * Code: mda2
 
-# 📋 Due to the double-blind review process, we are unable to upload the dataset or provide further details at this time.
+## 📋 Due to the double-blind review process, we are unable to upload the dataset or provide further details at this time.
 
 🚀️🚀️🚀️
 
