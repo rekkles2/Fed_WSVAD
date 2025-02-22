@@ -4,7 +4,7 @@
 ## Table of Contents
 - [WSVAD](#-requirements)
 - [Fed-WSVAD](https://github.com/rekkles2/Fed_WSVAD/blob/main/Fed_VAD/README.md)
-- [Feature-Extraction](https://github.com/rekkles2/Fed_WSVAD/blob/main/Backbone/README.md)
+- [Feature Extraction](https://github.com/rekkles2/Fed_WSVAD/blob/main/Backbone/README.md)
 
 ---
 
