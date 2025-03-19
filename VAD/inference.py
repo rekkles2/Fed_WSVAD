@@ -23,26 +23,11 @@ if __name__ == '__main__':
     torch.cuda.set_device(args.device)
     time = datetime.datetime.now()
 
-    save_path = os.path.join(args.model_name, args.feature_pretrain_model, args.dataset_name, 'k_{}'.format(args.k), '_Lambda_{}'.format(args.Lambda), args.feature_modal, '{}{:02d}{:02d}{:02d}{:02d}{:02d}'.format(time.year, time.month, time.day, time.hour,time.minute, time.second))
-
     model = model_generater(model_name=args.model_name, feature_size=args.feature_size).to(device)
-    optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=0.0005)
-    if args.pretrained_ckpt is not None:
-        checkpoint = torch.load(args.pretrained_ckpt)
-        model_dict = model.state_dict()
-        pretrained_dict = {k: v for k, v in checkpoint.items() if k in model_dict}
-        model.load_state_dict(pretrained_dict, strict=False)
 
-    train_dataset = dataset(args=args, train=True)
-    train_loader = DataLoader(dataset=train_dataset, batch_size=args.batch_size, pin_memory=True,
-                                num_workers=1, shuffle=True)
     test_dataset = dataset(args=args, train=False)
-    train2test_dataset = dataset_train2test(args=args)
     test_loader = DataLoader(dataset=test_dataset, batch_size=1, pin_memory=True,
                                 num_workers=0, shuffle=False)
-    train2test_loader = DataLoader(dataset=train2test_dataset, batch_size=1, pin_memory=True,
-                                num_workers=0, shuffle=False)
-    all_test_loader = [train2test_loader, test_loader]
 
     checkpoint = torch.load(args.inference_model)
     model_dict = model.state_dict()
@@ -116,5 +101,3 @@ if __name__ == '__main__':
     print('ano_false_alarm_all_video is {}'.format(all_ano_false_alarm))
     print('ano_false_alarm_normal_video is {}'.format(normal_ano_false_alarm))
     print('ano_false_alarm_abnormal_video is {}'.format(abnormal_ano_false_alarm))
-
-
