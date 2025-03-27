@@ -41,8 +41,8 @@ python VAD/inference.py --inference_model='shanghaitech.pkl'
 
 | Dataset          | AUC (FAR)          | FedSSALA (FAR)     | Model Link                                                  |
 |------------------|--------------------|---------------------|--------------------------------------------------------------|
-| **ShanghaiTech** | **97.91% (0.04%)** | **97.86% (0.03%)**  | [🔗 Model](https://pan.baidu.com/s/1nYz0VatkQGyuTNvbQRMdZg) |
-| **UBnormal**     | **70.91% (0.00%)** | **76.51% (0.00%)**  | [🔗 Model](https://pan.baidu.com/s/1nYz0VatkQGyuTNvbQRMdZg) |
+| **🔗 ShanghaiTech** | **97.91% (0.04%)** | **97.86% (0.03%)**  | [🔗 Model]() |
+| **🔗 UBnormal**     | **70.91% (0.00%)** | **76.51% (0.00%)**  | [🔗 Model]() |
 
 > **Note:** Model weights will be released upon paper acceptance.
 
