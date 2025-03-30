@@ -39,7 +39,7 @@ python VAD/inference.py --inference_model='shanghaitech.pkl'
 
 ### 📊 Model Performance Summary
 
-| Dataset          | AUC (FAR)          | FedSSALA (FAR)     | Model Link                                                  |
+| Dataset          | Centralized (FAR)          | FedSSALA (FAR)     | Model Link                                                  |
 |------------------|--------------------|---------------------|--------------------------------------------------------------|
 | **🔗 ShanghaiTech** | **97.91% (0.04%)** | **97.86% (0.03%)**  | [🔗 Model]() |
 | **🔗 UBnormal**     | **70.91% (0.00%)** | **76.51% (0.00%)**  | [🔗 Model]() |
