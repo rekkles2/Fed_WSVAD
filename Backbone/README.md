@@ -1,9 +1,8 @@
 # Video Feature Extraction Toolkit (Backbone)
 
 A modular toolkit for extracting video features using the **Video Masked Autoencoder V2 (VideoMAE V2)** framework.
-This backbone is part of the repository:
 
-🔗 https://github.com/rekkles2/Fed_WSVAD
+This backbone is part of the repository: [rekkles2/Fed_WSVAD](https://github.com/rekkles2/Fed_WSVAD)
 
 It is used in the paper:
 
@@ -14,31 +13,27 @@ It is used in the paper:
 
 ## 📑 Table of Contents
 
-1. [Introduction](#introduction)  
-2. [Pretrained Model](#pretrained-model)  
-3. [Workflow Overview](#workflow-overview)  
-   - [RGB Frame Extraction](#rgb-frame-extraction)  
-   - [Feature Directory Setup](#feature-directory-setup)  
-4. [Configuration Guide](#configuration-guide)  
-   - [main.py](#mainpy)  
-   - [feature_extract.py](#feature_extractpy)  
-   - [write_data_label_txt_new.py](#write_data_label_txt_newpy)  
-   - [dataset_creater.py](#dataset_createrpy)  
-5. [Feature Alignment](#feature-alignment)  
-6. [Citation](#citation)  
-7. [Related Resource](#related-resource)  
+1. [Introduction](#-introduction)  
+2. [Pretrained Model](#-pretrained-model)  
+3. [Workflow Overview](#-workflow-overview)  
+   - [RGB Frame Extraction](#1-rgb-frame-extraction)  
+   - [Feature Directory Setup](#2-feature-directory-setup)  
+   - [Feature Extraction](#3-feature-extraction)  
+   - [Feature Alignment](#4-feature-alignment)  
+4. [Citation](#-citation)
 
 ---
 
 ## 🚀 Introduction
 
-This repository provides scripts for extracting video features using the **Video-MAE V2** model. It is designed to support feature preprocessing in weakly supervised video anomaly detection tasks.
+This repository provides scripts for extracting video features using the **Video-MAE V2** model.  
+It is designed to support feature preprocessing in weakly supervised video anomaly detection tasks.
 
 ---
 
 ## 🎯 Pretrained Model
 
-You can download the pretrained Video-MAE V2 checkpoint from the link below:
+Download the pretrained Video-MAE V2 checkpoint:
 
 👉 [Download Pretrained Model](https://drive.google.com/file/d/1xr1yeA2cxck4NCLX1qjAi3JU9qhRpfGr/view?usp=drive_link)
 
@@ -49,20 +44,15 @@ You can download the pretrained Video-MAE V2 checkpoint from the link below:
 ### 1. RGB Frame Extraction
 
 Convert videos to RGB frames:
+
 ```bash
-python RGB_extraction.py
-```
-
-**Parameters:**
-- `root_folder`: Path to source videos  
-- `output_root`: Path to save RGB frames
-
-```python
-root_folder = "F:/Backbone/video/shanghaitech"
-output_root = "F:/Backbone/video/Rgb_Fig"
-```
+python RGB_extraction.py \
+  --root_folder F:/Backbone/video/shanghaitech \
+  --output_root F:/Backbone/video/Rgb_Fig
+````
 
 **Output Structure:**
+
 ```
 Rgb_Fig/
 ├── 01_0014/
@@ -77,12 +67,15 @@ Rgb_Fig/
 
 ### 2. Feature Directory Setup
 
-Prepare feature directories by running:
+Generate feature directories:
+
 ```bash
-python feature_folder_generate.py
+python feature_folder_generate.py \
+  --data_root shanghaitech/features_video/i3d/combine
 ```
 
 **Generated Structure:**
+
 ```
 shanghaitech/
 └── features_video/
@@ -94,58 +87,63 @@ shanghaitech/
 
 ---
 
-## ⚙️ Configuration Guide
+### 3. Feature Extraction
 
-Adjust paths and checkpoints in the following scripts:
+Update paths in the scripts to match your file system, then run:
 
-### 🔹 main.py
-```python
-video_list     = "./shanghaitech.txt"
-frame_folder   = "./video/Rgb_Fig/{video}"
-delet_folder   = "./dataset/shanghaitech/features"
-ft_folder      = "./dataset/shanghaitech/features_video/i3d/combine/shanghaitech"
-feature_folder = "./shanghaitech/features_video/i3d/combine/{video}"
+```bash
+python main.py
 ```
 
-### 🔹 feature_extract.py
-```python
-data_path = "F:/Backbone"
-ckpt_path = "path/to/checkpoint"
-```
+Key configurations:
 
-### 🔹 write_data_label_txt_new.py
-```python
-data_root = "F:/Backbone"
-```
+* **main.py**
 
-### 🔹 dataset_creater.py
-```python
-folder_path = "F:/Backbone/dataset/shanghaitech/features/i3d/rgb/shanghaitech"
-output_file = "F:/Backbone/dataset/shanghaitech/features_video/i3d/combine/shanghaitech/feature.npy"
-```
+  ```python
+  video_list     = "./shanghaitech.txt"
+  frame_folder   = "./video/Rgb_Fig/{video}"
+  delet_folder   = "./dataset/shanghaitech/features"
+  ft_folder      = "./dataset/shanghaitech/features_video/i3d/combine/shanghaitech"
+  feature_folder = "./shanghaitech/features_video/i3d/combine/{video}"
+  ```
+* **feature\_extract.py**
+
+  ```python
+  data_path = "F:/Backbone"
+  ckpt_path = "path/to/checkpoint"
+  ```
+* **write\_data\_label\_txt\_new\.py**
+
+  ```python
+  data_root = "F:/Backbone"
+  ```
+* **dataset\_creater.py**
+
+  ```python
+  folder_path = "F:/Backbone/dataset/shanghaitech/features/i3d/rgb/shanghaitech"
+  output_file = "F:/Backbone/dataset/shanghaitech/features_video/i3d/combine/shanghaitech/feature.npy"
+  ```
 
 ---
 
-## 🧩 Feature Alignment
+### 4. Feature Alignment
 
 Align features with ground truth labels:
+
 ```bash
-python feature_alignment.py
+python feature_alignment.py \
+  --feature_dir /VAD/shanghaitech/features_video/i3d/combine \
+  --gt_path /VAD/shanghaitech/GT/frame_label.pickle
 ```
 
-**Parameters:**
-```python
-feature_dir = "/VAD/shanghaitech/features_video/i3d/combine"
-gt_path     = "/VAD/shanghaitech/GT/frame_label.pickle"
-```
-
-✅ All aligned feature files will be saved in the `shanghaitech` directory.
+Aligned feature files will be saved under the `shanghaitech` directory.
 
 ---
 
 ## 📚 Citation
 
 If you use VideoMAE V2, please cite:
+
 ```bibtex
 @inproceedings{wang2023videomae,
   title={Videomae v2: Scaling video masked autoencoders with dual masking},
@@ -155,5 +153,4 @@ If you use VideoMAE V2, please cite:
   year={2023}
 }
 ```
-
 
