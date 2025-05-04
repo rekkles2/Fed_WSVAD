@@ -1,3 +1,14 @@
+# This model is introduced in the paper:
+# "Dual-detector Re-optimization for Federated Weakly Supervised Video Anomaly Detection
+# via Adaptive Dynamic Recursive Mapping", accepted by IEEE Transactions on Industrial Informatics (TII).
+#
+# Repository: https://github.com/rekkles2/Fed_WSVAD
+# Maintained by: Jiahang Li
+# License: Apache License 2.0 (see LICENSE at https://github.com/rekkles2/Fed_WSVAD/blob/main/LICENSE)
+
+
+
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
