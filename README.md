@@ -1,5 +1,5 @@
 
-# 📹 Dual-detector Re-optimization for Federated Weakly Supervised Video Anomaly Detection Via Adaptive Dynamic Recursive Mapping
+<h1 align="center">📹 Dual-detector Re-optimization for Federated Weakly Supervised Video Anomaly Detection Via Adaptive Dynamic Recursive Mapping</h1>
 
 <p align="center"><strong>⭐ If you find our code useful, please consider starring this repository!</strong></p>
 
