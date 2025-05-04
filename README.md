@@ -6,7 +6,7 @@
 ---
 
 <p align="center">
-  <img src="https://github.com/rekkles2/Fed_WSVAD/raw/main/Figure/model.svg" alt="Figure 1. Dual-detector re-optimization framework with adaptive dynamic recursive mapping for weakly supervised video anomaly detection." width="80%">
+  <img src="https://github.com/rekkles2/Fed_WSVAD/raw/main/Figure/model.svg" alt="Figure 1. Dual-detector re-optimization framework with adaptive dynamic recursive mapping for weakly supervised video anomaly detection." width="100%">
   <br>
   <em>Figure 1: Overview of the proposed dual-detector re-optimization framework featuring adaptive dynamic recursive mapping for federated weakly supervised video anomaly detection (Fed-WSVAD).</em>
 </p>
