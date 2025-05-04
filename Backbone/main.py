@@ -1,3 +1,13 @@
+# This is the feature extraction code accompanying the paper:
+# "Dual-detector Re-optimization for Federated Weakly Supervised Video Anomaly Detection
+# via Adaptive Dynamic Recursive Mapping", accepted by IEEE Transactions on Industrial Informatics (TII).
+#
+# Repository: https://github.com/rekkles2/Fed_WSVAD  
+# Maintained by: Jiahang Li  
+# License: Apache License 2.0 (see https://github.com/rekkles2/Fed_WSVAD/blob/main/LICENSE)
+
+
+
 import time
 from feature_extract import *
 from dataset_creater import *
