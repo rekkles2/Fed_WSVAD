@@ -1,3 +1,11 @@
+# "Dual-detector Re-optimization for Federated Weakly Supervised Video Anomaly Detection
+# via Adaptive Dynamic Recursive Mapping", accepted by IEEE Transactions on Industrial Informatics (TII).
+#
+# Repository: https://github.com/rekkles2/Fed_WSVAD  
+# Maintained by: Jiahang Li  
+# License: Apache License 2.0 (see https://github.com/rekkles2/Fed_WSVAD/blob/main/LICENSE)
+
+
 from sklearn.metrics import roc_auc_score, confusion_matrix
 import argparse
 import warnings
@@ -23,7 +31,7 @@ from SALA import SALA
 
 
 parser = argparse.ArgumentParser(description="Flower Embedded devices")
-parser.add_argument("--server_address", type=str, default="192.168.0.104:8080",help=f"gRPC server address (deafault '192.168.31.238:8080')",)
+parser.add_argument("--server_address", type=str, default="191.162.0.104:8080",help=f"gRPC server address (deafault '192.168.31.238:8080')",)
 parser.add_argument("--cid",type=int, required=True, help="Client id. Should be an integer between 0 and NUM_CLIENTS",)
 parser.add_argument('--lr', type=float, default=0.0001, help='learning rate (default: 0.0001)')
 parser.add_argument('--model_name', default='model_single', help='')
