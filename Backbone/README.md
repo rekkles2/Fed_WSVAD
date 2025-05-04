@@ -166,4 +166,4 @@ feature_dir = "/VAD/shanghaitech/features_video/i3d/combine"
 gt_path     = "/VAD/shanghaitech/GT/frame_label.pickle"
 ```
 
-All generated feature files will be stored under the `shanghaitech` directory after alignment.
+## All generated feature files will be stored under the `shanghaitech` directory after alignment.
