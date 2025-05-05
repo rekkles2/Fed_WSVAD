@@ -26,7 +26,7 @@
 -   [WSVAD](#wsvad)
 -   [Federated Setup (Fed-WSVAD)](https://github.com/rekkles2/Fed_WSVAD/blob/main/Fed_VAD/README.md)
 -   [Jetson AGX Xavier Deployment](https://github.com/rekkles2/Fed_WSVAD/blob/main/Fed_VAD/Jetson%20AGX%20Xavier%20Deployment%20Guide.md)
--   [Feature Extraction Guide](https://github.com/rekkles2/Fed_WSVAD/blob/main/Backbone/README.md)
+-   [Feature Extraction Guide (VideoMAE V2 Backbone)](https://github.com/rekkles2/Fed_WSVAD/blob/main/Backbone/README.md)
 
 ---
 
