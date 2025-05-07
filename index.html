@@ -76,7 +76,25 @@
       overflow: hidden; /* Hide overflow on body to manage scrolling on #content */
     }
 
-    /* Removed Badges Container Styles */
+    /* —— Badges Container from README —— */
+    .md-badges {
+      display: flex; /* Use flexbox for layout */
+      justify-content: center; /* Center items horizontally */
+      align-items: center; /* Center items vertically */
+      gap: 12px; /* Space between badges */
+      margin: 1.5em 0; /* Add vertical margin as in the snippet */
+    }
+
+    .md-badges img {
+        /* Override general .content-wrapper img styles for badges */
+        max-width: none; /* Ensure original size */
+        height: auto; /* Maintain aspect ratio */
+        display: inline-block; /* Ensure inline-block behavior */
+        margin: 0; /* Remove any default image margins */
+        border-radius: 4px; /* Keep styles from snippet */
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* Keep styles from snippet */
+        background-color: transparent; /* Ensure no background interferes */
+    }
 
 
     /* —— Sidebar —— */
@@ -334,7 +352,7 @@
 
     /* —— Images (including SVG) —— */
     .content-wrapper img {
-      max-width: 40%; /* Limit images to 40% of its container width */
+      max-width: 45%; /* Limit images to 45% of its container width */
       height: auto;
       display: block;
       margin: 1.5em auto; /* Centered with vertical margin */
