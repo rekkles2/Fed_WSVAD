@@ -76,6 +76,27 @@
       overflow: hidden;
     }
 
+    /* —— Badges Container (Positioned within content) —— */
+    #badgeContainer {
+      display: flex;
+      gap: 12px; /* Space between badges */
+      align-items: center;
+      margin-bottom: 2rem; /* Add space below the badges */
+      padding-top: 0.5rem; /* Add some padding above the badges */
+    }
+
+    #badgeContainer img {
+        /* Keep specific badge image styles */
+        max-width: none; /* Prevent inheriting max-width from #content img */
+        height: auto;
+        display: inline-block;
+        margin: 0; /* Remove default image margins */
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        background-color: transparent;
+    }
+
+
     /* —— Sidebar —— */
     #sidebar {
       position: fixed;
@@ -89,6 +110,7 @@
       flex-direction: column;
       overflow-y: auto;
       padding: 1.5rem 1rem; /* Adjusted padding */
+      /* Removed padding-top here as badges are now inside content */
     }
 
     #navList {
@@ -178,9 +200,12 @@
     #content {
       margin-left: 260px; /* Adjusted to match sidebar width */
       padding: 2rem 2.5rem; /* Increased horizontal padding */
+      padding-top: 1rem; /* Adjusted top padding to make space for badges within content */
       overflow-y: auto;
-      width: calc(100% - 260px); /* Adjusted to match sidebar width, removed max-width */
-      /* max-width: 900px; */ /* Removed for adaptive width */
+      width: calc(100% - 260px); /* Adjusted to match sidebar width */
+      max-width: 900px; /* 设置最大宽度 */
+      margin-right: auto; /* 自动右边距 */
+      margin-left: 260px; /* 保留左边距 */
     }
 
     #content h1,
@@ -303,10 +328,6 @@
     #content tr:nth-child(even) {
         background-color: var(--table-row-even-bg); /* Use new zebra stripe background variable */
     }
-    /* Removed explicit dark mode override for zebra stripe, using variable instead */
-    /* body.dark #content tr:nth-child(even) {
-        background-color: #1c222b;
-    } */
 
 
     #content blockquote {
@@ -323,7 +344,7 @@
 
     /* —— SVG Images —— */
     #content img {
-      max-width: 100%; /* Allow images to take full width if needed, but capped by container */
+      max-width: 80%; /* Allow images to take full width if needed, but capped at 80% */
       height: auto;
       display: block;
       margin: 1.5em auto; /* Centered with vertical margin */
@@ -357,6 +378,29 @@
   <button id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
 
   <main id="content">
+    <div id="badgeContainer">
+      <a href="https://github.com/rekkles2/Fed_WSVAD">
+        <img
+          src="https://img.shields.io/github/stars/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white"
+          alt="GitHub Stars"
+        />
+      </a>
+
+      <a href="https://rekkles2.github.io/Fed_WSVAD/#README.md">
+        <img
+          src="https://img.shields.io/badge/%F0%9F%8C%90-Project%20Page-0084FF?style=flat-square"
+          alt="Project Page"
+        />
+      </a>
+
+      <a href="https://github.com/rekkles2/Fed_WSVAD/blob/main/LICENSE">
+        <img
+          src="https://img.shields.io/github/license/rekkles2/Fed_WSVAD?style=flat-square&logo=apache&logoColor=white&color=brightgreen"
+          alt="License"
+        />
+      </a>
+    </div>
+
     <p>Loading...</p>
   </main>
 
@@ -397,8 +441,6 @@
     async function loadMarkdown(filePath) {
       contentDiv.innerHTML = '<p>Loading content...</p>'; // More descriptive loading message
       try {
-        // The filePath from hash is already partially URI encoded (e.g. %20 for spaces)
-        // fetch handles this correctly. We don't need to double encode with encodeURI(filePath).
         const response = await fetch(GITHUB_REPO_RAW_BASE_URL + filePath);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status} for ${filePath}`);
@@ -409,11 +451,8 @@
         markdownText = markdownText.replace(/https:\/\/github\.com\/rekkles2\/Fed_WSVAD\/blob\/main\//g, '#');
 
         // 2. Resolve relative image paths in the markdown to absolute raw GitHub URLs
-        // This handles both Markdown image syntax: ![alt](url) and HTML <img> tags
         const currentFileDirectory = filePath.includes('/') ? filePath.substring(0, filePath.lastIndexOf('/') + 1) : '';
-        // **FIXED**: Changed 'image kontekstBaseUrl' to 'imageBaseUrl'
         const imageBaseUrl = new URL(currentFileDirectory, GITHUB_REPO_RAW_BASE_URL).href;
-
 
         // Regex for HTML <img> tags: src="RELATIVE_PATH"
         markdownText = markdownText.replace(/(<img\s+[^>]*src=")(?!https?:\/\/|\/\/|data:)([^"]+)(")/gi, (match, prefix, srcUrl, suffix) => {
@@ -421,7 +460,7 @@
             if (srcUrl.startsWith('/')) { // Path relative to repo root
                 absoluteUrl = new URL(srcUrl.substring(1), GITHUB_REPO_RAW_BASE_URL).href;
             } else { // Path relative to current file's directory
-                absoluteUrl = new URL(srcUrl, imageBaseUrl).href; // Use fixed variable name
+                absoluteUrl = new URL(srcUrl, imageBaseUrl).href;
             }
             return prefix + absoluteUrl + suffix;
         });
@@ -432,27 +471,47 @@
             if (srcUrl.startsWith('/')) { // Path relative to repo root
                 absoluteUrl = new URL(srcUrl.substring(1), GITHUB_REPO_RAW_BASE_URL).href;
             } else { // Path relative to current file's directory
-                absoluteUrl = new URL(srcUrl, imageBaseUrl).href; // Use fixed variable name
+                absoluteUrl = new URL(srcUrl, imageBaseUrl).href;
             }
             return prefix + absoluteUrl + (titlePart || '') + suffix;
         });
 
-        // The problematic line for model.svg is removed as the general image resolver above should handle it.
-        // md = md.replace(/https:\/\/github\.com\/rekkles2\/Fed_WSVAD\/raw\/main\/Figure\/model\.svg/g, 'model.svg'); // REMOVED
+        // Add the badge container HTML to the beginning of the parsed markdown
+        const badgeHtml = `
+          <div id="badgeContainer">
+            <a href="https://github.com/rekkles2/Fed_WSVAD">
+              <img
+                src="https://img.shields.io/github/stars/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white"
+                alt="GitHub Stars"
+              />
+            </a>
+            <a href="https://rekkles2.github.io/Fed_WSVAD/#README.md">
+              <img
+                src="https://img.shields.io/badge/%F0%9F%8C%90-Project%20Page-0084FF?style=flat-square"
+                alt="Project Page"
+              />
+            </a>
+            <a href="https://github.com/rekkles2/Fed_WSVAD/blob/main/LICENSE">
+              <img
+                src="https://img.shields.io/github/license/rekkles2/Fed_WSVAD?style=flat-square&logo=apache&logoColor=white&color=brightgreen"
+                alt="License"
+              />
+            </a>
+          </div>
+        `;
+        contentDiv.innerHTML = badgeHtml + marked.parse(markdownText);
 
-        contentDiv.innerHTML = marked.parse(markdownText);
 
         // Add IDs to headings for deep linking (if not already present)
         document.querySelectorAll('#content h1, #content h2, #content h3, #content h4, #content h5, #content h6').forEach(heading => {
           if (!heading.id) {
             const suggestedId = heading.textContent.trim().toLowerCase()
-                               .replace(/[^\w\s-]/g, '') // Remove non-alphanumeric (except hyphen, underscore)
-                               .replace(/\s+/g, '-') // Replace spaces with hyphens
-                               .replace(/-+/g, '-'); // Replace multiple hyphens with single
+                               .replace(/[^\w\s-]/g, '')
+                               .replace(/\s+/g, '-')
+                               .replace(/-+/g, '-');
             try {
                 heading.id = suggestedId;
             } catch (e) {
-                // If ID is invalid (e.g., starts with a number), prefix it
                 heading.id = 'heading-' + suggestedId;
             }
           }
@@ -466,8 +525,12 @@
             copyButton.textContent = 'Copy';
             copyButton.setAttribute('aria-label', 'Copy code to clipboard');
             copyButton.onclick = () => {
+              console.log('Copy button clicked'); // Log click event
               const codeToCopy = preElement.querySelector('code').innerText;
+              console.log('Code to copy:', codeToCopy); // Log content to be copied
+
               navigator.clipboard.writeText(codeToCopy).then(() => {
+                console.log('Copy successful!'); // Log success
                 copyButton.textContent = 'Copied!';
                 copyButton.classList.add('copied');
                 setTimeout(() => {
@@ -475,7 +538,7 @@
                   copyButton.classList.remove('copied');
                 }, 2000);
               }).catch(err => {
-                console.error('Failed to copy text: ', err);
+                console.error('Failed to copy text: ', err); // Log failure and error
                 copyButton.textContent = 'Error';
                   setTimeout(() => {
                   copyButton.textContent = 'Copy';
@@ -494,7 +557,7 @@
         });
 
         // Scroll to top or to a specific hash if present in the loaded content's URL
-        const internalHash = window.location.hash.split('#').pop(); // Check for internal page hash
+        const internalHash = window.location.hash.split('#')[1]; // Corrected to get the first hash part
         const elementToScroll = document.getElementById(internalHash);
         if(elementToScroll && contentDiv.contains(elementToScroll)) {
             elementToScroll.scrollIntoView({ behavior: 'smooth' });
@@ -510,25 +573,18 @@
     }
 
     function onHashChange() {
-      // Decode the hash component, as it might contain %20 etc.
-      // Browsers usually provide location.hash already decoded for characters like %20,
-      // but explicit decodeURIComponent is safer for broader character sets.
       let hashPath = decodeURIComponent(location.hash.slice(1));
-
-      if (!hashPath) { // If no hash, load default
+      if (!hashPath) {
         hashPath = 'README.md';
-        // Update hash without triggering another hashchange, for bookmarkability
         history.replaceState(null, '', '#' + hashPath);
       }
 
-      // Only load if the main path part of the hash changes (ignoring sub-hashes for scrolling)
       const mainPath = hashPath.split('#')[0];
       if (mainPath.includes('.md')) {
         if (mainPath !== currentFile) {
           loadMarkdown(mainPath);
         } else {
-          // If same file, check for internal hash for scrolling
-           const internalHash = hashPath.split('#')[1];
+          const internalHash = hashPath.split('#')[1];
            if (internalHash) {
                const elementToScroll = document.getElementById(internalHash);
                if(elementToScroll && contentDiv.contains(elementToScroll)) {
@@ -540,11 +596,9 @@
     }
 
     window.addEventListener('hashchange', onHashChange);
-    // Initial load based on current hash or default
-    window.addEventListener('load', () => { // **FIXED**: Corrected fat arrow syntax for the load event listener
-        // Initialize highlighting for any pre-loaded code (if any, though unlikely here)
+    window.addEventListener('load', () => {
         hljs.highlightAll();
-        onHashChange(); // Trigger initial content load
+        onHashChange();
     });
   </script>
 </body>
