@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fed-WSVAD Documentation</title>
+  <!-- Marked.js for Markdown parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --sidebar-bg: #f9f9f9;
+      --link-color: #1a0dab;
+    }
+    [data-theme="dark"] {
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --sidebar-bg: #1f1f1f;
+      --link-color: #8ab4f8;
+    }
+    body {
+      margin: 0;
+      display: flex;
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #sidebar {
+      width: 280px;
+      background: var(--sidebar-bg);
+      border-right: 1px solid #ddd;
+      padding: 1rem;
+      overflow-y: auto;
+      position: relative;
+    }
+    #content {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      max-width: 800px;
+      margin: auto;
+      background: var(--bg-color);
+    }
+    #sidebar h2 {
+      font-size: 1.5rem;
+      margin-top: 0;
+    }
+    #sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    #sidebar li {
+      margin: 0.5rem 0;
+    }
+    #sidebar a {
+      text-decoration: none;
+      color: var(--link-color);
+    }
+    #sidebar a:hover {
+      text-decoration: underline;
+    }
+    pre {
+      background: #f6f8fa;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+    code {
+      font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+    }
+    img {
+      max-width: 100%;
+    }
+    #theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      border: none;
+      background: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--text-color);
+    }
+    #footer {
+      position: absolute;
+      bottom: 1rem;
+      font-size: 0.9rem;
+      color: var(--text-color);
+      width: calc(100% - 2rem);
+      text-align: center;
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <nav id="sidebar">
+    <h2>Fed-WSVAD</h2>
+    <button id="theme-toggle">🌙</button>
+    <ul id="nav-list"></ul>
+    <div id="footer">Maintained by Jiahang Li</div>
+  </nav>
+  <main id="content"></main>
+  <script>
+    // Markdown link renderer to handle .md links
+    const renderer = {
+      link(href, title, text) {
+        if (href.endsWith('.md')) {
+          const clean = href.replace(/^\.\//, '');
+          return `<a href="#${clean}">${text}</a>`;
+        }
+        return `<a href="${href}"${title ? ` title="${title}"` : ''}>${text}</a>`;
+      }
+    };
+    marked.setOptions({ renderer });
+    
+    // Fetch all Markdown files recursively
+    async function loadNav() {
+      const apiUrl = 'https://api.github.com/repos/rekkles2/Fed_WSVAD/git/trees/main?recursive=1';
+      const res = await fetch(apiUrl);
+      const data = await res.json();
+      const mdFiles = data.tree
+        .filter(f => f.path.endsWith('.md'))
+        .sort((a, b) => a.path.localeCompare(b.path));
+      const navList = document.getElementById('nav-list');
+      mdFiles.forEach(file => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        // Display only the filename or nested path
+        a.textContent = file.path.replace('.md', '').replace(/\//g, ' / ');
+        a.href = `#${file.path}`;
+        li.appendChild(a);
+        navList.appendChild(li);
+      });
+    }
+
+    // Load and render the Markdown based on URL hash
+    async function loadContent() {
+      const hash = window.location.hash.substring(1) || 'README.md';
+      const rawUrl = `https://raw.githubusercontent.com/rekkles2/Fed_WSVAD/main/${hash}`;
+      try {
+        const res = await fetch(rawUrl);
+        if (!res.ok) throw new Error('Not Found');
+        const md = await res.text();
+        document.getElementById('content').innerHTML = marked.parse(md);
+      } catch (err) {
+        document.getElementById('content').innerHTML = '<p>Content not found.</p>';
+      }
+    }
+
+    // Theme toggle logic
+    const toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('click', () => {
+      const root = document.documentElement;
+      const current = root.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      toggle.textContent = next === 'light' ? '🌙' : '☀️';
+    });
+
+    window.addEventListener('hashchange', loadContent);
+    loadNav().then(loadContent);
+  </script>
+</body>
+</html>
