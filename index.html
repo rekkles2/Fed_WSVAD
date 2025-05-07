@@ -1,151 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Fed-WSVAD Documentation</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fed_WSVAD Documentation</title>
+  <!-- Highlight.js styles for light and dark themes -->
+  <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css" />
+  <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css" disabled />
   <style>
-    body { margin:0; font-family: Arial, sans-serif; background: var(--bg); color: var(--text); }
-    :root { --bg: #ffffff; --text: #000000; --nav-bg: #f0f0f0; --nav-text: #000000; }
-    body.dark { --bg: #202124; --text: #e8eaed; --nav-bg: #303134; --nav-text: #e8eaed; }
-    .sidebar {
-      position: fixed; left: 0; top: 0; bottom: 0; width: 250px;
-      background: var(--nav-bg); color: var(--nav-text); overflow-y: auto; padding: 10px;
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #24292e;
+      background-color: #fff;
     }
-    .sidebar ul { list-style-type: none; padding-left: 0; }
-    .sidebar li { margin: 5px 0; }
-    .sidebar a { text-decoration: none; color: var(--nav-text); }
-    .sidebar a:hover { text-decoration: underline; }
-    .sidebar .footer { position: absolute; bottom: 10px; width: 100%; text-align: center; font-size: 0.8em; }
-    .content { margin-left: 260px; padding: 20px; }
-    pre { background: #f5f5f5; padding: 10px; position: relative; overflow: auto; }
-    body.dark pre { background: #333; }
-    code { font-family: Consolas, monospace; }
-    button.copy-btn {
-      position: absolute; top: 5px; right: 5px; padding: 2px 6px; font-size: 0.8em;
+    body.dark {
+      color: #c9d1d9;
+      background-color: #0d1117;
     }
-    #theme-toggle { position: fixed; top: 10px; right: 10px; }
-    img { max-width: 100%; height: auto; }
+    /* Layout */
+    #sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #f6f8fa;
+      border-right: 1px solid #d0d7de;
+    }
+    body.dark #sidebar {
+      background-color: #0d1117;
+      border-right: 1px solid #30363d;
+    }
+    .nav-container {
+      overflow-y: auto;
+    }
+    #navList {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    #navList ul {
+      list-style: none;
+      margin: 0 0 0 1em;
+      padding: 0;
+    }
+    #navList li {
+      margin: 0.2em 0;
+    }
+    #navList li span.folder {
+      font-weight: bold;
+      cursor: default;
+    }
+    #navList a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+    #navList a:hover {
+      background-color: #eaeef2;
+    }
+    body.dark #navList a:hover {
+      background-color: #30363d;
+    }
+    #navList a.active {
+      background-color: #eaeef2;
+      font-weight: bold;
+    }
+    body.dark #navList a.active {
+      background-color: #21262d;
+      font-weight: bold;
+    }
+    /* Toggle theme button */
+    #themeToggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+      border: none;
+      padding: 6px 8px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #ddd;
+      color: #24292e;
+    }
+    body.dark #themeToggle {
+      background-color: #444;
+      color: #c9d1d9;
+    }
+    /* Content area */
+    #content {
+      margin-left: 250px;
+      padding: 2em;
+    }
+    /* Content (Markdown) styles */
+    #content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
+      margin-top: 1.2em;
+      margin-bottom: 0.6em;
+      font-weight: 600;
+    }
+    #content h1 {
+      font-size: 2em;
+      border-bottom: 1px solid #d0d7de;
+      padding-bottom: 0.3em;
+    }
+    body.dark #content h1 {
+      border-bottom: 1px solid #30363d;
+    }
+    #content h2 { font-size: 1.5em; }
+    #content h3 { font-size: 1.25em; }
+    #content p {
+      margin: 0.8em 0;
+    }
+    #content code {
+      font-family: Menlo, Consolas, 'Liberation Mono', monospace;
+      font-size: 0.95em;
+    }
+    #content pre {
+      overflow-x: auto;
+      padding: 1em;
+      border: 1px solid #d0d7de;
+      background-color: #f6f8fa;
+      border-radius: 6px;
+    }
+    body.dark #content pre {
+      border: 1px solid #30363d;
+      background-color: #0d1117;
+    }
+    #content pre code {
+      display: block;
+    }
+    #content a {
+      color: #0969da;
+      text-decoration: none;
+    }
+    #content a:hover {
+      text-decoration: underline;
+    }
+    body.dark #content a {
+      color: #58a6ff;
+    }
+    /* Tables */
+    #content table {
+      border-collapse: collapse;
+      max-width: 100%;
+    }
+    #content th, #content td {
+      border: 1px solid #d0d7de;
+      padding: 6px 13px;
+    }
+    body.dark #content th, body.dark #content td {
+      border: 1px solid #30363d;
+    }
+    #content th {
+      font-weight: 600;
+      background-color: #f6f8fa;
+    }
+    body.dark #content th {
+      background-color: #161b22;
+    }
+    /* Blockquotes */
+    #content blockquote {
+      border-left: 4px solid #d0d7de;
+      margin: 0.8em 0;
+      padding: 0.5em 1em;
+      color: #6a737d;
+      background-color: #f6f8fa;
+    }
+    body.dark #content blockquote {
+      border-color: #30363d;
+      color: #8b949e;
+      background-color: transparent;
+    }
+    /* Maintainer footer text */
+    .maintainer {
+      padding: 8px;
+      text-align: left;
+      font-size: 0.9em;
+      color: #57606a;
+    }
+    body.dark .maintainer {
+      color: #8b949e;
+    }
   </style>
 </head>
 <body>
-  <div class="sidebar">
-    <ul>
-<li><a href="#backbone-readme" data-file="backbone-readme" data-path="Backbone/README.md">Video Feature Extraction Toolkit (Backbone)</a>
-  <ul>
-    <li><a href="#-introduction" data-file="backbone-readme" data-path="Backbone/README.md">Introduction</a></li>
-    <li><a href="#-pretrained-model" data-file="backbone-readme" data-path="Backbone/README.md">Pretrained Model</a></li>
-    <li><a href="#-workflow-overview" data-file="backbone-readme" data-path="Backbone/README.md">Workflow Overview</a>
-      <ul>
-        <li><a href="#1-rgb-frame-extraction" data-file="backbone-readme" data-path="Backbone/README.md">RGB Frame Extraction</a></li>
-        <li><a href="#2-feature-directory-setup" data-file="backbone-readme" data-path="Backbone/README.md">Feature Directory Setup</a></li>
-        <li><a href="#3-feature-extraction" data-file="backbone-readme" data-path="Backbone/README.md">Feature Extraction</a></li>
-        <li><a href="#4-feature-alignment" data-file="backbone-readme" data-path="Backbone/README.md">Feature Alignment</a></li>
-      </ul></li>
-    <li><a href="#-citation" data-file="backbone-readme" data-path="Backbone/README.md">Citation</a></li>
-  </ul></li>
-<li><a href="#fed-vad-jetson-agx-xavier-deployment-guide" data-file="fed-vad-jetson-agx-xavier-deployment-guide" data-path="Fed_VAD/Jetson AGX Xavier Deployment Guide.md">🚀 Jetson AGX Xavier Deployment Guide</a></li>
-<li><a href="#fed-vad-readme" data-file="fed-vad-readme" data-path="Fed_VAD/README.md">Fed-WSVAD Guide 📚</a></li>
-<li><a href="#wsvad" data-file="wsvad" data-path="README.md">📹 Dual-detector Re-optimization for Federated Weakly Supervised Video Anomaly Detection Via Adaptive Dynamic Recursive Mapping</a>
-  <ul>
-    <li><a href="#wsvad" data-file="wsvad" data-path="README.md">WSVAD</a></li>
-  </ul></li>
-    </ul>
-    <div class="footer">Maintained by Jiahang Li</div>
-  </div>
-  <button id="theme-toggle">Toggle Theme</button>
-  <div class="content" id="content"></div>
-
-  <!-- Marked library for Markdown parsing -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <nav id="sidebar">
+    <div class="nav-container">
+      <ul id="navList">
+        <li><a href="#README.md">Home</a></li>
+        <li><span class="folder">Backbone</span>
+          <ul>
+            <li><a href="#Backbone/README.md">README</a></li>
+          </ul>
+        </li>
+        <li><span class="folder">Fed_VAD</span>
+          <ul>
+            <li><a href="#Fed_VAD/README.md">README</a></li>
+            <li><a href="#Fed_VAD/Jetson%20AGX%20Xavier%20Deployment%20Guide.md">Jetson AGX Xavier Deployment Guide</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="maintainer">Maintained by Jiahang Li</div>
+  </nav>
+  <button id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
+  <main id="content">
+    <p>Loading...</p>
+  </main>
+  <!-- Marked (Markdown parser) and Highlight.js (syntax highlighter) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.7/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
   <script>
-    const navLinks = document.querySelectorAll('.sidebar a');
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const lightStyle = document.getElementById('hljs-light');
+    const darkStyle = document.getElementById('hljs-dark');
+    // Apply saved theme on load
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark');
+      lightStyle.disabled = true;
+      darkStyle.disabled = false;
+      themeToggleBtn.textContent = '☀️';
+    } else {
+      document.body.classList.remove('dark');
+      lightStyle.disabled = false;
+      darkStyle.disabled = true;
+      themeToggleBtn.textContent = '🌙';
+    }
+    themeToggleBtn.addEventListener('click', () => {
+      if (document.body.classList.contains('dark')) {
+        document.body.classList.remove('dark');
+        lightStyle.disabled = false;
+        darkStyle.disabled = true;
+        themeToggleBtn.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.body.classList.add('dark');
+        lightStyle.disabled = true;
+        darkStyle.disabled = false;
+        themeToggleBtn.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+    const contentDiv = document.getElementById('content');
     let currentFile = null;
-
-    async function loadAndRender(path) {
-      const rawUrl = "https://raw.githubusercontent.com/rekkles2/Fed_WSVAD/main/" + path;
+    async function loadMarkdown(path) {
+      contentDiv.innerHTML = '<p>Loading...</p>';
       try {
-        const res = await fetch(encodeURI(rawUrl));
-        const text = await res.text();
-        const html = marked.parse(text);
-        document.getElementById('content').innerHTML = html;
-        enhanceContent();
-      } catch(e) {
-        console.error("Failed to load " + path, e);
-        document.getElementById('content').innerHTML = "<p>Failed to load content.</p>";
+        const response = await fetch(encodeURI('https://raw.githubusercontent.com/rekkles2/Fed_WSVAD/main/' + path));
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        let mdText = await response.text();
+        // Replace GitHub blob links with internal hash links
+        mdText = mdText.replace(/https:\/\/github\.com\/rekkles2\/Fed_WSVAD\/blob\/main\//g, '#');
+        // Replace raw GitHub image link to local path
+        mdText = mdText.replace(/https:\/\/github\.com\/rekkles2\/Fed_WSVAD\/raw\/main\/Figure\/model\.svg/g, 'model.svg');
+        // Convert Markdown to HTML
+        let htmlContent = marked.parse(mdText);
+        contentDiv.innerHTML = htmlContent;
+        // Add id attributes to headings for anchor links
+        const headers = contentDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        const idCounts = {};
+        headers.forEach(header => {
+          let text = header.textContent.toLowerCase();
+          let slug = text.replace(/[^a-z0-9 ]/g, '');    // remove non-alphanumeric (except space)
+          slug = slug.replace(/\s+/g, '-');              // replace spaces with hyphens
+          slug = slug.replace(/-+/g, '-');               // collapse multiple hyphens
+          // Do not trim leading/trailing hyphens (to mimic GitHub slug behavior)
+          if (idCounts[slug] !== undefined) {
+            idCounts[slug] += 1;
+            slug = slug + '-' + idCounts[slug];
+          } else {
+            idCounts[slug] = 0;
+          }
+          header.id = slug;
+        });
+        // Make external links open in new tab
+        contentDiv.querySelectorAll('a[href^="http"]').forEach(link => {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener');
+        });
+        // Highlight code blocks
+        hljs.highlightAll();
+        // Scroll to top of content
+        window.scrollTo(0, 0);
+        // Update active link in nav
+        document.querySelectorAll('#navList a').forEach(navLink => {
+          if (navLink.getAttribute('href') === '#' + path) {
+            navLink.classList.add('active');
+          } else {
+            navLink.classList.remove('active');
+          }
+        });
+        currentFile = path;
+      } catch (err) {
+        console.error('Error loading markdown:', err);
+        contentDiv.innerHTML = '<p style="color: red;">Failed to load content. Please try again later.</p>';
       }
     }
-
-    function enhanceContent() {
-      // Add ids to headings
-      document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach(h => {
-        if (!h.id) {
-          let slug = h.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-          if (slug) h.id = slug;
+    function loadFromHash() {
+      const hash = window.location.hash;
+      if (!hash || hash === '#') {
+        loadMarkdown('README.md');
+      } else if (hash.includes('.md')) {
+        const filePath = decodeURIComponent(hash.substring(1));
+        if (filePath !== currentFile) {
+          loadMarkdown(filePath);
         }
-      });
-      // Add copy buttons to code blocks
-      document.querySelectorAll('pre').forEach(pre => {
-        pre.style.position = 'relative';
-        const button = document.createElement('button');
-        button.textContent = 'Copy';
-        button.className = 'copy-btn';
-        button.onclick = () => {
-          const code = pre.querySelector('code');
-          if (code) {
-            navigator.clipboard.writeText(code.innerText);
-          }
-        };
-        pre.appendChild(button);
-      });
-      // Adjust SVG image paths if needed
-      document.querySelectorAll('img').forEach(img => {
-        const src = img.getAttribute('src');
-        if (src && src.startsWith("Figure/")) {
-          img.setAttribute('src', src.replace("Figure/", ""));
-        }
-      });
+      } else {
+        // If hash is an in-page anchor (no .md), do nothing (browser will handle scroll)
+      }
     }
-
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const fid = link.dataset.file;
-        const path = link.dataset.path;
-        const href = link.getAttribute('href').substring(1);
-        const isSame = (fid === currentFile);
-        // If different file, load it
-        if (!isSame) {
-          currentFile = fid;
-          loadAndRender(path).then(() => {
-            // if anchor in href and not file id, scroll
-            if (href && href !== fid) {
-              const el = document.getElementById(href);
-              if (el) el.scrollIntoView();
-            } else {
-              window.scrollTo(0, 0);
-            }
-          });
-        } else {
-          // same file: scroll to anchor if not top
-          if (href && href !== fid) {
-            const el = document.getElementById(href);
-            if (el) el.scrollIntoView();
-          }
-        }
-      });
-    });
-
-    // Default load first file (main README)
-    window.addEventListener('load', () => {
-      const defaultLink = document.querySelector('.sidebar a[data-path="README.md"]');
-      if (defaultLink) defaultLink.click();
-    });
-
-    // Theme toggle
-    const themeToggle = document.getElementById('theme-toggle');
-    themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-    });
+    window.addEventListener('hashchange', loadFromHash);
+    // Initial load
+    loadFromHash();
   </script>
 </body>
 </html>
