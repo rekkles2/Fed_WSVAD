@@ -76,25 +76,24 @@
       overflow: hidden;
     }
 
-    /* —— Badges Container (Positioned within content) —— */
-    #badgeContainer {
+    /* —— Badges Container (Removed) —— */
+    /* #badgeContainer {
       display: flex;
-      gap: 12px; /* Space between badges */
+      gap: 12px;
       align-items: center;
-      margin-bottom: 2rem; /* Add space below the badges */
-      padding-top: 0.5rem; /* Add some padding above the badges */
-    }
+      margin-bottom: 2rem;
+      padding-top: 0.5rem;
+    } */
 
-    #badgeContainer img {
-        /* Keep specific badge image styles */
-        max-width: none; /* Prevent inheriting max-width from #content img */
+    /* #badgeContainer img {
+        max-width: none;
         height: auto;
         display: inline-block;
-        margin: 0; /* Remove default image margins */
+        margin: 0;
         border-radius: 4px;
         box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         background-color: transparent;
-    }
+    } */
 
 
     /* —— Sidebar —— */
@@ -110,7 +109,6 @@
       flex-direction: column;
       overflow-y: auto;
       padding: 1.5rem 1rem; /* Adjusted padding */
-      /* Removed padding-top here as badges are now inside content */
       flex-shrink: 0; /* Prevent sidebar from shrinking in flex layout */
     }
 
@@ -199,19 +197,15 @@
 
     /* —— Content Area —— */
     #content {
-      /* Remove fixed margin-left as flexbox handles positioning */
-      /* margin-left: 260px; */
       padding: 2rem 2.5rem; /* Keep horizontal padding */
-      padding-top: 1rem; /* Keep adjusted top padding to make space for badges within content */
+      padding-top: 2rem; /* Reverted top padding */
       overflow-y: auto;
       flex-grow: 1; /* Allow content to grow and fill space */
-      /* Set max-width to 80% of the viewport width */
-      max-width: 80vw; /* Limit content width to 80% of viewport */
+      /* Set max-width to 90% of the viewport width */
+      max-width: 90vw; /* Limit content width to 90% of viewport */
       /* Use auto margins to center the content block within the available space */
       margin: 0 auto; /* Use auto margins for horizontal centering */
       margin-top: 0; /* Ensure no default margin-top */
-      /* Adjusted width calculation is no longer needed with flexbox and max-width */
-      /* width: calc(100% - 260px); */
     }
 
     #content h1,
@@ -350,7 +344,7 @@
 
     /* —— SVG Images —— */
     #content img {
-      max-width: 40%; /* Allow images to take full width of its container, but capped at 80% */
+      max-width: 45%; /* Limit images to 45% of its container width */
       height: auto;
       display: block;
       margin: 1.5em auto; /* Centered with vertical margin */
@@ -384,29 +378,6 @@
   <button id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
 
   <main id="content">
-    <div id="badgeContainer">
-      <a href="https://github.com/rekkles2/Fed_WSVAD">
-        <img
-          src="https://img.shields.io/github/stars/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white"
-          alt="GitHub Stars"
-        />
-      </a>
-
-      <a href="https://rekkles2.github.io/Fed_WSVAD/#README.md">
-        <img
-          src="https://img.shields.io/badge/%F0%9F%8C%90-Project%20Page-0084FF?style=flat-square"
-          alt="Project Page"
-        />
-      </a>
-
-      <a href="https://github.com/rekkles2/Fed_WSVAD/blob/main/LICENSE">
-        <img
-          src="https://img.shields.io/github/license/rekkles2/Fed_WSVAD?style=flat-square&logo=apache&logoColor=white&color=brightgreen"
-          alt="License"
-        />
-      </a>
-    </div>
-
     <p>Loading...</p>
   </main>
 
@@ -482,30 +453,9 @@
             return prefix + absoluteUrl + (titlePart || '') + suffix;
         });
 
-        // Add the badge container HTML to the beginning of the parsed markdown
-        const badgeHtml = `
-          <div id="badgeContainer">
-            <a href="https://github.com/rekkles2/Fed_WSVAD">
-              <img
-                src="https://img.shields.io/github/stars/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white"
-                alt="GitHub Stars"
-              />
-            </a>
-            <a href="https://rekkles2.github.io/Fed_WSVAD/#README.md">
-              <img
-                src="https://img.shields.io/badge/%F0%9F%8C%90-Project%20Page-0084FF?style=flat-square"
-                alt="Project Page"
-              />
-            </a>
-            <a href="https://github.com/rekkles2/Fed_WSVAD/blob/main/LICENSE">
-              <img
-                src="https://img.shields.io/github/license/rekkles2/Fed_WSVAD?style=flat-square&logo=apache&logoColor=white&color=brightgreen"
-                alt="License"
-              />
-            </a>
-          </div>
-        `;
-        contentDiv.innerHTML = badgeHtml + marked.parse(markdownText);
+        // Removed the badge container HTML insertion
+
+        contentDiv.innerHTML = marked.parse(markdownText);
 
 
         // Add IDs to headings for deep linking (if not already present)
