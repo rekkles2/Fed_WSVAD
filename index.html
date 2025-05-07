@@ -81,7 +81,7 @@
       display: flex; /* Use flexbox for layout */
       justify-content: center; /* Center items horizontally */
       align-items: center; /* Center items vertically */
-      gap: 12px; /* Space between badges */
+      gap: 0; /* Remove space between badges */
       margin: 1.5em 0; /* Add vertical margin as in the snippet */
     }
 
@@ -94,6 +94,8 @@
         border-radius: 4px; /* Keep styles from snippet */
         box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* Keep styles from snippet */
         background-color: transparent; /* Ensure no background interferes */
+        /* Increase size - setting a height will scale proportionally */
+        height: 80px; /* Approximate 5x increase from typical badge height */
     }
 
 
@@ -208,7 +210,7 @@
 
     /* —— Content Wrapper (Centers content within #content) —— */
     .content-wrapper {
-      max-width: 80%; /* Limit content width to 80% of #content */
+      max-width: 75%; /* Limit content width to 75% of #content */
       width: 100%; /* Allow wrapper to take full width up to max-width */
       padding: 2rem 2.5rem; /* Apply padding here */
       padding-top: 2rem; /* Adjust top padding */
@@ -352,7 +354,7 @@
 
     /* —— Images (including SVG) —— */
     .content-wrapper img {
-      max-width: 45%; /* Limit images to 45% of its container width */
+      max-width: 50%; /* Limit images to 50% of its container width */
       height: auto;
       display: block;
       margin: 1.5em auto; /* Centered with vertical margin */
