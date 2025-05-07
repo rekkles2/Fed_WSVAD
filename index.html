@@ -73,8 +73,29 @@
       background-color: var(--bg);
       display: flex; /* Use flexbox for main layout */
       height: 100vh;
-      overflow: hidden;
+      overflow: hidden; /* Hide overflow on body to manage scrolling on #content */
     }
+
+    /* —— Badges Container (Positioned within content wrapper) —— */
+    #badgeContainer {
+      display: flex;
+      justify-content: center; /* Center badges within their container */
+      align-items: center;
+      gap: 12px; /* Space between badges */
+      margin: 1.5em 0; /* Keep original margin from README snippet */
+    }
+
+    #badgeContainer img {
+        /* Override general .content-wrapper img styles for badges */
+        max-width: none; /* Ensure badges use original width */
+        height: auto; /* Maintain aspect ratio */
+        display: inline-block; /* Display as inline block */
+        margin: 0; /* Remove default image margins */
+        border-radius: 4px; /* Keep the border-radius from the original snippet */
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* Keep the box-shadow from the original snippet */
+        background-color: transparent; /* Ensure no background interferes */
+    }
+
 
     /* —— Sidebar —— */
     #sidebar {
@@ -175,53 +196,57 @@
     }
 
 
-    /* —— Content Area —— */
+    /* —— Content Area (Full width next to sidebar, handles scrolling) —— */
     #content {
-      padding: 2rem 2.5rem; /* Keep horizontal padding */
-      padding-top: 2rem; /* Keep adjusted top padding */
-      overflow-y: auto;
       flex-grow: 1; /* Allow content to grow and fill space */
-      /* Set max-width to 80% of the available space (viewport width - sidebar width) */
-      max-width: calc((100vw - 260px) * 0.8); /* Limit content width to 80% of available space */
-      /* Use auto margins to center the content block within the available space */
-      margin: 0 auto; /* Use auto margins for horizontal centering */
-      margin-top: 0; /* Ensure no default margin-top */
+      overflow-y: auto; /* Add scrollbar to this area */
+      padding: 0; /* Remove padding here, apply to wrapper */
+      margin-left: 260px; /* Push content area next to sidebar */
     }
 
-    #content h1,
-    #content h2,
-    #content h3,
-    #content h4,
-    #content h5,
-    #content h6 {
+    /* —— Content Wrapper (Centers content within #content) —— */
+    .content-wrapper {
+      max-width: 80%; /* Limit content width to 80% of #content */
+      margin: 0 auto; /* Center the content block horizontally */
+      padding: 2rem 2.5rem; /* Apply padding here */
+      padding-top: 2rem; /* Adjust top padding */
+    }
+
+
+    .content-wrapper h1,
+    .content-wrapper h2,
+    .content-wrapper h3,
+    .content-wrapper h4,
+    .content-wrapper h5,
+    .content-wrapper h6 {
       margin-top: 2em;    /* Increased top margin for headings */
       margin-bottom: 1em; /* Increased bottom margin for headings */
       font-weight: 600;
       line-height: 1.3;    /* Adjusted line-height for headings */
     }
 
-    #content h1 {
+    .content-wrapper h1 {
       font-size: 2.2em; /* Slightly larger H1 */
       border-bottom: 1px solid var(--sidebar-border);
       padding-bottom: 0.4em;
     }
 
-    #content h2 {
+    .content-wrapper h2 {
       font-size: 1.8em; /* Slightly larger H2 */
        border-bottom: 1px dashed var(--sidebar-border); /* Subtle separator for H2 */
        padding-bottom: 0.3em;
     }
-    #content h3 {
+    .content-wrapper h3 {
         font-size: 1.4em;
     }
 
 
-    #content p {
+    .content-wrapper p {
       margin: 0 0 1.2em 0; /* Consistent bottom margin for paragraphs */
     }
 
     /* —— Code & Preformatted Blocks —— */
-    #content pre {
+    .content-wrapper pre {
       background-color: var(--code-bg);
       border: 1px solid var(--code-border);
       padding: 1.2rem; /* Increased padding */
@@ -231,14 +256,14 @@
       margin: 1.5em 0; /* Added vertical margin */
     }
 
-    #content code:not(pre code) { /* Inline code */
+    .content-wrapper code:not(pre code) { /* Inline code */
       background-color: var(--code-bg);
       padding: 0.2em 0.4em;
       border-radius: 4px;
       font-size: 0.9em;
       border: 1px solid var(--code-border);
     }
-    #content pre code { /* Code within pre blocks */
+    .content-wrapper pre code { /* Code within pre blocks */
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; /* Common monospace stack */
       font-size: 0.95em;
       background-color: transparent; /* No background for code inside pre */
@@ -261,7 +286,7 @@
       opacity: 0.7; /* Slightly transparent by default */
       transition: background-color var(--transition), color var(--transition), opacity 0.15s ease;
     }
-    #content pre:hover .copy-btn {
+    .content-wrapper pre:hover .copy-btn {
         opacity: 1; /* Fully visible on pre hover */
     }
 
@@ -276,17 +301,17 @@
 
 
     /* —— Links, Tables, Blockquotes —— */
-    #content a {
+    .content-wrapper a {
       color: var(--link);
       text-decoration: none; /* Remove underline by default */
     }
 
-    #content a:hover {
+    .content-wrapper a:hover {
       text-decoration: underline; /* Underline on hover */
       color: var(--link-hover);
     }
 
-    #content table {
+    .content-wrapper table {
       border-collapse: collapse;
       width: 100%;
       margin: 1.8em 0; /* Added vertical margin */
@@ -295,22 +320,22 @@
       overflow: hidden; /* Needed for border-radius on table */
     }
 
-    #content th,
-    #content td {
+    .content-wrapper th,
+    .content-wrapper td {
       border: 1px solid var(--table-border); /* Use new table border variable */
       padding: 0.8em 1.2em; /* Adjusted padding */
       text-align: left; /* Ensure text is left-aligned */
     }
-    #content th {
+    .content-wrapper th {
         background-color: var(--table-header-bg); /* Use new table header background variable */
         font-weight: 600;
     }
-    #content tr:nth-child(even) {
+    .content-wrapper tr:nth-child(even) {
         background-color: var(--table-row-even-bg); /* Use new zebra stripe background variable */
     }
 
 
-    #content blockquote {
+    .content-wrapper blockquote {
       border-left: 5px solid var(--link); /* Use link color for border */
       padding: 1em 1.5em; /* Adjusted padding */
       margin: 1.8em 0; /* Adjusted margin */
@@ -318,12 +343,12 @@
       border-radius: 0 6px 6px 0; /* Rounded corners on one side */
       color: var(--footer-text); /* Softer text color for blockquotes */
     }
-    #content blockquote p:last-child {
+    .content-wrapper blockquote p:last-child {
         margin-bottom: 0; /* Remove bottom margin from last p in blockquote */
     }
 
     /* —— SVG Images —— */
-    #content img {
+    .content-wrapper img {
       max-width: 40%; /* Limit images to 40% of its container width */
       height: auto;
       display: block;
@@ -358,7 +383,9 @@
   <button id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
 
   <main id="content">
-    <p>Loading...</p>
+    <div class="content-wrapper">
+      <p>Loading...</p>
+    </div>
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.7/marked.min.js"></script>
@@ -392,11 +419,12 @@
     });
 
     const contentDiv = document.getElementById('content');
+    const contentWrapperDiv = contentDiv.querySelector('.content-wrapper'); // Get the new wrapper div
     let currentFile = null;
     const GITHUB_REPO_RAW_BASE_URL = 'https://raw.githubusercontent.com/rekkles2/Fed_WSVAD/main/';
 
     async function loadMarkdown(filePath) {
-      contentDiv.innerHTML = '<p>Loading content...</p>'; // More descriptive loading message
+      contentWrapperDiv.innerHTML = '<p>Loading content...</p>'; // Load message inside the wrapper
       try {
         const response = await fetch(GITHUB_REPO_RAW_BASE_URL + filePath);
         if (!response.ok) {
@@ -433,11 +461,35 @@
             return prefix + absoluteUrl + (titlePart || '') + suffix;
         });
 
-        contentDiv.innerHTML = marked.parse(markdownText);
+        // Add the badge container HTML to the beginning of the parsed markdown
+        const badgeHtml = `
+          <div id="badgeContainer">
+            <a href="https://github.com/rekkles2/Fed_WSVAD">
+              <img
+                src="https://img.shields.io/github/stars/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white"
+                alt="GitHub Stars"
+              />
+            </a>
+            <a href="https://rekkles2.github.io/Fed_WSVAD/#README.md">
+              <img
+                src="https://img.shields.io/badge/%F0%9F%8C%90-Project%20Page-0084FF?style=flat-square"
+                alt="Project Page"
+              />
+            </a>
+            <a href="https://github.com/rekkles2/Fed_WSVAD/blob/main/LICENSE">
+              <img
+                src="https://img.shields.io/github/license/rekkles2/Fed_WSVAD?style=flat-square&logo=apache&logoColor=white&color=brightgreen"
+                alt="License"
+              />
+            </a>
+          </div>
+        `;
+        // Insert badges and parsed markdown into the content wrapper
+        contentWrapperDiv.innerHTML = badgeHtml + marked.parse(markdownText);
 
 
         // Add IDs to headings for deep linking (if not already present)
-        document.querySelectorAll('#content h1, #content h2, #content h3, #content h4, #content h5, #content h6').forEach(heading => {
+        contentWrapperDiv.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(heading => {
           if (!heading.id) {
             const suggestedId = heading.textContent.trim().toLowerCase()
                                .replace(/[^\w\s-]/g, '')
@@ -452,7 +504,7 @@
         });
 
         // Add copy buttons to pre blocks
-        document.querySelectorAll('#content pre').forEach(preElement => {
+        contentWrapperDiv.querySelectorAll('pre').forEach(preElement => {
           if (preElement.querySelector('code') && !preElement.querySelector('.copy-btn')) { // Ensure there's code to copy
             const copyButton = document.createElement('button');
             copyButton.className = 'copy-btn';
@@ -492,8 +544,8 @@
 
         // Scroll to top or to a specific hash if present in the loaded content's URL
         const internalHash = window.location.hash.split('#')[1]; // Corrected to get the first hash part
-        const elementToScroll = document.getElementById(internalHash);
-        if(elementToScroll && contentDiv.contains(elementToScroll)) {
+        const elementToScroll = contentWrapperDiv.querySelector('#' + internalHash); // Look for element inside wrapper
+        if(elementToScroll && contentWrapperDiv.contains(elementToScroll)) {
             elementToScroll.scrollIntoView({ behavior: 'smooth' });
         } else {
             contentDiv.scrollTop = 0; // Scroll content area, not window
@@ -502,7 +554,7 @@
         currentFile = filePath;
       } catch (error) {
         console.error('Failed to load Markdown:', error);
-        contentDiv.innerHTML = `<p style="color:red; font-weight:bold;">Failed to load content for "${filePath}".</p><p style="color:var(--text);">Error: ${error.message}</p><p>Please check the console for more details and ensure the file path is correct in the repository.</p>`;
+        contentWrapperDiv.innerHTML = `<p style="color:red; font-weight:bold;">Failed to load content for "${filePath}".</p><p style="color:var(--text);">Error: ${error.message}</p><p>Please check the console for more details and ensure the file path is correct in the repository.</p>`;
       }
     }
 
@@ -520,8 +572,8 @@
         } else {
           const internalHash = hashPath.split('#')[1];
            if (internalHash) {
-               const elementToScroll = document.getElementById(internalHash);
-               if(elementToScroll && contentDiv.contains(elementToScroll)) {
+               const elementToScroll = contentWrapperDiv.querySelector('#' + internalHash); // Look for element inside wrapper
+               if(elementToScroll && contentWrapperDiv.contains(elementToScroll)) {
                    elementToScroll.scrollIntoView({ behavior: 'smooth' });
                }
            }
