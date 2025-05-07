@@ -1,24 +1,7 @@
 
 <h1 align="center">📹 Dual-detector Re-optimization for Federated Weakly Supervised Video Anomaly Detection Via Adaptive Dynamic Recursive Mapping</h1>
 
-<style>
-.md-badges {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto 2rem;
-  gap: 12px;
-}
-.md-badges img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-</style>
-
-<div class="md-badges">
-<p align="center">
+<div class="md-badges" align="center">
   <a href="https://github.com/rekkles2/Fed_WSVAD">
     <img
       src="https://img.shields.io/github/stars/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white"
@@ -37,7 +20,6 @@
       alt="License"
     />
   </a>
-</p>
 </div>
 
 
