@@ -1,165 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fed-WSVAD Documentation</title>
-  <!-- Marked.js for Markdown parsing -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fed_WSVAD Documentation</title>
+  <!-- Highlight.js styles for light and dark themes -->
+  <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css" />
+  <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css" disabled />
   <style>
-    :root {
-      --bg-color: #ffffff;
-      --text-color: #000000;
-      --sidebar-bg: #f9f9f9;
-      --link-color: #1a0dab;
-    }
-    [data-theme="dark"] {
-      --bg-color: #121212;
-      --text-color: #e0e0e0;
-      --sidebar-bg: #1f1f1f;
-      --link-color: #8ab4f8;
-    }
     body {
       margin: 0;
-      display: flex;
-      background: var(--bg-color);
-      color: var(--text-color);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      height: 100vh;
-      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #24292e;
+      background-color: #fff;
     }
+    body.dark {
+      color: #c9d1d9;
+      background-color: #0d1117;
+    }
+    /* Layout */
     #sidebar {
-      width: 280px;
-      background: var(--sidebar-bg);
-      border-right: 1px solid #ddd;
-      padding: 1rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #f6f8fa;
+      border-right: 1px solid #d0d7de;
+    }
+    body.dark #sidebar {
+      background-color: #0d1117;
+      border-right: 1px solid #30363d;
+    }
+    .nav-container {
       overflow-y: auto;
-      position: relative;
     }
-    #content {
-      flex: 1;
-      padding: 2rem;
-      overflow-y: auto;
-      max-width: 800px;
-      margin: auto;
-      background: var(--bg-color);
-    }
-    #sidebar h2 {
-      font-size: 1.5rem;
-      margin-top: 0;
-    }
-    #sidebar ul {
+    #navList {
       list-style: none;
+      margin: 0;
       padding: 0;
     }
-    #sidebar li {
-      margin: 0.5rem 0;
+    #navList ul {
+      list-style: none;
+      margin: 0 0 0 1em;
+      padding: 0;
     }
-    #sidebar a {
+    #navList li {
+      margin: 0.2em 0;
+    }
+    #navList li span.folder {
+      font-weight: bold;
+      cursor: default;
+    }
+    #navList a {
+      display: block;
       text-decoration: none;
-      color: var(--link-color);
+      color: inherit;
+      padding: 4px 8px;
+      border-radius: 4px;
     }
-    #sidebar a:hover {
+    #navList a:hover {
+      background-color: #eaeef2;
+    }
+    body.dark #navList a:hover {
+      background-color: #30363d;
+    }
+    #navList a.active {
+      background-color: #eaeef2;
+      font-weight: bold;
+    }
+    body.dark #navList a.active {
+      background-color: #21262d;
+      font-weight: bold;
+    }
+    /* Toggle theme button */
+    #themeToggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+      border: none;
+      padding: 6px 8px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #ddd;
+      color: #24292e;
+    }
+    body.dark #themeToggle {
+      background-color: #444;
+      color: #c9d1d9;
+    }
+    /* Content area */
+    #content {
+      margin-left: 250px;
+      padding: 2em;
+    }
+    /* Content (Markdown) styles */
+    #content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
+      margin-top: 1.2em;
+      margin-bottom: 0.6em;
+      font-weight: 600;
+    }
+    #content h1 {
+      font-size: 2em;
+      border-bottom: 1px solid #d0d7de;
+      padding-bottom: 0.3em;
+    }
+    body.dark #content h1 {
+      border-bottom: 1px solid #30363d;
+    }
+    #content h2 { font-size: 1.5em; }
+    #content h3 { font-size: 1.25em; }
+    #content p {
+      margin: 0.8em 0;
+    }
+    #content code {
+      font-family: Menlo, Consolas, 'Liberation Mono', monospace;
+      font-size: 0.95em;
+    }
+    #content pre {
+      overflow-x: auto;
+      padding: 1em;
+      border: 1px solid #d0d7de;
+      background-color: #f6f8fa;
+      border-radius: 6px;
+    }
+    body.dark #content pre {
+      border: 1px solid #30363d;
+      background-color: #0d1117;
+    }
+    #content pre code {
+      display: block;
+    }
+    #content a {
+      color: #0969da;
+      text-decoration: none;
+    }
+    #content a:hover {
       text-decoration: underline;
     }
-    pre {
-      background: #f6f8fa;
-      padding: 1rem;
-      overflow-x: auto;
+    body.dark #content a {
+      color: #58a6ff;
     }
-    code {
-      font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-    }
-    img {
+    /* Tables */
+    #content table {
+      border-collapse: collapse;
       max-width: 100%;
     }
-    #theme-toggle {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      border: none;
-      background: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: var(--text-color);
+    #content th, #content td {
+      border: 1px solid #d0d7de;
+      padding: 6px 13px;
     }
-    #footer {
-      position: absolute;
-      bottom: 1rem;
-      font-size: 0.9rem;
-      color: var(--text-color);
-      width: calc(100% - 2rem);
-      text-align: center;
+    body.dark #content th, body.dark #content td {
+      border: 1px solid #30363d;
+    }
+    #content th {
+      font-weight: 600;
+      background-color: #f6f8fa;
+    }
+    body.dark #content th {
+      background-color: #161b22;
+    }
+    /* Blockquotes */
+    #content blockquote {
+      border-left: 4px solid #d0d7de;
+      margin: 0.8em 0;
+      padding: 0.5em 1em;
+      color: #6a737d;
+      background-color: #f6f8fa;
+    }
+    body.dark #content blockquote {
+      border-color: #30363d;
+      color: #8b949e;
+      background-color: transparent;
+    }
+    /* Maintainer footer text */
+    .maintainer {
+      padding: 8px;
+      text-align: left;
+      font-size: 0.9em;
+      color: #57606a;
+    }
+    body.dark .maintainer {
+      color: #8b949e;
     }
   </style>
 </head>
-<body data-theme="light">
+<body>
   <nav id="sidebar">
-    <h2>Fed-WSVAD</h2>
-    <button id="theme-toggle">🌙</button>
-    <ul id="nav-list"></ul>
-    <div id="footer">Maintained by Jiahang Li</div>
+    <div class="nav-container">
+      <ul id="navList">
+        <li><a href="#README.md">Home</a></li>
+        <li><span class="folder">Backbone</span>
+          <ul>
+            <li><a href="#Backbone/README.md">README</a></li>
+          </ul>
+        </li>
+        <li><span class="folder">Fed_VAD</span>
+          <ul>
+            <li><a href="#Fed_VAD/README.md">README</a></li>
+            <li><a href="#Fed_VAD/Jetson%20AGX%20Xavier%20Deployment%20Guide.md">Jetson AGX Xavier Deployment Guide</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="maintainer">Maintained by Jiahang Li</div>
   </nav>
-  <main id="content"></main>
+  <button id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
+  <main id="content">
+    <p>Loading...</p>
+  </main>
+  <!-- Marked (Markdown parser) and Highlight.js (syntax highlighter) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.7/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
   <script>
-    // Markdown link renderer to handle .md links
-    const renderer = {
-      link(href, title, text) {
-        if (href.endsWith('.md')) {
-          const clean = href.replace(/^\.\//, '');
-          return `<a href="#${clean}">${text}</a>`;
-        }
-        return `<a href="${href}"${title ? ` title="${title}"` : ''}>${text}</a>`;
-      }
-    };
-    marked.setOptions({ renderer });
-    
-    // Fetch all Markdown files recursively
-    async function loadNav() {
-      const apiUrl = 'https://api.github.com/repos/rekkles2/Fed_WSVAD/git/trees/main?recursive=1';
-      const res = await fetch(apiUrl);
-      const data = await res.json();
-      const mdFiles = data.tree
-        .filter(f => f.path.endsWith('.md'))
-        .sort((a, b) => a.path.localeCompare(b.path));
-      const navList = document.getElementById('nav-list');
-      mdFiles.forEach(file => {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        // Display only the filename or nested path
-        a.textContent = file.path.replace('.md', '').replace(/\//g, ' / ');
-        a.href = `#${file.path}`;
-        li.appendChild(a);
-        navList.appendChild(li);
-      });
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const lightStyle = document.getElementById('hljs-light');
+    const darkStyle = document.getElementById('hljs-dark');
+    // Apply saved theme on load
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark');
+      lightStyle.disabled = true;
+      darkStyle.disabled = false;
+      themeToggleBtn.textContent = '☀️';
+    } else {
+      document.body.classList.remove('dark');
+      lightStyle.disabled = false;
+      darkStyle.disabled = true;
+      themeToggleBtn.textContent = '🌙';
     }
-
-    // Load and render the Markdown based on URL hash
-    async function loadContent() {
-      const hash = window.location.hash.substring(1) || 'README.md';
-      const rawUrl = `https://raw.githubusercontent.com/rekkles2/Fed_WSVAD/main/${hash}`;
-      try {
-        const res = await fetch(rawUrl);
-        if (!res.ok) throw new Error('Not Found');
-        const md = await res.text();
-        document.getElementById('content').innerHTML = marked.parse(md);
-      } catch (err) {
-        document.getElementById('content').innerHTML = '<p>Content not found.</p>';
+    themeToggleBtn.addEventListener('click', () => {
+      if (document.body.classList.contains('dark')) {
+        document.body.classList.remove('dark');
+        lightStyle.disabled = false;
+        darkStyle.disabled = true;
+        themeToggleBtn.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.body.classList.add('dark');
+        lightStyle.disabled = true;
+        darkStyle.disabled = false;
+        themeToggleBtn.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
       }
-    }
-
-    // Theme toggle logic
-    const toggle = document.getElementById('theme-toggle');
-    toggle.addEventListener('click', () => {
-      const root = document.documentElement;
-      const current = root.getAttribute('data-theme');
-      const next = current === 'light' ? 'dark' : 'light';
-      root.setAttribute('data-theme', next);
-      toggle.textContent = next === 'light' ? '🌙' : '☀️';
     });
-
-    window.addEventListener('hashchange', loadContent);
-    loadNav().then(loadContent);
+    const contentDiv = document.getElementById('content');
+    let currentFile = null;
+    async function loadMarkdown(path) {
+      contentDiv.innerHTML = '<p>Loading...</p>';
+      try {
+        const response = await fetch(encodeURI('https://raw.githubusercontent.com/rekkles2/Fed_WSVAD/main/' + path));
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        let mdText = await response.text();
+        // Replace GitHub blob links with internal hash links
+        mdText = mdText.replace(/https:\/\/github\.com\/rekkles2\/Fed_WSVAD\/blob\/main\//g, '#');
+        // Replace raw GitHub image link to local path
+        mdText = mdText.replace(/https:\/\/github\.com\/rekkles2\/Fed_WSVAD\/raw\/main\/Figure\/model\.svg/g, 'model.svg');
+        // Convert Markdown to HTML
+        let htmlContent = marked.parse(mdText);
+        contentDiv.innerHTML = htmlContent;
+        // Add id attributes to headings for anchor links
+        const headers = contentDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        const idCounts = {};
+        headers.forEach(header => {
+          let text = header.textContent.toLowerCase();
+          let slug = text.replace(/[^a-z0-9 ]/g, '');    // remove non-alphanumeric (except space)
+          slug = slug.replace(/\s+/g, '-');              // replace spaces with hyphens
+          slug = slug.replace(/-+/g, '-');               // collapse multiple hyphens
+          // Do not trim leading/trailing hyphens (to mimic GitHub slug behavior)
+          if (idCounts[slug] !== undefined) {
+            idCounts[slug] += 1;
+            slug = slug + '-' + idCounts[slug];
+          } else {
+            idCounts[slug] = 0;
+          }
+          header.id = slug;
+        });
+        // Make external links open in new tab
+        contentDiv.querySelectorAll('a[href^="http"]').forEach(link => {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener');
+        });
+        // Highlight code blocks
+        hljs.highlightAll();
+        // Scroll to top of content
+        window.scrollTo(0, 0);
+        // Update active link in nav
+        document.querySelectorAll('#navList a').forEach(navLink => {
+          if (navLink.getAttribute('href') === '#' + path) {
+            navLink.classList.add('active');
+          } else {
+            navLink.classList.remove('active');
+          }
+        });
+        currentFile = path;
+      } catch (err) {
+        console.error('Error loading markdown:', err);
+        contentDiv.innerHTML = '<p style="color: red;">Failed to load content. Please try again later.</p>';
+      }
+    }
+    function loadFromHash() {
+      const hash = window.location.hash;
+      if (!hash || hash === '#') {
+        loadMarkdown('README.md');
+      } else if (hash.includes('.md')) {
+        const filePath = decodeURIComponent(hash.substring(1));
+        if (filePath !== currentFile) {
+          loadMarkdown(filePath);
+        }
+      } else {
+        // If hash is an in-page anchor (no .md), do nothing (browser will handle scroll)
+      }
+    }
+    window.addEventListener('hashchange', loadFromHash);
+    // Initial load
+    loadFromHash();
   </script>
 </body>
 </html>
