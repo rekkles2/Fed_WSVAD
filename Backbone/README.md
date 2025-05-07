@@ -13,14 +13,14 @@ It is used in the paper:
 
 ## 📑 Table of Contents
 
-1. [Introduction](#-introduction)  
-2. [Pretrained Model](#-pretrained-model)  
-3. [Workflow Overview](#-workflow-overview)  
-   - [RGB Frame Extraction](#1-rgb-frame-extraction)  
-   - [Feature Directory Setup](#2-feature-directory-setup)  
-   - [Feature Extraction](#3-feature-extraction)  
-   - [Feature Alignment](#4-feature-alignment)  
-4. [Citation](#-citation)
+1. [Introduction](#introduction)  
+2. [Pretrained Model](#pretrained-model)  
+3. [Workflow Overview](#workflow-overview)  
+   - [RGB Frame Extraction](#rgb-frame-extraction)  
+   - [Feature Directory Setup](#feature-directory-setup)  
+   - [Feature Extraction](#feature-extraction)  
+   - [Feature Alignment](#feature-alignment)  
+4. [Citation](#citation)
 
 ---
 
