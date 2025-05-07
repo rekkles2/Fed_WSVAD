@@ -1,327 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fed_WSVAD Documentation</title>
-  <!-- Highlight.js styles for light and dark themes -->
-  <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css" />
-  <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css" disabled />
-  <style>
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      color: #24292e;
-      background-color: #fff;
-    }
-    body.dark {
-      color: #c9d1d9;
-      background-color: #0d1117;
-    }
-    /* Layout */
-    #sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      width: 250px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background-color: #f6f8fa;
-      border-right: 1px solid #d0d7de;
-    }
-    body.dark #sidebar {
-      background-color: #0d1117;
-      border-right: 1px solid #30363d;
-    }
-    .nav-container {
-      overflow-y: auto;
-    }
-    #navList {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    #navList ul {
-      list-style: none;
-      margin: 0 0 0 1em;
-      padding: 0;
-    }
-    #navList li {
-      margin: 0.2em 0;
-    }
-    #navList li span.folder {
-      font-weight: bold;
-      cursor: default;
-    }
-    #navList a {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      padding: 4px 8px;
-      border-radius: 4px;
-    }
-    #navList a:hover {
-      background-color: #eaeef2;
-    }
-    body.dark #navList a:hover {
-      background-color: #30363d;
-    }
-    #navList a.active {
-      background-color: #eaeef2;
-      font-weight: bold;
-    }
-    body.dark #navList a.active {
-      background-color: #21262d;
-      font-weight: bold;
-    }
-    /* Toggle theme button */
-    #themeToggle {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      z-index: 1000;
-      border: none;
-      padding: 6px 8px;
-      border-radius: 4px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: #ddd;
-      color: #24292e;
-    }
-    body.dark #themeToggle {
-      background-color: #444;
-      color: #c9d1d9;
-    }
-    /* Content area */
-    #content {
-      margin-left: 250px;
-      padding: 2em;
-    }
-    /* Content (Markdown) styles */
-    #content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
-      margin-top: 1.2em;
-      margin-bottom: 0.6em;
-      font-weight: 600;
-    }
-    #content h1 {
-      font-size: 2em;
-      border-bottom: 1px solid #d0d7de;
-      padding-bottom: 0.3em;
-    }
-    body.dark #content h1 {
-      border-bottom: 1px solid #30363d;
-    }
-    #content h2 { font-size: 1.5em; }
-    #content h3 { font-size: 1.25em; }
-    #content p {
-      margin: 0.8em 0;
-    }
-    #content code {
-      font-family: Menlo, Consolas, 'Liberation Mono', monospace;
-      font-size: 0.95em;
-    }
-    #content pre {
-      overflow-x: auto;
-      padding: 1em;
-      border: 1px solid #d0d7de;
-      background-color: #f6f8fa;
-      border-radius: 6px;
-    }
-    body.dark #content pre {
-      border: 1px solid #30363d;
-      background-color: #0d1117;
-    }
-    #content pre code {
-      display: block;
-    }
-    #content a {
-      color: #0969da;
-      text-decoration: none;
-    }
-    #content a:hover {
-      text-decoration: underline;
-    }
-    body.dark #content a {
-      color: #58a6ff;
-    }
-    /* Tables */
-    #content table {
-      border-collapse: collapse;
-      max-width: 100%;
-    }
-    #content th, #content td {
-      border: 1px solid #d0d7de;
-      padding: 6px 13px;
-    }
-    body.dark #content th, body.dark #content td {
-      border: 1px solid #30363d;
-    }
-    #content th {
-      font-weight: 600;
-      background-color: #f6f8fa;
-    }
-    body.dark #content th {
-      background-color: #161b22;
-    }
-    /* Blockquotes */
-    #content blockquote {
-      border-left: 4px solid #d0d7de;
-      margin: 0.8em 0;
-      padding: 0.5em 1em;
-      color: #6a737d;
-      background-color: #f6f8fa;
-    }
-    body.dark #content blockquote {
-      border-color: #30363d;
-      color: #8b949e;
-      background-color: transparent;
-    }
-    /* Maintainer footer text */
-    .maintainer {
-      padding: 8px;
-      text-align: left;
-      font-size: 0.9em;
-      color: #57606a;
-    }
-    body.dark .maintainer {
-      color: #8b949e;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Fed-WSVAD Documentation</title>
+<style>
+body { margin: 0; font-family: Arial, sans-serif; display: flex; }
+nav { width: 220px; background: #f8f8f8; padding: 20px; box-sizing: border-box; border-right: 1px solid #ddd; height: 100vh; overflow: auto; position: fixed; top: 0; }
+nav ul { list-style: none; padding: 0; margin: 0; }
+nav li { margin-bottom: 8px; }
+nav a { text-decoration: none; color: #333; font-weight: bold; }
+nav a:hover { text-decoration: underline; }
+main { margin-left: 260px; padding: 20px; max-width: 800px; }
+h1 { font-size: 24px; margin-bottom: 0.5em; }
+h2 { font-size: 20px; margin-top: 1.5em; border-bottom: 1px solid #ddd; padding-bottom: 0.3em; }
+h3 { font-size: 18px; margin-top: 1.2em; }
+h4 { font-size: 16px; margin-top: 1em; }
+pre { background: #f4f4f4; padding: 10px; border: 1px solid #ddd; border-radius: 4px; position: relative; }
+.copy-button { position: absolute; top: 8px; right: 8px; padding: 2px 6px; font-size: 12px; border: 1px solid #ccc; background: #eee; cursor: pointer; border-radius: 3px; }
+.copy-button:hover { background: #ddd; }
+ul, ol { margin-top: 0; }
+</style>
 </head>
 <body>
-  <nav id="sidebar">
-    <div class="nav-container">
-      <ul id="navList">
-        <li><a href="#README.md">Home</a></li>
-        <li><span class="folder">Backbone</span>
-          <ul>
-            <li><a href="#Backbone/README.md">README</a></li>
-          </ul>
-        </li>
-        <li><span class="folder">Fed_VAD</span>
-          <ul>
-            <li><a href="#Fed_VAD/README.md">README</a></li>
-            <li><a href="#Fed_VAD/Jetson%20AGX%20Xavier%20Deployment%20Guide.md">Jetson AGX Xavier Deployment Guide</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <div class="maintainer">Maintained by Jiahang Li</div>
-  </nav>
-  <button id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
-  <main id="content">
-    <p>Loading...</p>
-  </main>
-  <!-- Marked (Markdown parser) and Highlight.js (syntax highlighter) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.7/marked.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-  <script>
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const lightStyle = document.getElementById('hljs-light');
-    const darkStyle = document.getElementById('hljs-dark');
-    // Apply saved theme on load
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      document.body.classList.add('dark');
-      lightStyle.disabled = true;
-      darkStyle.disabled = false;
-      themeToggleBtn.textContent = '☀️';
-    } else {
-      document.body.classList.remove('dark');
-      lightStyle.disabled = false;
-      darkStyle.disabled = true;
-      themeToggleBtn.textContent = '🌙';
+<nav>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#wsvad">WSVAD</a></li>
+    <li><a href="#fed-wsvad">Federated Setup (Fed-WSVAD)</a></li>
+    <li><a href="#jetson">Jetson AGX Xavier Deployment</a></li>
+    <li><a href="#feature-extraction">Feature Extraction Guide (VideoMAE V2 Backbone)</a></li>
+  </ul>
+</nav>
+<main>
+  <h1 id="home">Dual-detector Re-optimization for Federated Video Anomaly Detection via Adaptive Dynamic Recursive Mapping</h1>
+  <p align="center"><strong>⭐ If you find our code useful, please consider starring this repository!</strong></p>
+  <hr>
+  <p align="center">
+    <img src="https://github.com/rekkles2/Fed_WSVAD/raw/main/Figure/model.svg" alt="Figure 1: Overview of the proposed dual-detector framework for Fed-WSVAD" style="width:80%; height:auto;">
+    <br>
+    <em>Figure 1: Overview of the proposed dual-detector framework for federated weakly supervised video anomaly detection (Fed-WSVAD).</em>
+  </p>
+  <hr>
+  <h3>Key Contributions</h3>
+  <ul>
+    <li>We introduce a dual-detector framework that leverages adaptive dynamic recursive mapping to generate more stable anomaly scores, thereby enhancing detection accuracy.</li>
+    <li>We introduce the SSALA algorithm to learn private local models that adapt to each client’s data, mitigating the effects of scene heterogeneity.</li>
+    <li>We demonstrate superior detection performance and robustness through experiments on two benchmarks, validating the effectiveness of the proposed framework.</li>
+  </ul>
+
+  <h2 id="wsvad">WSVAD</h2>
+  <h3>Setup Instructions</h3>
+  <ol>
+    <li><strong>Clone the repository:</strong>
+      <pre><code>git clone https://github.com/rekkles2/Fed_WSVAD.git
+cd Fed_WSVAD</code></pre>
+    </li>
+    <li><strong>Create and activate the Conda environment:</strong> (Check the <code>VAD/environment.yml</code> file for the environment name, e.g., <code>vad_env</code>)
+      <pre><code>conda env create -f VAD/environment.yml
+conda activate &lt;your_environment_name&gt;  # e.g., conda activate vad_env</code></pre>
+    </li>
+  </ol>
+  <hr>
+  <h3>Running</h3>
+  <pre><code>python main.py</code></pre>
+  <hr>
+  <h3>Evaluation</h3>
+  <p>To evaluate the pretrained model (e.g., on ShanghaiTech), run the following command:</p>
+  <pre><code># Ensure the path to the .pkl model file is correct.
+python VAD/inference.py --inference_model='shanghaitech.pkl'</code></pre>
+
+  <h2 id="fed-wsvad">Federated Setup (Fed-WSVAD)</h2>
+  <p>This guide provides comprehensive instructions for setting up an end-to-end federated video anomaly detection (Fed-WSVAD) framework. Follow these steps to successfully deploy and execute your federated learning experiments.</p>
+  <hr>
+  <h3>1. Preparation</h3>
+  <p>Before you begin, ensure all necessary hardware, software, and data are in place. Careful preparation is key to a smooth setup process.</p>
+  <h4>1.1 Hardware Requirements</h4>
+  <ul>
+    <li><strong>Server:</strong> You will need <strong>one machine</strong> (a standard PC or server) to host the central aggregation server.</li>
+    <li><strong>Clients:</strong> At least <strong>two NVIDIA Jetson AGX Xavier</strong> devices are required to function as the distributed clients.</li>
+    <li><strong>Network:</strong> A reliable <strong>Wi-Fi network</strong> is essential to connect the server and all client devices for communication.</li>
+  </ul>
+  <h4>1.2 Software &amp; Data Setup</h4>
+  <ul>
+    <li><strong>Dependencies:</strong> Install all required libraries and dependencies listed in the <code>requirements.txt</code> file.</li>
+    <li><strong>Data Preparation:</strong> Download and preprocess the video datasets as needed. Ensure the data is formatted and accessible to both the server and clients.</li>
+  </ul>
+  <h4>1.3 Configuration Steps</h4>
+  <ul>
+    <li><strong>Server Address Modification:</strong> Locate and modify the relevant IP address in the source code files: <code>Fed_VAD/server.py</code> and <code>Fed_VAD/client_pytorch.py</code>.</li>
+    <li><strong>Replace Placeholder IP:</strong> Update the placeholder IP address (e.g., <code>192.168.1.100:8080</code>) with the actual server address. This ensures clients can connect to the server.</li>
+  </ul>
+  <hr>
+  <h3>2. Scene Similarity Analysis</h3>
+  <ul>
+    <li><strong>Purpose:</strong> Prepare each scene photo (without humans) to compute scene similarity. The most similar scenes might be chosen for paired experiments.</li>
+    <li><strong>Execution:</strong> Run the following script:
+      <pre><code>python Fed_VAD/Scene_Similarity.py</code></pre>
+    </li>
+  </ul>
+  <hr>
+  <h3>3. Running the Framework</h3>
+  <h4>3.1 Start the Server</h4>
+  <p>Begin by starting the central server process on your designated server machine:</p>
+  <pre><code># --rounds: total number of federated learning rounds.
+python Fed_VAD/server.py --rounds=10</code></pre>
+  <h4>3.2 Start Each Client</h4>
+  <p>After the server is running, start the client process on each client device. For each client, open a terminal and run:</p>
+  <pre><code># --cid: unique Client ID for this device.
+python Fed_VAD/client_pytorch.py --cid=&lt;CLIENT_ID&gt;</code></pre>
+  <p>Replace <code>&lt;CLIENT_ID&gt;</code> with the appropriate ID (e.g., 0, 1, 2, ...).</p>
+  <hr>
+  <p>By following these steps, you should be able to successfully run the Fed-WSVAD framework. Good luck with your experiments!</p>
+
+  <h2 id="jetson">Jetson AGX Xavier Deployment Guide</h2>
+  <p><strong>Status:</strong> <em>In preparation</em> (expected release in 2 months)</p>
+  <blockquote>
+    <strong>Configuring the Jetson AGX Xavier for federated learning is quite complex.</strong>
+    A detailed setup tutorial is currently being prepared and will be released within the next two months—stay tuned.
+  </blockquote>
+
+  <h2 id="feature-extraction">Feature Extraction Guide (VideoMAE V2 Backbone)</h2>
+  <p>A modular toolkit for extracting video features using the <strong>Video Masked Autoencoder V2 (VideoMAE V2)</strong> framework. This backbone is part of the repository <a href="https://github.com/rekkles2/Fed_WSVAD">rekkles2/Fed_WSVAD</a>.</p>
+  <h3>Introduction</h3>
+  <p>This repository provides scripts for extracting video features using the Video-MAE V2 model. It is designed to support feature preprocessing in weakly supervised video anomaly detection tasks.</p>
+  <h3>Pretrained Model</h3>
+  <p>Download the pretrained Video-MAE V2 checkpoint:</p>
+  <p><a href="https://drive.google.com/file/d/1xr1yeA2cxck4NCLX1qjAi3JU9qhRpfGr/view?usp=drive_link">Download Pretrained Model</a></p>
+
+</main>
+<script>
+document.querySelectorAll('pre').forEach(function(pre) {
+  var btn = document.createElement('button');
+  btn.className = 'copy-button';
+  btn.textContent = 'Copy';
+  btn.addEventListener('click', function() {
+    var code = pre.querySelector('code');
+    if (code) {
+      navigator.clipboard.writeText(code.innerText).then(function() {
+        btn.textContent = 'Copied!';
+        setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+      });
     }
-    themeToggleBtn.addEventListener('click', () => {
-      if (document.body.classList.contains('dark')) {
-        document.body.classList.remove('dark');
-        lightStyle.disabled = false;
-        darkStyle.disabled = true;
-        themeToggleBtn.textContent = '🌙';
-        localStorage.setItem('theme', 'light');
-      } else {
-        document.body.classList.add('dark');
-        lightStyle.disabled = true;
-        darkStyle.disabled = false;
-        themeToggleBtn.textContent = '☀️';
-        localStorage.setItem('theme', 'dark');
-      }
-    });
-    const contentDiv = document.getElementById('content');
-    let currentFile = null;
-    async function loadMarkdown(path) {
-      contentDiv.innerHTML = '<p>Loading...</p>';
-      try {
-        const response = await fetch(encodeURI('https://raw.githubusercontent.com/rekkles2/Fed_WSVAD/main/' + path));
-        if (!response.ok) throw new Error('HTTP ' + response.status);
-        let mdText = await response.text();
-        // Replace GitHub blob links with internal hash links
-        mdText = mdText.replace(/https:\/\/github\.com\/rekkles2\/Fed_WSVAD\/blob\/main\//g, '#');
-        // Replace raw GitHub image link to local path
-        mdText = mdText.replace(/https:\/\/github\.com\/rekkles2\/Fed_WSVAD\/raw\/main\/Figure\/model\.svg/g, 'model.svg');
-        // Convert Markdown to HTML
-        let htmlContent = marked.parse(mdText);
-        contentDiv.innerHTML = htmlContent;
-        // Add id attributes to headings for anchor links
-        const headers = contentDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
-        const idCounts = {};
-        headers.forEach(header => {
-          let text = header.textContent.toLowerCase();
-          let slug = text.replace(/[^a-z0-9 ]/g, '');    // remove non-alphanumeric (except space)
-          slug = slug.replace(/\s+/g, '-');              // replace spaces with hyphens
-          slug = slug.replace(/-+/g, '-');               // collapse multiple hyphens
-          // Do not trim leading/trailing hyphens (to mimic GitHub slug behavior)
-          if (idCounts[slug] !== undefined) {
-            idCounts[slug] += 1;
-            slug = slug + '-' + idCounts[slug];
-          } else {
-            idCounts[slug] = 0;
-          }
-          header.id = slug;
-        });
-        // Make external links open in new tab
-        contentDiv.querySelectorAll('a[href^="http"]').forEach(link => {
-          link.setAttribute('target', '_blank');
-          link.setAttribute('rel', 'noopener');
-        });
-        // Highlight code blocks
-        hljs.highlightAll();
-        // Scroll to top of content
-        window.scrollTo(0, 0);
-        // Update active link in nav
-        document.querySelectorAll('#navList a').forEach(navLink => {
-          if (navLink.getAttribute('href') === '#' + path) {
-            navLink.classList.add('active');
-          } else {
-            navLink.classList.remove('active');
-          }
-        });
-        currentFile = path;
-      } catch (err) {
-        console.error('Error loading markdown:', err);
-        contentDiv.innerHTML = '<p style="color: red;">Failed to load content. Please try again later.</p>';
-      }
-    }
-    function loadFromHash() {
-      const hash = window.location.hash;
-      if (!hash || hash === '#') {
-        loadMarkdown('README.md');
-      } else if (hash.includes('.md')) {
-        const filePath = decodeURIComponent(hash.substring(1));
-        if (filePath !== currentFile) {
-          loadMarkdown(filePath);
-        }
-      } else {
-        // If hash is an in-page anchor (no .md), do nothing (browser will handle scroll)
-      }
-    }
-    window.addEventListener('hashchange', loadFromHash);
-    // Initial load
-    loadFromHash();
-  </script>
+  });
+  pre.appendChild(btn);
+});
+</script>
 </body>
 </html>
