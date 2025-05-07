@@ -27,6 +27,11 @@
       --footer-text: #57606a;
       --transition: 0.2s ease-in-out;
       --img-shadow: rgba(0,0,0,0.1);
+
+      /* Table Specific Colors (New/Adjusted) */
+      --table-border: #c6cbd1; /* Darker border for tables */
+      --table-header-bg: #f0f3f6; /* Slightly darker header background */
+      --table-row-even-bg: #f6f8fa; /* Slightly darker zebra stripe */
     }
 
     body.dark {
@@ -44,6 +49,11 @@
       --btn-hover: #196e2d;
       --footer-text: #8b949e;
       --img-shadow: rgba(0,0,0,0.3);
+
+      /* Table Specific Colors (Dark Mode) (New/Adjusted) */
+      --table-border: #444c56; /* Darker border for tables in dark mode */
+      --table-header-bg: #21262d; /* Darker header background in dark mode */
+      --table-row-even-bg: #1c222b; /* Darker zebra stripe in dark mode */
     }
 
     /* —— Base Styles —— */
@@ -100,11 +110,11 @@
       font-weight: 500;
       word-wrap: break-word; /* Ensure long text wraps */
     }
-     #navList .folder {
+      #navList .folder {
         color: var(--text); /* Folder text color same as body text */
         font-weight: 600; /* Make folder names bolder */
         cursor: default;
-     }
+      }
 
 
     #navList a:hover {
@@ -123,9 +133,9 @@
       padding-left: 0.5rem;
       border-left: 1px solid var(--sidebar-border);
     }
-     #navList ul li {
+      #navList ul li {
         margin: 0.4rem 0;
-     }
+      }
 
     .maintainer {
       margin-top: auto;
@@ -182,7 +192,7 @@
       margin-top: 2em;    /* Increased top margin for headings */
       margin-bottom: 1em; /* Increased bottom margin for headings */
       font-weight: 600;
-      line-height: 1.3;   /* Adjusted line-height for headings */
+      line-height: 1.3;    /* Adjusted line-height for headings */
     }
 
     #content h1 {
@@ -282,20 +292,21 @@
 
     #content th,
     #content td {
-      border: 1px solid var(--sidebar-border);
+      border: 1px solid var(--table-border); /* Use new table border variable */
       padding: 0.8em 1.2em; /* Adjusted padding */
       text-align: left; /* Ensure text is left-aligned */
     }
     #content th {
-        background-color: var(--code-bg); /* Header background for tables */
+        background-color: var(--table-header-bg); /* Use new table header background variable */
         font-weight: 600;
     }
     #content tr:nth-child(even) {
-        background-color: var(--sidebar-bg); /* Zebra striping for table rows */
+        background-color: var(--table-row-even-bg); /* Use new zebra stripe background variable */
     }
-    body.dark #content tr:nth-child(even) {
-        background-color: #1c222b; /* Darker zebra striping for dark mode */
-    }
+    /* Removed explicit dark mode override for zebra stripe, using variable instead */
+    /* body.dark #content tr:nth-child(even) {
+        background-color: #1c222b;
+    } */
 
 
     #content blockquote {
@@ -400,7 +411,9 @@
         // 2. Resolve relative image paths in the markdown to absolute raw GitHub URLs
         // This handles both Markdown image syntax: ![alt](url) and HTML <img> tags
         const currentFileDirectory = filePath.includes('/') ? filePath.substring(0, filePath.lastIndexOf('/') + 1) : '';
-        const image kontekstBaseUrl = new URL(currentFileDirectory, GITHUB_REPO_RAW_BASE_URL).href;
+        // **FIXED**: Changed 'image kontekstBaseUrl' to 'imageBaseUrl'
+        const imageBaseUrl = new URL(currentFileDirectory, GITHUB_REPO_RAW_BASE_URL).href;
+
 
         // Regex for HTML <img> tags: src="RELATIVE_PATH"
         markdownText = markdownText.replace(/(<img\s+[^>]*src=")(?!https?:\/\/|\/\/|data:)([^"]+)(")/gi, (match, prefix, srcUrl, suffix) => {
@@ -408,7 +421,7 @@
             if (srcUrl.startsWith('/')) { // Path relative to repo root
                 absoluteUrl = new URL(srcUrl.substring(1), GITHUB_REPO_RAW_BASE_URL).href;
             } else { // Path relative to current file's directory
-                absoluteUrl = new URL(srcUrl, imagekontekstBaseUrl).href;
+                absoluteUrl = new URL(srcUrl, imageBaseUrl).href; // Use fixed variable name
             }
             return prefix + absoluteUrl + suffix;
         });
@@ -419,11 +432,11 @@
             if (srcUrl.startsWith('/')) { // Path relative to repo root
                 absoluteUrl = new URL(srcUrl.substring(1), GITHUB_REPO_RAW_BASE_URL).href;
             } else { // Path relative to current file's directory
-                absoluteUrl = new URL(srcUrl, imagekontekstBaseUrl).href;
+                absoluteUrl = new URL(srcUrl, imageBaseUrl).href; // Use fixed variable name
             }
             return prefix + absoluteUrl + (titlePart || '') + suffix;
         });
-        
+
         // The problematic line for model.svg is removed as the general image resolver above should handle it.
         // md = md.replace(/https:\/\/github\.com\/rekkles2\/Fed_WSVAD\/raw\/main\/Figure\/model\.svg/g, 'model.svg'); // REMOVED
 
@@ -464,7 +477,7 @@
               }).catch(err => {
                 console.error('Failed to copy text: ', err);
                 copyButton.textContent = 'Error';
-                 setTimeout(() => {
+                  setTimeout(() => {
                   copyButton.textContent = 'Copy';
                 }, 2000);
               });
@@ -488,7 +501,7 @@
         } else {
             contentDiv.scrollTop = 0; // Scroll content area, not window
         }
-        
+
         currentFile = filePath;
       } catch (error) {
         console.error('Failed to load Markdown:', error);
@@ -505,11 +518,11 @@
       if (!hashPath) { // If no hash, load default
         hashPath = 'README.md';
         // Update hash without triggering another hashchange, for bookmarkability
-        history.replaceState(null, '', '#' + hashPath); 
+        history.replaceState(null, '', '#' + hashPath);
       }
-      
+
       // Only load if the main path part of the hash changes (ignoring sub-hashes for scrolling)
-      const mainPath = hashPath.split('#')[0]; 
+      const mainPath = hashPath.split('#')[0];
       if (mainPath.includes('.md')) {
         if (mainPath !== currentFile) {
           loadMarkdown(mainPath);
@@ -528,9 +541,9 @@
 
     window.addEventListener('hashchange', onHashChange);
     // Initial load based on current hash or default
-    window.addEventListener('load', ()_ => {
+    window.addEventListener('load', () => { // **FIXED**: Corrected fat arrow syntax for the load event listener
         // Initialize highlighting for any pre-loaded code (if any, though unlikely here)
-        hljs.highlightAll(); 
+        hljs.highlightAll();
         onHashChange(); // Trigger initial content load
     });
   </script>
