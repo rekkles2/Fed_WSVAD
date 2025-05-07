@@ -9,6 +9,8 @@
   <link id="hljs-dark" rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css"
     disabled />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+
   <style>
     /* —— Color Variables —— */
     :root {
@@ -76,9 +78,6 @@
       overflow: hidden; /* Hide overflow on body to manage scrolling on #content */
     }
 
-
-
-
     /* —— Sidebar —— */
     #sidebar {
       position: fixed; /* Keep fixed position */
@@ -144,9 +143,12 @@
     .maintainer {
       margin-top: auto;
       padding-top: 1.5rem; /* Increased padding */
-      font-size: 0.9rem; /* Slightly larger maintainer text */
+      font-size: 1.1rem; /* Slightly larger maintainer text */
       color: var(--footer-text);
       text-align: left;
+      padding-left: 0.8rem; /* Align with nav items */
+      font-family: 'Dancing Script', cursive; /* Apply cursive font */
+      font-weight: 700; /* Make it a bit bolder if the font supports it */
     }
 
     /* —— Theme Toggle Button —— */
@@ -184,17 +186,52 @@
       overflow-y: auto; /* Add scrollbar to this area */
       padding: 0; /* Remove padding here, apply to wrapper */
       margin-left: 260px; /* Push content area next to sidebar */
-      display: flex; /* Use flexbox to center the wrapper */
-      justify-content: center; /* Center the wrapper horizontally */
+      display: flex; /* Use flexbox column to stack badges and wrapper */
+      flex-direction: column;
+      /* Removed align-items: center; to allow badge container to align left */
     }
+
+    /* —— Badges Container from README (Direct child of #content) —— */
+    .md-badges {
+      display: flex; /* Use flexbox for layout */
+      justify-content: flex-start; /* Align badges to the left */
+      align-items: center; /* Center badges vertically */
+      gap: 0; /* Remove space between badges */
+      margin: 1.5em 0; /* Add vertical margin */
+      width: auto; /* Allow badge container to take only necessary width */
+      padding: 0 2.5rem; /* Add horizontal padding to align with content wrapper padding */
+      box-sizing: border-box; /* Include padding in width calculation */
+      align-self: flex-start; /* Align the badge container to the start (left) within #content */
+    }
+
+    .md-badges img {
+        /* Override general .content-wrapper img styles for badges */
+        max-width: none; /* Ensure original size */
+        height: auto; /* Maintain aspect ratio */
+        display: inline-block; /* Ensure inline-block behavior */
+        margin: 0; /* Remove any default image margins */
+        border-radius: 4px; /* Keep styles from snippet */
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* Keep styles from snippet */
+        background-color: transparent; /* Ensure no background interferes */
+        /* Increase size - setting a height will scale proportionally */
+        height: 80px; /* Approximate 5x increase from typical badge height */
+    }
+
+    .md-badges a {
+        text-decoration: none; /* Remove underline from badge links */
+    }
+
 
     /* —— Content Wrapper (Centers content within #content) —— */
     .content-wrapper {
-      max-width: 70%; /* Limit content width to 70% of #content */
+      max-width: 75%; /* Limit content width to 75% of #content */
       width: 100%; /* Allow wrapper to take full width up to max-width */
-      padding: 2rem 2.5rem; /* Apply padding here */
-      padding-top: 2rem; /* Adjust top padding */
-      /* Removed margin: 0 auto; as flexbox on #content handles centering */
+      padding: 0 2.5rem; /* Apply horizontal padding here */
+      padding-top: 0; /* Remove top padding here, handled by badge margin */
+      padding-bottom: 2rem; /* Add bottom padding */
+      box-sizing: border-box; /* Include padding in width calculation */
+      flex-shrink: 0; /* Prevent wrapper from shrinking */
+      align-self: center; /* Center the content wrapper horizontally within #content */
     }
 
 
@@ -207,7 +244,7 @@
       margin-top: 2em;    /* Increased top margin for headings */
       margin-bottom: 1em; /* Increased bottom margin for headings */
       font-weight: 600;
-      line-height: 1.3;    /* Adjusted line-height for headings */
+      line-height: 1.3;   /* Adjusted line-height for headings */
     }
 
     .content-wrapper h1 {
@@ -218,8 +255,8 @@
 
     .content-wrapper h2 {
       font-size: 1.8em; /* Slightly larger H2 */
-       border-bottom: 1px dashed var(--sidebar-border); /* Subtle separator for H2 */
-       padding-bottom: 0.3em;
+        border-bottom: 1px dashed var(--sidebar-border); /* Subtle separator for H2 */
+        padding-bottom: 0.3em;
     }
     .content-wrapper h3 {
         font-size: 1.4em;
@@ -333,8 +370,8 @@
     }
 
     /* —— Images (including SVG) —— */
-    .content-wrapper img {
-      max-width: 58%; /* Limit images to 55% of its container width */
+    .content-wrapper img { /* General image styling */
+      max-width: 55%; /* Limit images to 55% of its container width */
       height: auto;
       display: block;
       margin: 1.5em auto; /* Centered with vertical margin */
@@ -361,6 +398,7 @@
             <li><a href="#Fed_VAD/Jetson%20AGX%20Xavier%20Deployment%20Guide.md">Jetson AGX Xavier Deployment Guide</a></li>
           </ul>
         </li>
+        <li><a href="https://deepwiki.com/rekkles2/Fed_WSVAD" target="_blank" rel="noopener noreferrer">DeepWiki Code Navigator</a></li>
       </ul>
     </div>
     <div class="maintainer">Maintained by Jiahang Li</div>
@@ -377,6 +415,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.7/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
   <script>
+    // --- Theme Toggle Functionality ---
     const themeToggleBtn = document.getElementById('themeToggle');
     const lightStyle = document.getElementById('hljs-light');
     const darkStyle = document.getElementById('hljs-dark');
@@ -387,132 +426,191 @@
         document.body.classList.add('dark');
         if (lightStyle) lightStyle.disabled = true;
         if (darkStyle) darkStyle.disabled = false;
-        themeToggleBtn.textContent = '☀️';
+        themeToggleBtn.textContent = '☀️'; // Sun icon for dark mode
       } else {
         document.body.classList.remove('dark');
         if (lightStyle) lightStyle.disabled = false;
         if (darkStyle) darkStyle.disabled = true;
-        themeToggleBtn.textContent = '🌙';
+        themeToggleBtn.textContent = '🌙'; // Moon icon for light mode
       }
     }
 
+    // Apply saved theme or system preference on load
     applyTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
 
+    // Event listener for theme toggle button
     themeToggleBtn.addEventListener('click', () => {
       const newTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
       applyTheme(newTheme);
       localStorage.setItem('theme', newTheme);
     });
 
+    // --- Markdown Loading and Processing ---
     const contentDiv = document.getElementById('content');
-    const contentWrapperDiv = contentDiv.querySelector('.content-wrapper'); // Get the new wrapper div
-    let currentFile = null;
+    const contentWrapperDiv = contentDiv.querySelector('.content-wrapper');
+    let currentFile = null; // Tracks the currently loaded markdown file
     const GITHUB_REPO_RAW_BASE_URL = 'https://raw.githubusercontent.com/rekkles2/Fed_WSVAD/main/';
+    const HOME_README_URL = 'https://raw.githubusercontent.com/rekkles2/page/main/README.md';
 
-    // Function to generate a valid HTML ID from a string (e.g., heading text)
+
+    // Generates a valid HTML ID from a string (e.g., for heading anchors)
     function generateValidId(input) {
-        // Replace invalid characters with hyphens
         return input.trim().toLowerCase()
-                   .replace(/[^\w\s-]/g, '') // Remove non-alphanumeric (except hyphen, underscore)
-                   .replace(/\s+/g, '-') // Replace spaces with hyphens
-                   .replace(/-+/g, '-'); // Replace multiple hyphens with single
+                    .replace(/[^\w\s-]/g, '') // Remove non-alphanumeric (except hyphen, underscore)
+                    .replace(/\s+/g, '-')    // Replace spaces with hyphens
+                    .replace(/-+/g, '-');   // Replace multiple hyphens with single
     }
 
-
+    // Fetches and renders Markdown content
     async function loadMarkdown(filePath) {
-      contentWrapperDiv.innerHTML = '<p>Loading content...</p>'; // Load message inside the wrapper
-      try {
-        const response = await fetch(GITHUB_REPO_RAW_BASE_URL + filePath);
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status} for ${filePath}`);
-        }
-        let markdownText = await response.text();
+      // Clear previous content and display loading message
+      contentWrapperDiv.innerHTML = '<p>Loading content...</p>';
+      // Remove any previously extracted badges
+      const oldBadges = contentDiv.querySelector('.md-badges');
+      if (oldBadges) {
+          oldBadges.remove();
+      }
 
-        // Parse markdown first
+
+      try {
+        // Determine the correct URL for the markdown file
+        const isHomePage = filePath === 'README.md';
+        const fileUrl = isHomePage ? HOME_README_URL : GITHUB_REPO_RAW_BASE_URL + filePath;
+        const response = await fetch(fileUrl);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status} for ${fileUrl}`);
+        }
+        const markdownText = await response.text();
+
+        // Parse Markdown to HTML using 'marked' library
         let parsedHtml = marked.parse(markdownText);
 
-        // Insert parsed markdown into the content wrapper
-        contentWrapperDiv.innerHTML = parsedHtml;
+        // Use a temporary div to extract the badges before inserting the rest of the HTML
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = parsedHtml;
+        const badgeDiv = tempDiv.querySelector('.md-badges');
+
+        if (badgeDiv) {
+            // Remove the badge div from the temporary HTML string
+            badgeDiv.remove();
+             // Insert the extracted badge div directly into #content before the wrapper
+            contentDiv.insertBefore(badgeDiv, contentWrapperDiv);
+
+             // Ensure badge links open in a new tab
+            badgeDiv.querySelectorAll('a').forEach(badgeLink => {
+                const href = badgeLink.getAttribute('href');
+                if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
+                     try {
+                        const linkUrl = new URL(badgeLink.href); // Use badgeLink.href to get absolute URL
+                        const currentLocUrl = new URL(window.location.href);
+                        if (linkUrl.hostname !== currentLocUrl.hostname || linkUrl.protocol !== currentLocUrl.protocol) {
+                            badgeLink.setAttribute('target', '_blank');
+                            badgeLink.setAttribute('rel', 'noopener noreferrer');
+                        }
+                    } catch (e) {
+                        console.error("Error processing badge link URL for target='_blank':", href, e);
+                         badgeLink.setAttribute('target', '_blank');
+                         badgeLink.setAttribute('rel', 'noopener noreferrer');
+                    }
+                }
+            });
+
+        }
+
+        // Insert the remaining parsed HTML (without badges) into the content wrapper
+        contentWrapperDiv.innerHTML = tempDiv.innerHTML;
 
 
         // --- Link Handling ---
+        // Determine the base URL for resolving relative links within the current markdown file
         const currentFileDirectory = filePath.includes('/') ? filePath.substring(0, filePath.lastIndexOf('/') + 1) : '';
-        const baseUrl = new URL(currentFileDirectory, GITHUB_REPO_RAW_BASE_URL).href; // Base URL for resolving relative links
+        const baseUrlForRelativeLinks = (isHomePage) ?
+                                       new URL(HOME_README_URL).href.substring(0, new URL(HOME_README_URL).href.lastIndexOf('/') + 1) : // Base of the 'page' repo
+                                       new URL(currentFileDirectory, GITHUB_REPO_RAW_BASE_URL).href;
+
 
         contentWrapperDiv.querySelectorAll('a').forEach(link => {
-            const href = link.getAttribute('href');
-            if (href) {
-                // Check if it's a relative link (not starting with #, http, mailto)
-                if (!href.startsWith('#') && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('mailto:')) {
-                    // Split href into path and potential hash
-                    const parts = href.split('#');
-                    const pathPart = parts[0];
-                    const internalHashPart = parts.length > 1 ? '#' + parts.slice(1).join('#') : ''; // Rejoin multiple hashes if any
+          const href = link.getAttribute('href');
+          if (href) {
+            // Handle relative links (not starting with #, http, mailto)
+            if (!href.startsWith('#') && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('mailto:')) {
+              const parts = href.split('#');
+              const pathPart = parts[0];
+              const internalHashPart = parts.length > 1 ? '#' + parts.slice(1).join('#') : '';
 
-                    if (pathPart.toLowerCase().endsWith('.md')) {
-                        // It's a relative .md link - convert to hash link using original file path
-                        const absolutePath = new URL(pathPart, baseUrl).pathname.substring(1); // Resolve absolute path
-                        link.setAttribute('href', '#' + absolutePath + internalHashPart); // Use original path in hash
-                    } else {
-                        // It's another relative link (asset, etc.) - convert to absolute raw URL
-                         const absoluteUrl = new URL(href, baseUrl).href; // Resolve absolute URL
-                         link.setAttribute('href', absoluteUrl);
-                         link.setAttribute('target', '_blank'); // Open external links in new tab
-                    }
-                } else if (href.startsWith('https://github.com/rekkles2/Fed_WSVAD/blob/main/')) {
-                     // Handle existing GitHub blob links - convert to hash link using repo path
-                     const repoPathWithHash = href.substring('https://github.com/rekkles2/Fed_WSVAD/blob/main/'.length);
-                     const parts = repoPathWithHash.split('#');
-                     const pathPart = parts[0];
-                     const internalHashPart = parts.length > 1 ? '#' + parts.slice(1).join('#') : '';
-                     link.setAttribute('href', '#' + pathPart + internalHashPart); // Use original repo path in hash
-                } else if (href.startsWith('#') && href.length > 1) {
-                    // It's an internal page hash link (e.g., #section)
-                    // No change to href needed here. Scrolling will use querySelector with the valid ID generated from text.
-                }
+              if (pathPart.toLowerCase().endsWith('.md')) {
+                // Convert relative .md links to internal hash links for SPA navigation
+                let absolutePath;
+                // Resolve relative path based on the current markdown file's directory
+                absolutePath = new URL(pathPart, baseUrlForRelativeLinks).pathname;
+                // Make path relative to GITHUB_REPO_RAW_BASE_URL's path part if it's not the home page
+                 if (!isHomePage) {
+                     let baseRepoPath = new URL(GITHUB_REPO_RAW_BASE_URL).pathname;
+                     if (absolutePath.startsWith(baseRepoPath)) {
+                        absolutePath = absolutePath.substring(baseRepoPath.length);
+                     }
+                 }
+                 absolutePath = absolutePath.replace(/^\//, ''); // Ensure no leading slash for hash
 
-                 // For external http/https links, add target="_blank"
-                if (href.startsWith('http://') || href.startsWith('https://')) {
-                    // Check if it's an external link (not to the current domain)
+                link.setAttribute('href', '#' + absolutePath + internalHashPart); // Use original path in hash
+
+              } else {
+                // Convert other relative links (assets, etc.) to absolute raw GitHub URLs
+                const absoluteUrl = new URL(href, baseUrlForRelativeLinks).href;
+                link.setAttribute('href', absoluteUrl);
+                link.setAttribute('target', '_blank'); // Open asset links in new tab
+                link.setAttribute('rel', 'noopener noreferrer');
+              }
+            } else if (href.startsWith('https://github.com/rekkles2/Fed_WSVAD/blob/main/')) {
+              // Convert GitHub blob links to internal hash links
+              const repoPathWithHash = href.substring('https://github.com/rekkles2/Fed_WSVAD/blob/main/'.length);
+              const parts = repoPathWithHash.split('#');
+              const pathPart = parts[0];
+              const internalHashPart = parts.length > 1 ? '#' + parts.slice(1).join('#') : '';
+              link.setAttribute('href', '#' + pathPart + internalHashPart);
+            }
+            // Ensure all external HTTP/HTTPS links open in a new tab
+             if ((href.startsWith('http://') || href.startsWith('https://')) && !link.getAttribute('href').startsWith('#')) {
+                // Check if it's not already targeting _blank and not an internal SPA link
+                if (link.getAttribute('target') !== '_blank') {
                     try {
-                        const linkUrl = new URL(href);
-                        const currentUrl = new URL(window.location.href);
-                        // Compare hostnames, ignoring port
-                        if (linkUrl.hostname !== currentUrl.hostname) {
-                             link.setAttribute('target', '_blank');
+                        const linkUrl = new URL(link.href); // Use link.href to get absolute URL
+                        const currentLocUrl = new URL(window.location.href);
+                        if (linkUrl.hostname !== currentLocUrl.hostname || linkUrl.protocol !== currentLocUrl.protocol) {
+                            link.setAttribute('target', '_blank');
+                            link.setAttribute('rel', 'noopener noreferrer');
                         }
                     } catch (e) {
-                        console.error("Invalid URL:", href, e);
-                        // If URL is invalid, might still be an external link, add target="_blank" cautiously
-                         link.setAttribute('target', '_blank');
+                        console.error("Error processing link URL for target='_blank':", href, e);
+                        // Fallback for potentially malformed relative links that became absolute
+                        if (!link.href.startsWith(window.location.origin + window.location.pathname)) {
+                             link.setAttribute('target', '_blank');
+                             link.setAttribute('rel', 'noopener noreferrer');
+                        }
                     }
                 }
             }
+          }
         });
 
-
-        // Add IDs to headings for deep linking (if not already present)
+        // Add IDs to headings for deep linking if not already present
         contentWrapperDiv.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(heading => {
           if (!heading.id) {
-            // Use the generated valid ID based on heading text
             heading.id = generateValidId(heading.textContent.trim());
           }
         });
 
-        // Add copy buttons to pre blocks
+        // Add "Copy" buttons to code blocks
         contentWrapperDiv.querySelectorAll('pre').forEach(preElement => {
-          if (preElement.querySelector('code') && !preElement.querySelector('.copy-btn')) { // Ensure there's code to copy
+          if (preElement.querySelector('code') && !preElement.querySelector('.copy-btn')) {
             const copyButton = document.createElement('button');
             copyButton.className = 'copy-btn';
             copyButton.textContent = 'Copy';
             copyButton.setAttribute('aria-label', 'Copy code to clipboard');
             copyButton.onclick = () => {
-              console.log('Copy button clicked'); // Log click event
               const codeToCopy = preElement.querySelector('code').innerText;
-              console.log('Code to copy:', codeToCopy); // Log content to be copied
-
               navigator.clipboard.writeText(codeToCopy).then(() => {
-                console.log('Copy successful!'); // Log success
                 copyButton.textContent = 'Copied!';
                 copyButton.classList.add('copied');
                 setTimeout(() => {
@@ -520,127 +618,137 @@
                   copyButton.classList.remove('copied');
                 }, 2000);
               }).catch(err => {
-                console.error('Failed to copy text: ', err); // Log failure and error
+                console.error('Failed to copy text: ', err);
                 copyButton.textContent = 'Error';
-                  setTimeout(() => {
-                  copyButton.textContent = 'Copy';
-                }, 2000);
+                setTimeout(() => { copyButton.textContent = 'Copy'; }, 2000);
               });
             };
             preElement.appendChild(copyButton);
           }
         });
 
-        hljs.highlightAll(); // Apply syntax highlighting
+        // Apply syntax highlighting using highlight.js
+        if (typeof hljs !== 'undefined') {
+            hljs.highlightAll();
+        }
 
-        // Update active link in navigation
+
+        // Update active link in the sidebar navigation
         document.querySelectorAll('#navList a').forEach(navLink => {
           const navHref = navLink.getAttribute('href');
+          // Only apply 'active' to internal hash links
           if (navHref && navHref.startsWith('#')) {
-              // Compare the file path part of the hash
-              const navFilePath = navHref.substring(1).split('#')[0];
-              navLink.classList.toggle('active', navFilePath === filePath);
+            const navFilePath = navHref.substring(1).split('#')[0]; // Compare file path part of the hash
+            navLink.classList.toggle('active', navFilePath === filePath);
           } else {
-               navLink.classList.toggle('active', false);
+            navLink.classList.remove('active'); // External links should not be marked active
           }
         });
 
-        // Scroll to top or to a specific hash if present in the loaded content's URL
+        // Scroll to the top of the content or to a specific section if a hash is present
         const urlHash = window.location.hash;
         if (urlHash) {
-             const hashContent = decodeURIComponent(urlHash.slice(1));
-             const hashParts = hashContent.split('#');
-             const sectionHashPart = hashParts.length > 1 ? hashParts[1] : ''; // Get the section hash
+          const hashContent = decodeURIComponent(urlHash.slice(1));
+          const hashParts = hashContent.split('#');
+          const filePartOfHash = hashParts[0]; // e.g., README.md or Backbone/README.md
+          const sectionHashPart = hashParts.length > 1 ? hashParts[1] : ''; // e.g., introduction
 
-             if (sectionHashPart) {
-                 // Find the element with the valid ID matching the section hash
-                 const elementToScroll = contentWrapperDiv.querySelector('#' + generateValidId(sectionHashPart));
-                 if(elementToScroll && contentWrapperDiv.contains(elementToScroll)) {
-                     elementToScroll.scrollIntoView({ behavior: 'smooth' });
-                 } else {
-                      console.warn(`Element with ID #${generateValidId(sectionHashPart)} not found in the loaded content.`);
-                     contentDiv.scrollTop = 0; // Scroll to top of content if section not found
-                 }
-             } else {
-                 // If no section hash, scroll to top of content
-                 contentDiv.scrollTop = 0;
-             }
+          // Only scroll if the file part of the hash matches the currently loaded file
+          if (filePartOfHash === filePath && sectionHashPart) {
+            const elementToScroll = contentWrapperDiv.querySelector('#' + generateValidId(sectionHashPart));
+            if (elementToScroll && contentWrapperDiv.contains(elementToScroll)) {
+              elementToScroll.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              console.warn(`Element with ID #${generateValidId(sectionHashPart)} not found in ${filePath}.`);
+              contentDiv.scrollTop = 0; // Scroll to top if section not found
+            }
+          } else if (filePartOfHash === filePath) { // File matches, but no specific section
+            contentDiv.scrollTop = 0;
+          }
+          // If filePartOfHash does not match filePath, scrolling is handled by the new page load.
         } else {
-             // If no hash at all, scroll to top of content
-             contentDiv.scrollTop = 0;
+          contentDiv.scrollTop = 0; // Scroll to top if no hash at all
         }
 
-
-        currentFile = filePath;
+        currentFile = filePath; // Update the currently loaded file
       } catch (error) {
         console.error('Failed to load Markdown:', error);
-        contentWrapperDiv.innerHTML = `<p style="color:red; font-weight:bold;">Failed to load content for "${filePath}".</p><p style="color:var(--text);">Error: ${error.message}</p><p>Please check the console for more details and ensure the file path is correct in the repository.</p>`;
+        contentWrapperDiv.innerHTML = `<p style="color:red; font-weight:bold;">Failed to load content for "${filePath}".</p><p style="color:var(--text);">Error: ${error.message}</p><p>Please check the console for more details.</p>`;
       }
     }
 
+    // Handles URL hash changes for navigation
     function onHashChange() {
-      let hash = decodeURIComponent(location.hash.slice(1)); // Decode the hash
+      let hash = decodeURIComponent(location.hash.slice(1));
 
-      if (!hash) { // If no hash, load default
+      if (!hash) { // If no hash, load default README.md
         hash = 'README.md';
-        // Update hash without triggering another hashchange, for bookmarkability
-        history.replaceState(null, '', '#' + hash); // Use original file path in hash
+        history.replaceState(null, '', '#' + hash); // Update URL without triggering hashchange
       }
 
-      // Split the hash into file path and potential internal section hash
       const hashParts = hash.split('#');
-      const filePathFromHash = hashParts[0]; // Get the file path part
+      const filePathFromHash = hashParts[0]; // This is the path to the .md file
 
-      if (filePathFromHash.toLowerCase().endsWith('.md')) {
-        if (filePathFromHash !== currentFile) {
+      if (filePathFromHash && filePathFromHash.toLowerCase().endsWith('.md')) {
+        // If the file path from hash is different from currentFile, load it.
+        // Or, if it's the same file but currentFile is null (initial load), load it.
+        if (filePathFromHash !== currentFile || currentFile === null) {
           loadMarkdown(filePathFromHash);
         } else {
-          // If same file, just scroll to internal hash if present
-           const urlHash = window.location.hash;
-           if (urlHash && urlHash.length > 1) {
-                const hashContent = decodeURIComponent(urlHash.slice(1));
-                const hashParts = hashContent.split('#');
-                const sectionHashPart = hashParts.length > 1 ? hashParts[1] : ''; // Get the section hash
-
-               if (sectionHashPart) {
-                   // Find the element with the valid ID matching the section hash
-                   const elementToScroll = contentWrapperDiv.querySelector('#' + generateValidId(sectionHashPart));
-                   if(elementToScroll && contentWrapperDiv.contains(elementToScroll)) {
-                       elementToScroll.scrollIntoView({ behavior: 'smooth' });
-                   } else {
-                        console.warn(`Element with ID #${generateValidId(sectionHashPart)} not found in the loaded content.`);
-                       contentDiv.scrollTop = 0; // Scroll to top of content if section not found
-                   }
-               } else {
-                   contentDiv.scrollTop = 0; // Scroll to top if no internal hash
-               }
-           } else {
-               contentDiv.scrollTop = 0; // Scroll to top if no hash at all
-           }
+          // Same file is already loaded, just handle scrolling to section if specified
+          const sectionHashPart = hashParts.length > 1 ? hashParts[1] : '';
+          if (sectionHashPart) {
+            const elementToScroll = contentWrapperDiv.querySelector('#' + generateValidId(sectionHashPart));
+            if (elementToScroll && contentWrapperDiv.contains(elementToScroll)) {
+              elementToScroll.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                 console.warn(`Element with ID #${generateValidId(sectionHashPart)} not found for same-file scroll in ${filePathFromHash}.`);
+                 contentDiv.scrollTop = 0; // Scroll to top if section not found
+            }
+          } else {
+            contentDiv.scrollTop = 0; // Scroll to top if no internal hash for the same file
+          }
         }
-      } else {
-          // If the hash doesn't end with .md, it might be an invalid hash or just an internal section link without a file
-          // In this case, try to load the default README.md
-           console.warn(`Invalid hash format: ${hash}. Loading default README.md`);
-           history.replaceState(null, '', '#README.md'); // Correct the hash
-           loadMarkdown('README.md');
+      } else if (filePathFromHash) { // If hash is not an .md file but exists
+        console.warn(`Invalid or non-Markdown file path in hash: "${filePathFromHash}". Loading default README.md`);
+        history.replaceState(null, '', '#README.md');
+        loadMarkdown('README.md');
       }
+      // If filePathFromHash is empty (e.g. URL is just `#`), it defaults to README.md due to the `!hash` check earlier.
     }
 
-    // Update sidebar links to use original file paths on load
-    document.querySelectorAll('#navList a').forEach(navLink => {
-        const href = navLink.getAttribute('href');
-        if (href && href.startsWith('#') && href.includes('.md')) {
-            // Keep the original file path in the hash
-            // No change needed here as we want #FilePath.md format
+    // Ensure sidebar links and badge links are correctly formatted for external targets
+    document.querySelectorAll('#sidebar a, .md-badges a').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
+            // Check if it's not already targeting _blank and not an internal SPA link
+            if (!link.hasAttribute('target') || link.getAttribute('target') !== '_blank') {
+                try {
+                    const linkUrl = new URL(link.href); // Use link.href to get absolute URL
+                    const currentLocUrl = new URL(window.location.href);
+                    if (linkUrl.hostname !== currentLocUrl.hostname || linkUrl.protocol !== currentLocUrl.protocol) {
+                        link.setAttribute('target', '_blank');
+                        link.setAttribute('rel', 'noopener noreferrer');
+                    }
+                } catch (e) {
+                    console.error("Error processing link URL for target='_blank':", href, e);
+                     link.setAttribute('target', '_blank');
+                     link.setAttribute('rel', 'noopener noreferrer');
+                }
+            }
         }
     });
 
 
+    // Event listeners for page load and hash changes
     window.addEventListener('hashchange', onHashChange);
     window.addEventListener('load', () => {
-        hljs.highlightAll();
-        onHashChange(); // Initial load based on hash or default
+      if (typeof hljs !== 'undefined') {
+        // Ensure highlight.js is available before calling
+        hljs.configure({ ignoreUnescapedHTML: true }); // Optional: good for robustness
+        // Initial highlighting might be better done after first loadMarkdown completes
+      }
+      onHashChange(); // Initial content load based on hash or default
     });
   </script>
 </body>
