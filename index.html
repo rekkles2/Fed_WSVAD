@@ -186,13 +186,11 @@
       overflow-y: auto; /* Add scrollbar to this area */
       padding: 0; /* Remove padding here, apply to wrapper */
       margin-left: 260px; /* Push content area next to sidebar */
-      display: flex; /* Use flexbox column to stack badges and wrapper */
-      flex-direction: column;
-      /* Removed align-items: center; to allow badge container to align left */
+      /* Removed flexbox centering here, wrapper handles centering */
     }
 
-    /* —— Badges Container from README (Direct child of #content) —— */
-    .md-badges {
+    /* —— Badges Container (Directly added to HTML) —— */
+    #topBadges { /* Unique ID for the badges added directly in HTML */
       display: flex; /* Use flexbox for layout */
       justify-content: flex-start; /* Align badges to the left */
       align-items: center; /* Center badges vertically */
@@ -202,10 +200,13 @@
       padding: 0 2.5rem; /* Add horizontal padding to align with content wrapper padding */
       box-sizing: border-box; /* Include padding in width calculation */
       align-self: flex-start; /* Align the badge container to the start (left) within #content */
+       /* Optional: Add a subtle border or shadow for visual separation */
+      /* border-bottom: 1px solid var(--sidebar-border); */
+      /* padding-bottom: 1em; */
+      /* box-shadow: 0 2px 4px rgba(0,0,0,0.05); */
     }
 
-    .md-badges img {
-        /* Override general .content-wrapper img styles for badges */
+    #topBadges img {
         max-width: none; /* Ensure original size */
         height: auto; /* Maintain aspect ratio */
         display: inline-block; /* Ensure inline-block behavior */
@@ -213,11 +214,10 @@
         border-radius: 4px; /* Keep styles from snippet */
         box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* Keep styles from snippet */
         background-color: transparent; /* Ensure no background interferes */
-        /* Increase size - setting a height will scale proportionally */
-        height: 80px; /* Approximate 5x increase from typical badge height */
+        /* Removed height: 80px; to revert to original size */
     }
 
-    .md-badges a {
+    #topBadges a {
         text-decoration: none; /* Remove underline from badge links */
     }
 
@@ -226,6 +226,7 @@
     .content-wrapper {
       max-width: 75%; /* Limit content width to 75% of #content */
       width: 100%; /* Allow wrapper to take full width up to max-width */
+      margin: 0 auto; /* Center the content block horizontally */
       padding: 0 2.5rem; /* Apply horizontal padding here */
       padding-top: 0; /* Remove top padding here, handled by badge margin */
       padding-bottom: 2rem; /* Add bottom padding */
@@ -407,6 +408,26 @@
   <button id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
 
   <main id="content">
+    <div id="topBadges">
+      <a href="https://github.com/rekkles2/Fed_WSVAD" target="_blank" rel="noopener noreferrer">
+        <img
+          src="https://img.shields.io/github/stars/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white"
+          alt="GitHub Stars"
+        />
+      </a>
+      <a href="https://rekkles2.github.io/Fed_WSVAD/#README.md" target="_blank" rel="noopener noreferrer">
+        <img
+          src="https://img.shields.io/badge/%F0%9F%8C%90-Project%20Page-0084FF?style=flat-square"
+          alt="Project Page"
+        />
+      </a>
+      <a href="https://github.com/rekkles2/Fed_WSVAD/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">
+        <img
+          src="https://img.shields.io/github/license/rekkles2/Fed_WSVAD?style=flat-square&logo=apache&logoColor=white&color=brightgreen"
+          alt="License"
+        />
+      </a>
+    </div>
     <div class="content-wrapper">
       <p>Loading...</p>
     </div>
@@ -465,12 +486,6 @@
     async function loadMarkdown(filePath) {
       // Clear previous content and display loading message
       contentWrapperDiv.innerHTML = '<p>Loading content...</p>';
-      // Remove any previously extracted badges
-      const oldBadges = contentDiv.querySelector('.md-badges');
-      if (oldBadges) {
-          oldBadges.remove();
-      }
-
 
       try {
         // Determine the correct URL for the markdown file
@@ -486,40 +501,8 @@
         // Parse Markdown to HTML using 'marked' library
         let parsedHtml = marked.parse(markdownText);
 
-        // Use a temporary div to extract the badges before inserting the rest of the HTML
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = parsedHtml;
-        const badgeDiv = tempDiv.querySelector('.md-badges');
-
-        if (badgeDiv) {
-            // Remove the badge div from the temporary HTML string
-            badgeDiv.remove();
-             // Insert the extracted badge div directly into #content before the wrapper
-            contentDiv.insertBefore(badgeDiv, contentWrapperDiv);
-
-             // Ensure badge links open in a new tab
-            badgeDiv.querySelectorAll('a').forEach(badgeLink => {
-                const href = badgeLink.getAttribute('href');
-                if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
-                     try {
-                        const linkUrl = new URL(badgeLink.href); // Use badgeLink.href to get absolute URL
-                        const currentLocUrl = new URL(window.location.href);
-                        if (linkUrl.hostname !== currentLocUrl.hostname || linkUrl.protocol !== currentLocUrl.protocol) {
-                            badgeLink.setAttribute('target', '_blank');
-                            badgeLink.setAttribute('rel', 'noopener noreferrer');
-                        }
-                    } catch (e) {
-                        console.error("Error processing badge link URL for target='_blank':", href, e);
-                         badgeLink.setAttribute('target', '_blank');
-                         badgeLink.setAttribute('rel', 'noopener noreferrer');
-                    }
-                }
-            });
-
-        }
-
-        // Insert the remaining parsed HTML (without badges) into the content wrapper
-        contentWrapperDiv.innerHTML = tempDiv.innerHTML;
+        // Insert parsed markdown into the content wrapper
+        contentWrapperDiv.innerHTML = parsedHtml;
 
 
         // --- Link Handling ---
@@ -569,8 +552,14 @@
               const pathPart = parts[0];
               const internalHashPart = parts.length > 1 ? '#' + parts.slice(1).join('#') : '';
               link.setAttribute('href', '#' + pathPart + internalHashPart);
+            } else if (href.startsWith('#') && href.length > 1) {
+                // It's an internal page hash link (e.g., #section)
+                // Modify the href to include the current file path
+                const sectionId = href.substring(1); // Get the original section ID
+                link.setAttribute('href', '#' + filePath + '#' + sectionId); // Format: #FilePath.md#section-id
             }
-            // Ensure all external HTTP/HTTPS links open in a new tab
+
+             // Ensure all external HTTP/HTTPS links open in a new tab
              if ((href.startsWith('http://') || href.startsWith('https://')) && !link.getAttribute('href').startsWith('#')) {
                 // Check if it's not already targeting _blank and not an internal SPA link
                 if (link.getAttribute('target') !== '_blank') {
@@ -655,6 +644,7 @@
 
           // Only scroll if the file part of the hash matches the currently loaded file
           if (filePartOfHash === filePath && sectionHashPart) {
+            // Find the element with the valid ID matching the section hash
             const elementToScroll = contentWrapperDiv.querySelector('#' + generateValidId(sectionHashPart));
             if (elementToScroll && contentWrapperDiv.contains(elementToScroll)) {
               elementToScroll.scrollIntoView({ behavior: 'smooth' });
@@ -698,6 +688,7 @@
           // Same file is already loaded, just handle scrolling to section if specified
           const sectionHashPart = hashParts.length > 1 ? hashParts[1] : '';
           if (sectionHashPart) {
+            // Find the element with the valid ID matching the section hash
             const elementToScroll = contentWrapperDiv.querySelector('#' + generateValidId(sectionHashPart));
             if (elementToScroll && contentWrapperDiv.contains(elementToScroll)) {
               elementToScroll.scrollIntoView({ behavior: 'smooth' });
@@ -718,7 +709,7 @@
     }
 
     // Ensure sidebar links and badge links are correctly formatted for external targets
-    document.querySelectorAll('#sidebar a, .md-badges a').forEach(link => {
+    document.querySelectorAll('#sidebar a, #topBadges a').forEach(link => {
         const href = link.getAttribute('href');
         if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
             // Check if it's not already targeting _blank and not an internal SPA link
