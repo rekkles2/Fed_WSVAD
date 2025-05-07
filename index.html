@@ -71,7 +71,7 @@
       line-height: 1.7; /* Increased for better readability */
       color: var(--text);
       background-color: var(--bg);
-      display: flex;
+      display: flex; /* Use flexbox for main layout */
       height: 100vh;
       overflow: hidden;
     }
@@ -99,11 +99,11 @@
 
     /* —— Sidebar —— */
     #sidebar {
-      position: fixed;
+      position: fixed; /* Keep fixed position */
       top: 0;
       left: 0;
       bottom: 0;
-      width: 260px; /* Slightly wider sidebar */
+      width: 260px; /* Fixed width sidebar */
       background-color: var(--sidebar-bg);
       border-right: 1px solid var(--sidebar-border);
       display: flex;
@@ -111,6 +111,7 @@
       overflow-y: auto;
       padding: 1.5rem 1rem; /* Adjusted padding */
       /* Removed padding-top here as badges are now inside content */
+      flex-shrink: 0; /* Prevent sidebar from shrinking in flex layout */
     }
 
     #navList {
@@ -198,14 +199,19 @@
 
     /* —— Content Area —— */
     #content {
-      margin-left: 260px; /* Adjusted to match sidebar width */
-      padding: 2rem 2.5rem; /* Increased horizontal padding */
-      padding-top: 1rem; /* Adjusted top padding to make space for badges within content */
+      /* Remove fixed margin-left as flexbox handles positioning */
+      /* margin-left: 260px; */
+      padding: 2rem 2.5rem; /* Keep horizontal padding */
+      padding-top: 1rem; /* Keep adjusted top padding to make space for badges within content */
       overflow-y: auto;
-      width: calc(100% - 260px); /* Adjusted to match sidebar width */
-      max-width: 900px; /* 设置最大宽度 */
-      margin-right: auto; /* 自动右边距 */
-      margin-left: 260px; /* 保留左边距 */
+      flex-grow: 1; /* Allow content to grow and fill space */
+      /* Set max-width to 80% of the viewport width */
+      max-width: 80vw; /* Limit content width to 80% of viewport */
+      /* Use auto margins to center the content block within the available space */
+      margin: 0 auto; /* Use auto margins for horizontal centering */
+      margin-top: 0; /* Ensure no default margin-top */
+      /* Adjusted width calculation is no longer needed with flexbox and max-width */
+      /* width: calc(100% - 260px); */
     }
 
     #content h1,
@@ -344,7 +350,7 @@
 
     /* —— SVG Images —— */
     #content img {
-      max-width: 80%; /* Allow images to take full width if needed, but capped at 80% */
+      max-width: 80%; /* Allow images to take full width of its container, but capped at 80% */
       height: auto;
       display: block;
       margin: 1.5em auto; /* Centered with vertical margin */
