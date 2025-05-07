@@ -76,26 +76,6 @@
       overflow: hidden;
     }
 
-    /* —— Badges Container (Removed) —— */
-    /* #badgeContainer {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-bottom: 2rem;
-      padding-top: 0.5rem;
-    } */
-
-    /* #badgeContainer img {
-        max-width: none;
-        height: auto;
-        display: inline-block;
-        margin: 0;
-        border-radius: 4px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-        background-color: transparent;
-    } */
-
-
     /* —— Sidebar —— */
     #sidebar {
       position: fixed; /* Keep fixed position */
@@ -198,11 +178,11 @@
     /* —— Content Area —— */
     #content {
       padding: 2rem 2.5rem; /* Keep horizontal padding */
-      padding-top: 2rem; /* Reverted top padding */
+      padding-top: 2rem; /* Keep adjusted top padding */
       overflow-y: auto;
       flex-grow: 1; /* Allow content to grow and fill space */
-      /* Set max-width to 90% of the viewport width */
-      max-width: 90vw; /* Limit content width to 90% of viewport */
+      /* Set max-width to 80% of the available space (viewport width - sidebar width) */
+      max-width: calc((100vw - 260px) * 0.8); /* Limit content width to 80% of available space */
       /* Use auto margins to center the content block within the available space */
       margin: 0 auto; /* Use auto margins for horizontal centering */
       margin-top: 0; /* Ensure no default margin-top */
@@ -344,7 +324,7 @@
 
     /* —— SVG Images —— */
     #content img {
-      max-width: 45%; /* Limit images to 45% of its container width */
+      max-width: 40%; /* Limit images to 40% of its container width */
       height: auto;
       display: block;
       margin: 1.5em auto; /* Centered with vertical margin */
@@ -452,8 +432,6 @@
             }
             return prefix + absoluteUrl + (titlePart || '') + suffix;
         });
-
-        // Removed the badge container HTML insertion
 
         contentDiv.innerHTML = marked.parse(markdownText);
 
