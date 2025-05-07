@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fed_WSVAD Documentation</title>
-  <!-- Highlight.js styles for light and dark themes -->
   <link id="hljs-light" rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css" />
   <link id="hljs-dark" rel="stylesheet"
@@ -19,7 +18,7 @@
       --sidebar-border: #e1e4e8;
       --link: #0366d6;
       --link-hover: #024ea2;
-      --active-bg: #e7f4ff;
+      --active-bg: #e7f4ff; /* A slightly lighter blue for active items */
       --code-bg: #f6f8fa;
       --code-border: #e1e4e8;
       --btn-bg: #0366d6;
@@ -27,7 +26,9 @@
       --btn-hover: #024ea2;
       --footer-text: #57606a;
       --transition: 0.2s ease-in-out;
+      --img-shadow: rgba(0,0,0,0.1);
     }
+
     body.dark {
       --bg: #0d1117;
       --text: #c9d1d9;
@@ -35,27 +36,29 @@
       --sidebar-border: #30363d;
       --link: #58a6ff;
       --link-hover: #4191db;
-      --active-bg: #21262d;
+      --active-bg: #1f6feb33; /* A subtle blue highlight for dark mode */
       --code-bg: #161b22;
       --code-border: #30363d;
       --btn-bg: #238636;
       --btn-text: #ffffff;
       --btn-hover: #196e2d;
       --footer-text: #8b949e;
+      --img-shadow: rgba(0,0,0,0.3);
     }
 
     /* —— Base Styles —— */
     * {
       box-sizing: border-box;
       transition: background-color var(--transition),
-                  color var(--transition);
+        color var(--transition), border-color var(--transition); /* Added border-color to transition */
     }
+
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
-                   Arial, sans-serif;
+        Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; /* Added emoji fonts */
       font-size: 16px;
-      line-height: 1.6;
+      line-height: 1.7; /* Increased for better readability */
       color: var(--text);
       background-color: var(--bg);
       display: flex;
@@ -66,38 +69,68 @@
     /* —— Sidebar —— */
     #sidebar {
       position: fixed;
-      top: 0; left: 0; bottom: 0;
-      width: 250px;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 260px; /* Slightly wider sidebar */
       background-color: var(--sidebar-bg);
       border-right: 1px solid var(--sidebar-border);
       display: flex;
       flex-direction: column;
       overflow-y: auto;
-      padding: 1rem;
+      padding: 1.5rem 1rem; /* Adjusted padding */
     }
-    #navList { list-style: none; padding: 0; margin: 0; }
-    #navList li { margin: 0.4rem 0; }
-    #navList a {
+
+    #navList {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #navList li {
+      margin: 0.6rem 0; /* Increased spacing between items */
+    }
+
+    #navList a, #navList .folder {
       display: block;
       text-decoration: none;
       color: var(--link);
-      padding: 0.3rem 0.5rem;
-      border-radius: 4px;
+      padding: 0.5rem 0.8rem; /* Increased padding for better touch targets */
+      border-radius: 6px; /* Slightly more rounded corners */
       font-weight: 500;
+      word-wrap: break-word; /* Ensure long text wraps */
     }
+     #navList .folder {
+        color: var(--text); /* Folder text color same as body text */
+        font-weight: 600; /* Make folder names bolder */
+        cursor: default;
+     }
+
+
     #navList a:hover {
       background-color: var(--active-bg);
       color: var(--link-hover);
     }
+
     #navList a.active {
       background-color: var(--active-bg);
-      font-weight: 600;
+      color: var(--link-hover); /* Ensure text color changes for active link */
+      font-weight: 700; /* Bolder active link */
     }
-    #navList ul { margin-left: 1rem; }
+
+    #navList ul {
+      margin-left: 1.2rem; /* Slightly increased indent for sub-items */
+      padding-left: 0.5rem;
+      border-left: 1px solid var(--sidebar-border);
+    }
+     #navList ul li {
+        margin: 0.4rem 0;
+     }
+
     .maintainer {
       margin-top: auto;
-      padding-top: 1rem;
-      font-size: 0.85rem;
+      padding-top: 1.5rem; /* Increased padding */
+      font-size: 0.9rem; /* Slightly larger maintainer text */
       color: var(--footer-text);
       text-align: left;
     }
@@ -105,126 +138,208 @@
     /* —— Theme Toggle Button —— */
     #themeToggle {
       position: fixed;
-      top: 1rem; right: 1rem;
+      top: 1rem;
+      right: 1rem;
       z-index: 1000;
-      border: none;
-      background-color: var(--btn-bg);
-      color: var(--btn-text);
-      width: 36px; height: 36px;
+      border: 1px solid var(--sidebar-border); /* Added border for definition */
+      background-color: var(--sidebar-bg); /* Use sidebar background */
+      color: var(--text); /* Use body text color */
+      width: 40px; /* Slightly larger */
+      height: 40px; /* Slightly larger */
       border-radius: 50%;
-      font-size: 18px;
+      font-size: 20px; /* Slightly larger icon */
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color var(--transition), color var(--transition), border-color var(--transition), transform 0.1s ease;
     }
+
     #themeToggle:hover {
-      background-color: var(--btn-hover);
+      background-color: var(--code-bg); /* Use code background for hover */
+      border-color: var(--link);
     }
+    #themeToggle:active {
+        transform: scale(0.95);
+    }
+
 
     /* —— Content Area —— */
     #content {
-      margin-left: 250px;
-      padding: 2rem;
+      margin-left: 260px; /* Adjusted to match sidebar width */
+      padding: 2rem 2.5rem; /* Increased horizontal padding */
       overflow-y: auto;
-      width: calc(100% - 250px);
-      /* 已移除 max-width: 900px，以实现自适应 */
+      width: calc(100% - 260px); /* Adjusted to match sidebar width, removed max-width */
+      /* max-width: 900px; */ /* Removed for adaptive width */
     }
+
     #content h1,
     #content h2,
     #content h3,
     #content h4,
     #content h5,
     #content h6 {
-      margin-top: 1.2em;
-      margin-bottom: 0.6em;
+      margin-top: 2em;    /* Increased top margin for headings */
+      margin-bottom: 1em; /* Increased bottom margin for headings */
       font-weight: 600;
-      line-height: 1.2;
-    }
-    #content p {
-      margin: 1em 0;
-      line-height: 1.75;
+      line-height: 1.3;   /* Adjusted line-height for headings */
     }
 
-    /* —— Code & Pre —— */
+    #content h1 {
+      font-size: 2.2em; /* Slightly larger H1 */
+      border-bottom: 1px solid var(--sidebar-border);
+      padding-bottom: 0.4em;
+    }
+
+    #content h2 {
+      font-size: 1.8em; /* Slightly larger H2 */
+       border-bottom: 1px dashed var(--sidebar-border); /* Subtle separator for H2 */
+       padding-bottom: 0.3em;
+    }
+    #content h3 {
+        font-size: 1.4em;
+    }
+
+
+    #content p {
+      margin: 0 0 1.2em 0; /* Consistent bottom margin for paragraphs */
+    }
+
+    /* —— Code & Preformatted Blocks —— */
     #content pre {
       background-color: var(--code-bg);
       border: 1px solid var(--code-border);
-      padding: 1rem;
-      border-radius: 6px;
+      padding: 1.2rem; /* Increased padding */
+      border-radius: 8px; /* More rounded corners */
       position: relative;
       overflow-x: auto;
+      margin: 1.5em 0; /* Added vertical margin */
     }
-    #content code {
-      font-family: Menlo, Consolas, "Liberation Mono", monospace;
+
+    #content code:not(pre code) { /* Inline code */
+      background-color: var(--code-bg);
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-size: 0.9em;
+      border: 1px solid var(--code-border);
+    }
+    #content pre code { /* Code within pre blocks */
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; /* Common monospace stack */
       font-size: 0.95em;
+      background-color: transparent; /* No background for code inside pre */
+      border: none;
+      padding: 0;
     }
+
+
     .copy-btn {
       position: absolute;
-      top: 8px; right: 8px;
+      top: 10px; /* Adjusted position */
+      right: 10px; /* Adjusted position */
       background: var(--btn-bg);
       color: var(--btn-text);
       border: none;
-      padding: 4px 8px;
-      font-size: 12px;
-      border-radius: 3px;
+      padding: 6px 10px; /* Adjusted padding */
+      font-size: 13px; /* Adjusted font size */
+      border-radius: 5px; /* Adjusted border radius */
       cursor: pointer;
+      opacity: 0.7; /* Slightly transparent by default */
+      transition: background-color var(--transition), color var(--transition), opacity 0.15s ease;
     }
+    #content pre:hover .copy-btn {
+        opacity: 1; /* Fully visible on pre hover */
+    }
+
     .copy-btn:hover {
       background: var(--btn-hover);
+      opacity: 1;
     }
+    .copy-btn.copied { /* Style for when button is clicked */
+        background: #28a745; /* Green for success */
+        color: white;
+    }
+
 
     /* —— Links, Tables, Blockquotes —— */
     #content a {
       color: var(--link);
-      text-decoration: underline;
+      text-decoration: none; /* Remove underline by default */
     }
+
     #content a:hover {
+      text-decoration: underline; /* Underline on hover */
       color: var(--link-hover);
     }
+
     #content table {
       border-collapse: collapse;
       width: 100%;
+      margin: 1.8em 0; /* Added vertical margin */
+      box-shadow: 0 2px 4px var(--img-shadow); /* Subtle shadow for tables */
+      border-radius: 6px; /* Rounded corners for table wrapper (if any) or via cells */
+      overflow: hidden; /* Needed for border-radius on table */
     }
+
     #content th,
     #content td {
       border: 1px solid var(--sidebar-border);
-      padding: 0.6em 1em;
+      padding: 0.8em 1.2em; /* Adjusted padding */
+      text-align: left; /* Ensure text is left-aligned */
     }
+    #content th {
+        background-color: var(--code-bg); /* Header background for tables */
+        font-weight: 600;
+    }
+    #content tr:nth-child(even) {
+        background-color: var(--sidebar-bg); /* Zebra striping for table rows */
+    }
+    body.dark #content tr:nth-child(even) {
+        background-color: #1c222b; /* Darker zebra striping for dark mode */
+    }
+
+
     #content blockquote {
-      border-left: 4px solid var(--sidebar-border);
-      padding: 0.5em 1em;
-      margin: 1em 0;
+      border-left: 5px solid var(--link); /* Use link color for border */
+      padding: 1em 1.5em; /* Adjusted padding */
+      margin: 1.8em 0; /* Adjusted margin */
       background-color: var(--code-bg);
+      border-radius: 0 6px 6px 0; /* Rounded corners on one side */
+      color: var(--footer-text); /* Softer text color for blockquotes */
+    }
+    #content blockquote p:last-child {
+        margin-bottom: 0; /* Remove bottom margin from last p in blockquote */
     }
 
     /* —— SVG Images —— */
     #content img {
-      max-width: 80%;
+      max-width: 100%; /* Allow images to take full width if needed, but capped by container */
       height: auto;
       display: block;
-      margin: 1em auto;
+      margin: 1.5em auto; /* Centered with vertical margin */
+      border-radius: 8px; /* Rounded corners for images */
+      box-shadow: 0 4px 12px var(--img-shadow); /* Softer, more diffused shadow */
+      background-color: var(--bg); /* Add background for transparent images */
     }
   </style>
 </head>
 <body>
   <nav id="sidebar">
-    <ul id="navList">
-      <li><a href="#README.md">Home</a></li>
-      <li><span class="folder">Backbone</span>
-        <ul>
-          <li><a href="#Backbone/README.md">Feature Extraction Guide (VideoMAE V2 Backbone)</a></li>
-        </ul>
-      </li>
-      <li><span class="folder">Fed_VAD</span>
-        <ul>
-          <li><a href="#Fed_VAD/README.md">Federated Setup (Fed-WSVAD)</a></li>
-          <li>
-            <!-- 链接中保留空格，由 JS 做 decodeURIComponent -->
-            <a href="#Fed_VAD/Jetson AGX Xavier Deployment Guide.md">
-              Jetson AGX Xavier Deployment Guide
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
+    <div class="nav-container">
+      <ul id="navList">
+        <li><a href="#README.md">Home</a></li>
+        <li><span class="folder">Backbone</span>
+          <ul>
+            <li><a href="#Backbone/README.md">Feature Extraction Guide (VideoMAE V2 Backbone)</a></li>
+          </ul>
+        </li>
+        <li><span class="folder">Fed_VAD</span>
+          <ul>
+            <li><a href="#Fed_VAD/README.md">Federated Setup (Fed-WSVAD)</a></li>
+            <li><a href="#Fed_VAD/Jetson%20AGX%20Xavier%20Deployment%20Guide.md">Jetson AGX Xavier Deployment Guide</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
     <div class="maintainer">Maintained by Jiahang Li</div>
   </nav>
 
@@ -234,7 +349,6 @@
     <p>Loading...</p>
   </main>
 
-  <!-- Marked (Markdown parser) and Highlight.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.7/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
   <script>
@@ -243,101 +357,182 @@
     const darkStyle = document.getElementById('hljs-dark');
     const savedTheme = localStorage.getItem('theme');
 
-    if (savedTheme === 'dark') {
-      document.body.classList.add('dark');
-      lightStyle.disabled = true;
-      darkStyle.disabled = false;
-      themeToggleBtn.textContent = '☀️';
-    } else {
-      document.body.classList.remove('dark');
-      lightStyle.disabled = false;
-      darkStyle.disabled = true;
-      themeToggleBtn.textContent = '🌙';
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        document.body.classList.add('dark');
+        if (lightStyle) lightStyle.disabled = true;
+        if (darkStyle) darkStyle.disabled = false;
+        themeToggleBtn.textContent = '☀️';
+      } else {
+        document.body.classList.remove('dark');
+        if (lightStyle) lightStyle.disabled = false;
+        if (darkStyle) darkStyle.disabled = true;
+        themeToggleBtn.textContent = '🌙';
+      }
     }
 
+    applyTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+
     themeToggleBtn.addEventListener('click', () => {
-      if (document.body.classList.toggle('dark')) {
-        lightStyle.disabled = true;
-        darkStyle.disabled = false;
-        themeToggleBtn.textContent = '☀️';
-        localStorage.setItem('theme', 'dark');
-      } else {
-        lightStyle.disabled = false;
-        darkStyle.disabled = true;
-        themeToggleBtn.textContent = '🌙';
-        localStorage.setItem('theme', 'light');
-      }
+      const newTheme = document.body.classList.contains('dark') ? 'light' : 'dark';
+      applyTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
     });
 
     const contentDiv = document.getElementById('content');
     let currentFile = null;
+    const GITHUB_REPO_RAW_BASE_URL = 'https://raw.githubusercontent.com/rekkles2/Fed_WSVAD/main/';
 
-    async function loadMarkdown(path) {
-      contentDiv.innerHTML = '<p>Loading...</p>';
+    async function loadMarkdown(filePath) {
+      contentDiv.innerHTML = '<p>Loading content...</p>'; // More descriptive loading message
       try {
-        // 先解码，再重新 encodeURI，确保各种空格/特殊字符都能正确请求
-        const decodedPath = decodeURIComponent(path);
-        const url = encodeURI('https://raw.githubusercontent.com/rekkles2/Fed_WSVAD/main/' + decodedPath);
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(res.status);
-        let md = await res.text();
+        // The filePath from hash is already partially URI encoded (e.g. %20 for spaces)
+        // fetch handles this correctly. We don't need to double encode with encodeURI(filePath).
+        const response = await fetch(GITHUB_REPO_RAW_BASE_URL + filePath);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status} for ${filePath}`);
+        }
+        let markdownText = await response.text();
 
-        // 去掉本地替换 SVG 的逻辑，保留原始外部链接，保证 GitHub README 中的 model.svg 可以正常加载
-        // md = md.replace(/https:\/\/github\.com\/rekkles2\/Fed_WSVAD\/raw\/main\/Figure\/model\.svg/g, 'model.svg');
+        // 1. Replace GitHub blob links with internal hash links for navigation
+        markdownText = markdownText.replace(/https:\/\/github\.com\/rekkles2\/Fed_WSVAD\/blob\/main\//g, '#');
 
-        // 将 blob 链接转为本地锚点
-        md = md.replace(/https:\/\/github\.com\/rekkles2\/Fed_WSVAD\/blob\/main\//g, '#');
+        // 2. Resolve relative image paths in the markdown to absolute raw GitHub URLs
+        // This handles both Markdown image syntax: ![alt](url) and HTML <img> tags
+        const currentFileDirectory = filePath.includes('/') ? filePath.substring(0, filePath.lastIndexOf('/') + 1) : '';
+        const image kontekstBaseUrl = new URL(currentFileDirectory, GITHUB_REPO_RAW_BASE_URL).href;
 
-        contentDiv.innerHTML = marked.parse(md);
+        // Regex for HTML <img> tags: src="RELATIVE_PATH"
+        markdownText = markdownText.replace(/(<img\s+[^>]*src=")(?!https?:\/\/|\/\/|data:)([^"]+)(")/gi, (match, prefix, srcUrl, suffix) => {
+            let absoluteUrl;
+            if (srcUrl.startsWith('/')) { // Path relative to repo root
+                absoluteUrl = new URL(srcUrl.substring(1), GITHUB_REPO_RAW_BASE_URL).href;
+            } else { // Path relative to current file's directory
+                absoluteUrl = new URL(srcUrl, imagekontekstBaseUrl).href;
+            }
+            return prefix + absoluteUrl + suffix;
+        });
 
-        // 添加标题 ID
-        document.querySelectorAll('#content h1, #content h2, #content h3, #content h4').forEach(h => {
-          if (!h.id) {
-            h.id = h.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        // Regex for Markdown image syntax: ![alt](RELATIVE_PATH)
+        markdownText = markdownText.replace(/(!\[[^\]]*\]\()(?!(?:https?:\/\/|\/\/|data:))([^\)\s]+?)(\s*["'](?:[^"']*)["'])?(\))/gi, (match, prefix, srcUrl, titlePart, suffix) => {
+            let absoluteUrl;
+            if (srcUrl.startsWith('/')) { // Path relative to repo root
+                absoluteUrl = new URL(srcUrl.substring(1), GITHUB_REPO_RAW_BASE_URL).href;
+            } else { // Path relative to current file's directory
+                absoluteUrl = new URL(srcUrl, imagekontekstBaseUrl).href;
+            }
+            return prefix + absoluteUrl + (titlePart || '') + suffix;
+        });
+        
+        // The problematic line for model.svg is removed as the general image resolver above should handle it.
+        // md = md.replace(/https:\/\/github\.com\/rekkles2\/Fed_WSVAD\/raw\/main\/Figure\/model\.svg/g, 'model.svg'); // REMOVED
+
+        contentDiv.innerHTML = marked.parse(markdownText);
+
+        // Add IDs to headings for deep linking (if not already present)
+        document.querySelectorAll('#content h1, #content h2, #content h3, #content h4, #content h5, #content h6').forEach(heading => {
+          if (!heading.id) {
+            const suggestedId = heading.textContent.trim().toLowerCase()
+                               .replace(/[^\w\s-]/g, '') // Remove non-alphanumeric (except hyphen, underscore)
+                               .replace(/\s+/g, '-') // Replace spaces with hyphens
+                               .replace(/-+/g, '-'); // Replace multiple hyphens with single
+            try {
+                heading.id = suggestedId;
+            } catch (e) {
+                // If ID is invalid (e.g., starts with a number), prefix it
+                heading.id = 'heading-' + suggestedId;
+            }
           }
         });
 
-        // 添加复制按钮
-        document.querySelectorAll('#content pre').forEach(pre => {
-          if (!pre.querySelector('.copy-btn')) {
-            const btn = document.createElement('button');
-            btn.className = 'copy-btn';
-            btn.textContent = 'Copy';
-            btn.onclick = () => {
-              const code = pre.querySelector('code');
-              navigator.clipboard.writeText(code.innerText).then(() => {
-                btn.textContent = 'Copied';
-                setTimeout(() => btn.textContent = 'Copy', 2000);
+        // Add copy buttons to pre blocks
+        document.querySelectorAll('#content pre').forEach(preElement => {
+          if (preElement.querySelector('code') && !preElement.querySelector('.copy-btn')) { // Ensure there's code to copy
+            const copyButton = document.createElement('button');
+            copyButton.className = 'copy-btn';
+            copyButton.textContent = 'Copy';
+            copyButton.setAttribute('aria-label', 'Copy code to clipboard');
+            copyButton.onclick = () => {
+              const codeToCopy = preElement.querySelector('code').innerText;
+              navigator.clipboard.writeText(codeToCopy).then(() => {
+                copyButton.textContent = 'Copied!';
+                copyButton.classList.add('copied');
+                setTimeout(() => {
+                  copyButton.textContent = 'Copy';
+                  copyButton.classList.remove('copied');
+                }, 2000);
+              }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                copyButton.textContent = 'Error';
+                 setTimeout(() => {
+                  copyButton.textContent = 'Copy';
+                }, 2000);
               });
             };
-            pre.appendChild(btn);
+            preElement.appendChild(copyButton);
           }
         });
 
-        hljs.highlightAll();
+        hljs.highlightAll(); // Apply syntax highlighting
 
-        // 更新导航高亮
-        document.querySelectorAll('#navList a').forEach(a => {
-          a.classList.toggle('active', a.getAttribute('href') === '#' + path);
+        // Update active link in navigation
+        document.querySelectorAll('#navList a').forEach(navLink => {
+          navLink.classList.toggle('active', navLink.getAttribute('href') === '#' + filePath);
         });
-        window.scrollTo(0, 0);
-        currentFile = path;
-      } catch (e) {
-        contentDiv.innerHTML = '<p style="color:red">Failed to load content.</p>';
+
+        // Scroll to top or to a specific hash if present in the loaded content's URL
+        const internalHash = window.location.hash.split('#').pop(); // Check for internal page hash
+        const elementToScroll = document.getElementById(internalHash);
+        if(elementToScroll && contentDiv.contains(elementToScroll)) {
+            elementToScroll.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            contentDiv.scrollTop = 0; // Scroll content area, not window
+        }
+        
+        currentFile = filePath;
+      } catch (error) {
+        console.error('Failed to load Markdown:', error);
+        contentDiv.innerHTML = `<p style="color:red; font-weight:bold;">Failed to load content for "${filePath}".</p><p style="color:var(--text);">Error: ${error.message}</p><p>Please check the console for more details and ensure the file path is correct in the repository.</p>`;
       }
     }
 
     function onHashChange() {
-      const hash = location.hash.slice(1);
-      if (!hash) {
-        loadMarkdown('README.md');
-      } else if (hash.includes('.md')) {
-        if (hash !== currentFile) loadMarkdown(hash);
+      // Decode the hash component, as it might contain %20 etc.
+      // Browsers usually provide location.hash already decoded for characters like %20,
+      // but explicit decodeURIComponent is safer for broader character sets.
+      let hashPath = decodeURIComponent(location.hash.slice(1));
+
+      if (!hashPath) { // If no hash, load default
+        hashPath = 'README.md';
+        // Update hash without triggering another hashchange, for bookmarkability
+        history.replaceState(null, '', '#' + hashPath); 
+      }
+      
+      // Only load if the main path part of the hash changes (ignoring sub-hashes for scrolling)
+      const mainPath = hashPath.split('#')[0]; 
+      if (mainPath.includes('.md')) {
+        if (mainPath !== currentFile) {
+          loadMarkdown(mainPath);
+        } else {
+          // If same file, check for internal hash for scrolling
+           const internalHash = hashPath.split('#')[1];
+           if (internalHash) {
+               const elementToScroll = document.getElementById(internalHash);
+               if(elementToScroll && contentDiv.contains(elementToScroll)) {
+                   elementToScroll.scrollIntoView({ behavior: 'smooth' });
+               }
+           }
+        }
       }
     }
 
     window.addEventListener('hashchange', onHashChange);
-    window.addEventListener('load', onHashChange);
+    // Initial load based on current hash or default
+    window.addEventListener('load', ()_ => {
+        // Initialize highlighting for any pre-loaded code (if any, though unlikely here)
+        hljs.highlightAll(); 
+        onHashChange(); // Trigger initial content load
+    });
   </script>
 </body>
 </html>
