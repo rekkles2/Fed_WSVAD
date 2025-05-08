@@ -16,10 +16,10 @@ It is used in the paper:
 - [Introduction](#-introduction)
 - [Pretrained Model](#-pretrained-model)
 - [Workflow Overview](#-workflow-overview)
-  - [1. RGB Frame Extraction](#1-rgb-frame-extraction)
-  - [2. Feature Directory Setup](#2-feature-directory-setup)
-  - [3. Feature Extraction](#3-feature-extraction)
-  - [4. Feature Alignment](#4-feature-alignment)
+  - [RGB Frame Extraction](#1-rgb-frame-extraction)
+  - [Feature Directory Setup](#2-feature-directory-setup)
+  - [Feature Extraction](#3-feature-extraction)
+  - [Feature Alignment](#4-feature-alignment)
 - [Citation](#-citation)
 ---
 
