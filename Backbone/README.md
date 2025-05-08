@@ -16,10 +16,10 @@ It is used in the paper:
 - [Introduction](#-introduction)
 - [Pretrained Model](#-pretrained-model)
 - [Workflow Overview](#-workflow-overview)
-  - [RGB Frame Extraction](#1-rgb-frame-extraction)
-  - [Feature Directory Setup](#2-feature-directory-setup)
-  - [Feature Extraction](#3-feature-extraction)
-  - [Feature Alignment](#4-feature-alignment)
+  - [RGB Frame Extraction](#rgb-frame-extraction)
+  - [Feature Directory Setup](#feature-directory-setup)
+  - [Feature Extraction](#feature-extraction)
+  - [Feature Alignment](#feature-alignment)
 - [Citation](#-citation)
 ---
 
@@ -40,7 +40,7 @@ Download the pretrained Video-MAE V2 checkpoint:
 
 ## 🛠 Workflow Overview
 
-### 1. RGB Frame Extraction
+### <a id="rgb-frame-extraction"></a>1. RGB Frame Extraction
 
 Convert videos to RGB frames:
 
@@ -64,7 +64,7 @@ Rgb_Fig/
 
 ---
 
-### 2. Feature Directory Setup
+### <a id="feature-directory-setup"></a>2. Feature Directory Setup
 
 Generate feature directories:
 
@@ -86,7 +86,7 @@ shanghaitech/
 
 ---
 
-### 3. Feature Extraction
+### <a id="feature-extraction"></a>3. Feature Extraction
 
 Update paths in the scripts to match your file system, then run:
 
@@ -125,7 +125,7 @@ Key configurations:
 
 ---
 
-### 4. Feature Alignment
+### <a id="feature-alignment"></a>4. Feature Alignment
 
 Align features with ground truth labels:
 
