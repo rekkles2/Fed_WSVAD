@@ -4,12 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fed_WSVAD Documentation</title>
+
   <link id="hljs-light" rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css" />
   <link id="hljs-dark" rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css"
     disabled />
+
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
   <style>
     /* —— Color Variables —— */
@@ -30,10 +33,10 @@
       --transition: 0.2s ease-in-out;
       --img-shadow: rgba(0,0,0,0.1);
 
-      /* Table Specific Colors (New/Adjusted) */
-      --table-border: #c6cbd1; /* Darker border for tables */
-      --table-header-bg: #f0f3f6; /* Slightly darker header background */
-      --table-row-even-bg: #f6f8fa; /* Slightly darker zebra stripe */
+      /* Table Specific Colors */
+      --table-border: #c6cbd1;
+      --table-header-bg: #f0f3f6;
+      --table-row-even-bg: #f6f8fa;
     }
 
     body.dark {
@@ -52,25 +55,25 @@
       --footer-text: #8b949e;
       --img-shadow: rgba(0,0,0,0.3);
 
-      /* Table Specific Colors (Dark Mode) (New/Adjusted) */
-      --table-border: #444c56; /* Darker border for tables in dark mode */
-      --table-header-bg: #21262d; /* Darker header background in dark mode */
-      --table-row-even-bg: #1c222b; /* Darker zebra stripe in dark mode */
+      /* Table Specific Colors (Dark Mode) */
+      --table-border: #444c56;
+      --table-header-bg: #21262d;
+      --table-row-even-bg: #1c222b;
     }
 
     /* —— Base Styles —— */
     * {
       box-sizing: border-box;
       transition: background-color var(--transition),
-        color var(--transition), border-color var(--transition); /* Added border-color to transition */
+        color var(--transition), border-color var(--transition);
     }
 
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica,
-        Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; /* Added emoji fonts */
+        Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
       font-size: 16px;
-      line-height: 1.7; /* Increased for better readability */
+      line-height: 1.7;
       color: var(--text);
       background-color: var(--bg);
       display: flex; /* Use flexbox for main layout */
@@ -90,7 +93,7 @@
       display: flex;
       flex-direction: column;
       overflow-y: auto;
-      padding: 1.5rem 1rem; /* Adjusted padding */
+      padding: 1.5rem 1rem;
       flex-shrink: 0; /* Prevent sidebar from shrinking in flex layout */
     }
 
@@ -101,21 +104,21 @@
     }
 
     #navList li {
-      margin: 0.6rem 0; /* Increased spacing between items */
+      margin: 0.6rem 0;
     }
 
     #navList a, #navList .folder {
       display: block;
       text-decoration: none;
       color: var(--link);
-      padding: 0.5rem 0.8rem; /* Increased padding for better touch targets */
-      border-radius: 6px; /* Slightly more rounded corners */
+      padding: 0.5rem 0.8rem;
+      border-radius: 6px;
       font-weight: 500;
       word-wrap: break-word; /* Ensure long text wraps */
     }
       #navList .folder {
-        color: var(--text); /* Folder text color same as body text */
-        font-weight: 600; /* Make folder names bolder */
+        color: var(--text);
+        font-weight: 600;
         cursor: default;
       }
 
@@ -127,12 +130,12 @@
 
     #navList a.active {
       background-color: var(--active-bg);
-      color: var(--link-hover); /* Ensure text color changes for active link */
-      font-weight: 700; /* Bolder active link */
+      color: var(--link-hover);
+      font-weight: 700;
     }
 
     #navList ul {
-      margin-left: 1.2rem; /* Slightly increased indent for sub-items */
+      margin-left: 1.2rem;
       padding-left: 0.5rem;
       border-left: 1px solid var(--sidebar-border);
     }
@@ -141,14 +144,14 @@
       }
 
     .maintainer {
-      margin-top: auto;
-      padding-top: 1.5rem; /* Increased padding */
-      font-size: 1.1rem; /* Slightly larger maintainer text */
+      margin-top: auto; /* Pushes the element to the bottom */
+      padding-top: 1.5rem;
+      font-size: 1.3rem; /* Slightly larger maintainer text */
       color: var(--footer-text);
       text-align: left;
-      padding-left: 0.8rem; /* Align with nav items */
-      font-family: 'Dancing Script', cursive; /* Apply cursive font */
-      font-weight: 700; /* Make it a bit bolder if the font supports it */
+      padding-left: 0.8rem;
+      font-family: 'Pacifico', cursive; /* Apply Pacifico font */
+      font-weight: 700; /* Make it bold */
     }
 
     /* —— Theme Toggle Button —— */
@@ -157,13 +160,13 @@
       top: 1rem;
       right: 1rem;
       z-index: 1000;
-      border: 1px solid var(--sidebar-border); /* Added border for definition */
-      background-color: var(--sidebar-bg); /* Use sidebar background */
-      color: var(--text); /* Use body text color */
-      width: 40px; /* Slightly larger */
-      height: 40px; /* Slightly larger */
+      border: 1px solid var(--sidebar-border);
+      background-color: var(--sidebar-bg);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      font-size: 20px; /* Slightly larger icon */
+      font-size: 20px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -172,10 +175,37 @@
     }
 
     #themeToggle:hover {
-      background-color: var(--code-bg); /* Use code background for hover */
+      background-color: var(--code-bg);
       border-color: var(--link);
     }
     #themeToggle:active {
+        transform: scale(0.95);
+    }
+
+    /* —— Back Button —— */
+    #backButton {
+      position: fixed;
+      top: 3rem; /* Moved down to avoid overlap */
+      left: calc(260px + 1rem); /* Position to the right of the sidebar + 1rem margin */
+      z-index: 1000;
+      border: 1px solid var(--sidebar-border);
+      background-color: var(--sidebar-bg);
+      color: var(--text);
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color var(--transition), color var(--transition), border-color var(--transition), transform 0.1s ease;
+    }
+
+    #backButton:hover {
+      background-color: var(--code-bg);
+      border-color: var(--link);
+    }
+     #backButton:active {
         transform: scale(0.95);
     }
 
@@ -186,97 +216,167 @@
       overflow-y: auto; /* Add scrollbar to this area */
       padding: 0; /* Remove padding here, apply to wrapper */
       margin-left: 260px; /* Push content area next to sidebar */
-      /* Removed flexbox centering here, wrapper handles centering */
     }
 
     /* —— Badges Container (Directly added to HTML) —— */
-    #topBadges { /* Unique ID for the badges added directly in HTML */
-      display: flex; /* Use flexbox for layout */
-      justify-content: flex-start; /* Align badges to the left */
-      align-items: center; /* Center badges vertically */
-      gap: 0; /* Remove space between badges */
-      margin: 1.5em 0; /* Add vertical margin */
-      width: auto; /* Allow badge container to take only necessary width */
-      padding: 0 2.5rem; /* Add horizontal padding to align with content wrapper padding */
-      box-sizing: border-box; /* Include padding in width calculation */
-      align-self: flex-start; /* Align the badge container to the start (left) within #content */
-       /* Optional: Add a subtle border or shadow for visual separation */
-      /* border-bottom: 1px solid var(--sidebar-border); */
-      /* padding-bottom: 1em; */
-      /* box-shadow: 0 2px 4px rgba(0,0,0,0.05); */
+    #topBadges {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0;
+      margin: 1.5em 0;
+      width: auto;
+      padding: 0 2.5rem;
+      box-sizing: border-box;
+      align-self: flex-start;
     }
 
     #topBadges img {
-        max-width: none; /* Ensure original size */
-        height: auto; /* Maintain aspect ratio */
-        display: inline-block; /* Ensure inline-block behavior */
-        margin: 0; /* Remove any default image margins */
-        border-radius: 4px; /* Keep styles from snippet */
-        box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* Keep styles from snippet */
-        background-color: transparent; /* Ensure no background interferes */
-        /* Removed height: 80px; to revert to original size */
+        max-width: none;
+        height: auto;
+        display: inline-block;
+        margin: 0;
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        background-color: transparent;
     }
 
     #topBadges a {
-        text-decoration: none; /* Remove underline from badge links */
+        text-decoration: none;
     }
 
 
     /* —— Content Wrapper (Centers content within #content) —— */
     .content-wrapper {
-      max-width: 75%; /* Limit content width to 75% of #content */
-      width: 100%; /* Allow wrapper to take full width up to max-width */
-      margin: 0 auto; /* Center the content block horizontally */
-      padding: 0 2.5rem; /* Apply horizontal padding here */
-      padding-top: 0; /* Remove top padding here, handled by badge margin */
-      padding-bottom: 2rem; /* Add bottom padding */
-      box-sizing: border-box; /* Include padding in width calculation */
-      flex-shrink: 0; /* Prevent wrapper from shrinking */
-      align-self: center; /* Center the content wrapper horizontally within #content */
+      max-width: 75%;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      padding-top: 0;
+      padding-bottom: 2rem;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      align-self: center;
     }
 
+    /* —— Table of Contents Styling —— */
+    .content-wrapper ol:first-of-type,
+    .content-wrapper ul:first-of-type {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 1.5em;
+        margin-bottom: 2em;
+        background-color: var(--code-bg);
+        border: 1px solid var(--code-border);
+        border-radius: 8px;
+        padding: 1.5em;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
 
+    .content-wrapper ol:first-of-type ul,
+    .content-wrapper ul:first-of-type ul {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+        padding-left: 1.5em;
+        border-left: 2px solid var(--sidebar-border);
+    }
+
+    .content-wrapper ol:first-of-type li,
+    .content-wrapper ul:first-of-type li {
+        margin-bottom: 0.8em;
+        line-height: 1.4;
+        position: relative;
+        padding-left: 1.2em;
+    }
+
+     .content-wrapper ol:first-of-type ul li,
+     .content-wrapper ul:first-of-type ul li {
+        margin-bottom: 0.4em;
+    }
+
+    /* Custom marker for ToC list items */
+    .content-wrapper ol:first-of-type li::before,
+    .content-wrapper ul:first-of-type li::before {
+        content: "➤";
+        color: var(--link);
+        position: absolute;
+        left: 0;
+        top: 0.1em;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+     .content-wrapper ol:first-of-type ul li::before,
+     .content-wrapper ul:first-of-type ul li::before {
+         content: "•";
+         color: var(--footer-text);
+         font-size: 1em;
+         top: 0.2em;
+     }
+
+    .content-wrapper li a {
+        font-weight: 400;
+        text-decoration: none;
+        color: var(--text);
+        transition: color var(--transition);
+    }
+
+    .content-wrapper li a:hover {
+        color: var(--link);
+        text-decoration: underline;
+    }
+
+    /* Style for the ToC heading (if it's an h2) */
+    .content-wrapper h2:first-of-type {
+        margin-top: 0;
+        margin-bottom: 1.5em;
+        border-bottom: none;
+        padding-bottom: 0;
+        font-size: 1.6em;
+        color: var(--text);
+    }
+
+    /* —— Headings —— */
     .content-wrapper h1,
     .content-wrapper h2,
     .content-wrapper h3,
     .content-wrapper h4,
     .content-wrapper h5,
     .content-wrapper h6 {
-      margin-top: 2em;    /* Increased top margin for headings */
-      margin-bottom: 1em; /* Increased bottom margin for headings */
+      margin-top: 2em;
+      margin-bottom: 1em;
       font-weight: 600;
-      line-height: 1.3;   /* Adjusted line-height for headings */
+      line-height: 1.3;
     }
 
     .content-wrapper h1 {
-      font-size: 2.2em; /* Slightly larger H1 */
+      font-size: 2.2em;
       border-bottom: 1px solid var(--sidebar-border);
       padding-bottom: 0.4em;
     }
 
     .content-wrapper h2 {
-      font-size: 1.8em; /* Slightly larger H2 */
-        border-bottom: 1px dashed var(--sidebar-border); /* Subtle separator for H2 */
+      font-size: 1.8em;
+        border-bottom: 1px dashed var(--sidebar-border);
         padding-bottom: 0.3em;
     }
     .content-wrapper h3 {
         font-size: 1.4em;
     }
 
-
+    /* —— Paragraphs —— */
     .content-wrapper p {
-      margin: 0 0 1.2em 0; /* Consistent bottom margin for paragraphs */
+      margin: 0 0 1.2em 0;
     }
 
     /* —— Code & Preformatted Blocks —— */
     .content-wrapper pre {
       background-color: var(--code-bg);
       border: 1px solid var(--code-border);
-      padding: 1.2rem; /* Increased padding */
-      border-radius: 8px; /* More rounded corners */
+      padding: 1.2rem;
+      border-radius: 8px;
       position: relative;
       overflow-x: auto;
-      margin: 1.5em 0; /* Added vertical margin */
+      margin: 1.5em 0;
     }
 
     .content-wrapper code:not(pre code) { /* Inline code */
@@ -287,99 +387,119 @@
       border: 1px solid var(--code-border);
     }
     .content-wrapper pre code { /* Code within pre blocks */
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; /* Common monospace stack */
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
       font-size: 0.95em;
-      background-color: transparent; /* No background for code inside pre */
+      background-color: transparent;
       border: none;
       padding: 0;
     }
 
-
     .copy-btn {
       position: absolute;
-      top: 10px; /* Adjusted position */
-      right: 10px; /* Adjusted position */
+      top: 10px;
+      right: 10px;
       background: var(--btn-bg);
       color: var(--btn-text);
       border: none;
-      padding: 6px 10px; /* Adjusted padding */
-      font-size: 13px; /* Adjusted font size */
-      border-radius: 5px; /* Adjusted border radius */
+      padding: 6px 10px;
+      font-size: 13px;
+      border-radius: 5px;
       cursor: pointer;
-      opacity: 0.7; /* Slightly transparent by default */
+      opacity: 0.7;
       transition: background-color var(--transition), color var(--transition), opacity 0.15s ease;
     }
     .content-wrapper pre:hover .copy-btn {
-        opacity: 1; /* Fully visible on pre hover */
+        opacity: 1;
     }
 
     .copy-btn:hover {
       background: var(--btn-hover);
       opacity: 1;
     }
-    .copy-btn.copied { /* Style for when button is clicked */
-        background: #28a745; /* Green for success */
+    .copy-btn.copied {
+        background: #28a745;
         color: white;
     }
-
 
     /* —— Links, Tables, Blockquotes —— */
     .content-wrapper a {
       color: var(--link);
-      text-decoration: none; /* Remove underline by default */
+      text-decoration: none;
     }
 
     .content-wrapper a:hover {
-      text-decoration: underline; /* Underline on hover */
+      text-decoration: underline;
       color: var(--link-hover);
     }
 
     .content-wrapper table {
       border-collapse: collapse;
       width: 100%;
-      margin: 1.8em 0; /* Added vertical margin */
-      box-shadow: 0 2px 4px var(--img-shadow); /* Subtle shadow for tables */
-      border-radius: 6px; /* Rounded corners for table wrapper (if any) or via cells */
-      overflow: hidden; /* Needed for border-radius on table */
+      margin: 1.8em 0;
+      box-shadow: 0 2px 4px var(--img-shadow);
+      border-radius: 6px;
+      overflow: hidden;
     }
 
     .content-wrapper th,
     .content-wrapper td {
-      border: 1px solid var(--table-border); /* Use new table border variable */
-      padding: 0.8em 1.2em; /* Adjusted padding */
-      text-align: left; /* Ensure text is left-aligned */
+      border: 1px solid var(--table-border);
+      padding: 0.8em 1.2em;
+      text-align: left;
     }
     .content-wrapper th {
-        background-color: var(--table-header-bg); /* Use new table header background variable */
+        background-color: var(--table-header-bg);
         font-weight: 600;
     }
     .content-wrapper tr:nth-child(even) {
-        background-color: var(--table-row-even-bg); /* Use new zebra stripe background variable */
+        background-color: var(--table-row-even-bg);
     }
-
 
     .content-wrapper blockquote {
-      border-left: 5px solid var(--link); /* Use link color for border */
-      padding: 1em 1.5em; /* Adjusted padding */
-      margin: 1.8em 0; /* Adjusted margin */
+      border-left: 5px solid var(--link);
+      padding: 1em 1.5em;
+      margin: 1.8em 0;
       background-color: var(--code-bg);
-      border-radius: 0 6px 6px 0; /* Rounded corners on one side */
-      color: var(--footer-text); /* Softer text color for blockquotes */
+      border-radius: 0 6px 6px 0;
+      color: var(--footer-text);
     }
     .content-wrapper blockquote p:last-child {
-        margin-bottom: 0; /* Remove bottom margin from last p in blockquote */
+        margin-bottom: 0;
     }
 
     /* —— Images (including SVG) —— */
-    .content-wrapper img { /* General image styling */
-      max-width: 55%; /* Limit images to 55% of its container width */
+    .content-wrapper img {
+      max-width: 55%;
       height: auto;
       display: block;
-      margin: 1.5em auto; /* Centered with vertical margin */
-      border-radius: 8px; /* Rounded corners for images */
-      box-shadow: 0 4px 12px var(--img-shadow); /* Softer, more diffused shadow */
-      background-color: var(--bg); /* Add background for transparent images */
+      margin: 1.5em auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px var(--img-shadow);
+      background-color: var(--bg);
     }
+
+    /* —— Key Contributions List Styling —— */
+    .content-wrapper ul:not(:first-of-type) {
+        list-style: none;
+        padding-left: 1.5em;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+    }
+
+     .content-wrapper ul:not(:first-of-type) li {
+         margin-bottom: 0.8em;
+         position: relative;
+     }
+
+     /* Custom marker for Key Contributions list items */
+     .content-wrapper ul:not(:first-of-type) li::before {
+         content: "→";
+         color: var(--link);
+         position: absolute;
+         left: -1.5em;
+         top: 0.1em;
+         font-weight: bold;
+     }
 
   </style>
 </head>
@@ -388,15 +508,15 @@
     <div class="nav-container">
       <ul id="navList">
         <li><a href="#README.md">Home</a></li>
-        <li><span class="folder">Backbone</span>
+        <li><span class="folder">Backbone">Backbone</span>
           <ul>
             <li><a href="#Backbone/README.md">Feature Extraction Guide (VideoMAE V2 Backbone)</a></li>
           </ul>
         </li>
-        <li><span class="folder">Fed_VAD</span>
+        <li><span class="folder">Fed_VAD">Fed_VAD</span>
           <ul>
-            <li><a href="#Fed_VAD/README.md">Federated Setup (Fed-WSVAD)</a></li>
             <li><a href="#Fed_VAD/Jetson%20AGX%20Xavier%20Deployment%20Guide.md">Jetson AGX Xavier Deployment Guide</a></li>
+            <li><a href="#Fed_VAD/README.md">Federated Setup (Fed-WSVAD)</a></li>
           </ul>
         </li>
         <li><a href="https://deepwiki.com/rekkles2/Fed_WSVAD" target="_blank" rel="noopener noreferrer">DeepWiki Code Navigator</a></li>
@@ -406,6 +526,7 @@
   </nav>
 
   <button id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
+  <button id="backButton">← Back</button>
 
   <main id="content">
     <div id="topBadges">
@@ -446,7 +567,7 @@
       if (theme === 'dark') {
         document.body.classList.add('dark');
         if (lightStyle) lightStyle.disabled = true;
-        if (darkStyle) darkStyle.disabled = false;
+        if (darkStyle) darkStyle.disabled = true;
         themeToggleBtn.textContent = '☀️'; // Sun icon for dark mode
       } else {
         document.body.classList.remove('dark');
@@ -476,10 +597,12 @@
 
     // Generates a valid HTML ID from a string (e.g., for heading anchors)
     function generateValidId(input) {
+        // Replace invalid characters with hyphens, remove leading/trailing hyphens
         return input.trim().toLowerCase()
-                    .replace(/[^\w\s-]/g, '') // Remove non-alphanumeric (except hyphen, underscore)
-                    .replace(/\s+/g, '-')    // Replace spaces with hyphens
-                    .replace(/-+/g, '-');   // Replace multiple hyphens with single
+                    .replace(/[^\w\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-')
+                    .replace(/^-+|-+$/g, '');
     }
 
     // Fetches and renders Markdown content
@@ -512,8 +635,19 @@
                                        new URL(HOME_README_URL).href.substring(0, new URL(HOME_README_URL).href.lastIndexOf('/') + 1) : // Base of the 'page' repo
                                        new URL(currentFileDirectory, GITHUB_REPO_RAW_BASE_URL).href;
 
+        // After inserting HTML, find all links and headings to correct internal links
+        const headings = contentWrapperDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        const links = contentWrapperDiv.querySelectorAll('a');
 
-        contentWrapperDiv.querySelectorAll('a').forEach(link => {
+        // Generate IDs for headings if they don't have them
+        headings.forEach(heading => {
+            if (!heading.id) {
+                 heading.id = generateValidId(heading.textContent.trim());
+            }
+        });
+
+
+        links.forEach(link => {
           const href = link.getAttribute('href');
           if (href) {
             // Handle relative links (not starting with #, http, mailto)
@@ -554,9 +688,57 @@
               link.setAttribute('href', '#' + pathPart + internalHashPart);
             } else if (href.startsWith('#') && href.length > 1) {
                 // It's an internal page hash link (e.g., #section)
-                // Modify the href to include the current file path
-                const sectionId = href.substring(1); // Get the original section ID
-                link.setAttribute('href', '#' + filePath + '#' + sectionId); // Format: #FilePath.md#section-id
+                const originalSectionId = href.substring(1); // Get the original section ID from Markdown
+
+                // Try to find a heading element whose generated ID matches the original section ID
+                // Convert NodeList to Array to use find() method
+                const headingsArray = Array.from(headings);
+                let targetElement = headingsArray.find(heading => generateValidId(heading.textContent.trim()) === generateValidId(originalSectionId));
+
+                // Fallback: If finding by generated ID of heading text fails,
+                // try finding by the exact originalSectionId from the link's href.
+                // This is necessary because Markdown parsers might generate IDs differently
+                // for list items compared to headings.
+                if (!targetElement) {
+                     targetElement = contentWrapperDiv.querySelector('#' + originalSectionId);
+                }
+
+                // Final fallback: Try to find an element whose text content closely matches the link text
+                // This is less reliable but can help with some cases where IDs are unpredictable.
+                 if (!targetElement) {
+                     const linkText = link.textContent.trim();
+                     if (linkText) {
+                         // Look for any element that might contain this text and is a potential target
+                         // This is a broad search and might need refinement based on actual HTML structure
+                         // We'll try to find a heading with matching text content first
+                         targetElement = headingsArray.find(heading => heading.textContent.trim() === linkText);
+
+                         // If not found in headings, try a broader search within the content wrapper
+                         if (!targetElement) {
+                             targetElement = contentWrapperDiv.querySelector(`*:has(a[href="${href}"])`); // Find the parent element of the link
+                             if (targetElement && targetElement !== link.parentElement) {
+                                  // If the parent is found and it's not just the link itself,
+                                  // try to find a heading or other block element within it
+                                  targetElement = targetElement.querySelector('h1, h2, h3, h4, h5, h6, p, div'); // Broad search
+                             }
+                         }
+                         // As a last resort, try finding any element with a matching generated ID from the link text
+                         if (!targetElement) {
+                              const generatedIdFromLinkText = generateValidId(linkText);
+                              targetElement = contentWrapperDiv.querySelector('#' + generatedIdFromLinkText);
+                         }
+                     }
+                 }
+
+
+                if (targetElement && targetElement.id) {
+                     // If a target element with an ID is found, update the link href to point to its ID
+                     link.setAttribute('href', '#' + filePath + '#' + targetElement.id); // Format: #FilePath.md#target-id
+                } else {
+                    console.warn(`Could not find a reliable target element for internal link: ${href} in ${filePath}. Link text: "${link.textContent.trim()}"`);
+                     // If target not found, modify to a potentially invalid hash that includes the file path
+                     link.setAttribute('href', '#' + filePath + href); // Keep original hash part but add file path
+                }
             }
 
              // Ensure all external HTTP/HTTPS links open in a new tab
@@ -583,12 +765,13 @@
           }
         });
 
-        // Add IDs to headings for deep linking if not already present
-        contentWrapperDiv.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(heading => {
-          if (!heading.id) {
-            heading.id = generateValidId(heading.textContent.trim());
-          }
+        // Add IDs to headings if they don't have them (Redundant after first pass, but harmless)
+        headings.forEach(heading => {
+            if (!heading.id) {
+                 heading.id = generateValidId(heading.textContent.trim());
+            }
         });
+
 
         // Add "Copy" buttons to code blocks
         contentWrapperDiv.querySelectorAll('pre').forEach(preElement => {
@@ -644,12 +827,12 @@
 
           // Only scroll if the file part of the hash matches the currently loaded file
           if (filePartOfHash === filePath && sectionHashPart) {
-            // Find the element with the valid ID matching the section hash
-            const elementToScroll = contentWrapperDiv.querySelector('#' + generateValidId(sectionHashPart));
+            // Find the element with the valid ID matching the section hash (which should be the generated ID)
+            const elementToScroll = contentWrapperDiv.querySelector('#' + sectionHashPart);
             if (elementToScroll && contentWrapperDiv.contains(elementToScroll)) {
               elementToScroll.scrollIntoView({ behavior: 'smooth' });
             } else {
-              console.warn(`Element with ID #${generateValidId(sectionHashPart)} not found in ${filePath}.`);
+              console.warn(`Element with ID #${sectionHashPart} not found in ${filePath}.`);
               contentDiv.scrollTop = 0; // Scroll to top if section not found
             }
           } else if (filePartOfHash === filePath) { // File matches, but no specific section
@@ -688,12 +871,12 @@
           // Same file is already loaded, just handle scrolling to section if specified
           const sectionHashPart = hashParts.length > 1 ? hashParts[1] : '';
           if (sectionHashPart) {
-            // Find the element with the valid ID matching the section hash
-            const elementToScroll = contentWrapperDiv.querySelector('#' + generateValidId(sectionHashPart));
+            // Find the element with the valid ID matching the section hash (which is a generated ID)
+            const elementToScroll = contentWrapperDiv.querySelector('#' + sectionHashPart);
             if (elementToScroll && contentWrapperDiv.contains(elementToScroll)) {
               elementToScroll.scrollIntoView({ behavior: 'smooth' });
             } else {
-                 console.warn(`Element with ID #${generateValidId(sectionHashPart)} not found for same-file scroll in ${filePathFromHash}.`);
+                 console.warn(`Element with ID #${sectionHashPart} not found for same-file scroll in ${filePathFromHash}.`);
                  contentDiv.scrollTop = 0; // Scroll to top if section not found
             }
           } else {
@@ -728,6 +911,11 @@
                 }
             }
         }
+    });
+
+    // Add event listener for the back button
+    document.getElementById('backButton').addEventListener('click', () => {
+        history.back();
     });
 
 
