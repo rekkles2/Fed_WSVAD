@@ -12,60 +12,61 @@
     disabled />
 
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
 
   <style>
-    /* —— Color Variables —— */
+    /* —— Color Variables (Refined Palette) —— */
     :root {
-      --bg: #ffffff;
-      --text: #24292e;
-      --sidebar-bg: #fdfdfd;
-      --sidebar-border: #e1e4e8;
-      --link: #0366d6;
-      --link-hover: #024ea2;
-      --active-bg: #e7f4ff; /* A slightly lighter blue for active items */
-      --code-bg: #f6f8fa;
-      --code-border: #e1e4e8;
-      --btn-bg: #0366d6;
+      --bg: #f8f9fa; /* Slightly softer white background */
+      --text: #343a40; /* Darker text for better contrast */
+      --sidebar-bg: #e9ecef; /* Light grey sidebar */
+      --sidebar-border: #dee2e6; /* Subtle border */
+      --link: #007bff; /* Vibrant blue link */
+      --link-hover: #0056b3; /* Darker blue on hover */
+      --active-bg: #cce5ff; /* Lighter blue for active items */
+      --code-bg: #e9ecef; /* Match sidebar background for code blocks */
+      --code-border: #ced4da; /* Slightly darker code border */
+      --btn-bg: #007bff; /* Match link color for buttons */
       --btn-text: #ffffff;
-      --btn-hover: #024ea2;
-      --footer-text: #57606a;
-      --transition: 0.2s ease-in-out;
-      --img-shadow: rgba(0,0,0,0.1);
+      --btn-hover: #0056b3;
+      --footer-text: #6c757d; /* Muted footer text */
+      --transition: 0.3s ease-in-out; /* Slightly longer transition */
+      --img-shadow: rgba(0,0,0,0.15); /* Slightly stronger image shadow */
 
       /* Table Specific Colors */
-      --table-border: #c6cbd1;
-      --table-header-bg: #f0f3f6;
-      --table-row-even-bg: #f6f8fa;
+      --table-border: #dee2e6;
+      --table-header-bg: #e9ecef;
+      --table-row-even-bg: #f2f2f2; /* More distinct zebra stripe */
     }
 
     body.dark {
-      --bg: #0d1117;
-      --text: #c9d1d9;
-      --sidebar-bg: #161b22;
-      --sidebar-border: #30363d;
-      --link: #58a6ff;
-      --link-hover: #4191db;
-      --active-bg: #1f6feb33; /* A subtle blue highlight for dark mode */
-      --code-bg: #161b22;
-      --code-border: #30363d;
-      --btn-bg: #238636;
+      --bg: #212529; /* Dark background */
+      --text: #dee2e6; /* Light text */
+      --sidebar-bg: #343a40; /* Darker grey sidebar */
+      --sidebar-border: #495057; /* Subtle border */
+      --link: #007bff; /* Keep vibrant blue link */
+      --link-hover: #0056b3; /* Darker blue on hover */
+      --active-bg: #007bff40; /* Subtle blue highlight for dark mode */
+      --code-bg: #343a40; /* Match sidebar background for code blocks */
+      --code-border: #495057; /* Slightly darker code border */
+      --btn-bg: #007bff; /* Match link color for buttons */
       --btn-text: #ffffff;
-      --btn-hover: #196e2d;
-      --footer-text: #8b949e;
-      --img-shadow: rgba(0,0,0,0.3);
+      --btn-hover: #0056b3;
+      --footer-text: #adb5bd; /* Lighter muted footer text */
+      --img-shadow: rgba(0,0,0,0.4); /* Slightly stronger image shadow */
 
       /* Table Specific Colors (Dark Mode) */
-      --table-border: #444c56;
-      --table-header-bg: #21262d;
-      --table-row-even-bg: #1c222b;
+      --table-border: #495057;
+      --table-header-bg: #343a40;
+      --table-row-even-bg: #2c3034; /* More distinct zebra stripe */
     }
 
     /* —— Base Styles —— */
     * {
       box-sizing: border-box;
       transition: background-color var(--transition),
-        color var(--transition), border-color var(--transition);
+        color var(--transition), border-color var(--transition), box-shadow var(--transition); /* Added box-shadow to transition */
     }
 
     body {
@@ -95,6 +96,8 @@
       overflow-y: auto;
       padding: 1.5rem 1rem;
       flex-shrink: 0; /* Prevent sidebar from shrinking in flex layout */
+      z-index: 500; /* Ensure sidebar is above content but below fixed buttons */
+      box-shadow: 2px 0 5px rgba(0,0,0,0.05); /* Subtle shadow for sidebar */
     }
 
     #navList {
@@ -107,20 +110,29 @@
       margin: 0.6rem 0;
     }
 
-    #navList a, #navList .folder {
+    /* Style for all links in the nav */
+    #navList a {
       display: block;
       text-decoration: none;
-      color: var(--link);
+      color: var(--link); /* Default link color */
       padding: 0.5rem 0.8rem;
       border-radius: 6px;
       font-weight: 500;
       word-wrap: break-word; /* Ensure long text wraps */
+      transition: background-color var(--transition), color var(--transition); /* Added color transition */
     }
-      #navList .folder {
-        color: var(--text);
-        font-weight: 600;
-        cursor: default;
-      }
+
+    /* Style for folder links (top level within a folder group) */
+    #navList li > a:first-child:not(.folder) {
+        color: var(--text); /* Folder link text color same as body text */
+        font-weight: 600; /* Make folder links bolder */
+    }
+
+    /* Style for nested list links (二级列表) */
+    #navList ul li a {
+        color: var(--link); /* Apply the standard link color (blue) */
+        font-weight: 500; /* Standard font weight for nested links */
+    }
 
 
     #navList a:hover {
@@ -132,6 +144,8 @@
       background-color: var(--active-bg);
       color: var(--link-hover);
       font-weight: 700;
+      box-shadow: inset 3px 0 0 0 var(--link); /* Highlight bar on the left */
+      padding-left: calc(0.8rem - 3px); /* Adjust padding to compensate for the bar */
     }
 
     #navList ul {
@@ -146,11 +160,11 @@
     .maintainer {
       margin-top: auto; /* Pushes the element to the bottom */
       padding-top: 1.5rem;
-      font-size: 1.3rem; /* Slightly larger maintainer text */
+      font-size: 1.2rem; /* Slightly reduced font size */
       color: var(--footer-text);
       text-align: left;
       padding-left: 0.8rem;
-      font-family: 'Pacifico', cursive; /* Apply Pacifico font */
+      font-family: 'Great Vibes', cursive; /* Apply Great Vibes font */
       font-weight: 700; /* Make it bold */
     }
 
@@ -159,7 +173,7 @@
       position: fixed;
       top: 1rem;
       right: 1rem;
-      z-index: 1000;
+      z-index: 1000; /* Ensure it's on top */
       border: 1px solid var(--sidebar-border);
       background-color: var(--sidebar-bg);
       color: var(--text);
@@ -172,14 +186,17 @@
       align-items: center;
       justify-content: center;
       transition: background-color var(--transition), color var(--transition), border-color var(--transition), transform 0.1s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
     }
 
     #themeToggle:hover {
       background-color: var(--code-bg);
       border-color: var(--link);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
     }
     #themeToggle:active {
         transform: scale(0.95);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
     /* —— Back Button —— */
@@ -187,7 +204,7 @@
       position: fixed;
       top: 3rem; /* Moved down to avoid overlap */
       left: calc(260px + 1rem); /* Position to the right of the sidebar + 1rem margin */
-      z-index: 1000;
+      z-index: 1000; /* Ensure it's on top */
       border: 1px solid var(--sidebar-border);
       background-color: var(--sidebar-bg);
       color: var(--text);
@@ -199,14 +216,17 @@
       align-items: center;
       justify-content: center;
       transition: background-color var(--transition), color var(--transition), border-color var(--transition), transform 0.1s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
     }
 
     #backButton:hover {
       background-color: var(--code-bg);
       border-color: var(--link);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
     }
      #backButton:active {
         transform: scale(0.95);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
 
 
@@ -216,6 +236,8 @@
       overflow-y: auto; /* Add scrollbar to this area */
       padding: 0; /* Remove padding here, apply to wrapper */
       margin-left: 260px; /* Push content area next to sidebar */
+      /* Add some padding-right to prevent scrollbar from overlapping content */
+      padding-right: 1rem;
     }
 
     /* —— Badges Container (Directly added to HTML) —— */
@@ -223,7 +245,7 @@
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      gap: 0;
+      gap: 0.5rem; /* Added small gap between badges */
       margin: 1.5em 0;
       width: auto;
       padding: 0 2.5rem;
@@ -239,6 +261,9 @@
         border-radius: 4px;
         box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         background-color: transparent;
+        /* Ensure images don't cause horizontal scroll */
+        max-width: 100%;
+        height: auto;
     }
 
     #topBadges a {
@@ -377,6 +402,7 @@
       position: relative;
       overflow-x: auto;
       margin: 1.5em 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle shadow for code blocks */
     }
 
     .content-wrapper code:not(pre code) { /* Inline code */
@@ -501,6 +527,58 @@
          font-weight: bold;
      }
 
+     /* Responsive adjustments */
+    @media (max-width: 768px) {
+        #sidebar {
+            width: 200px; /* Slightly reduce sidebar width on smaller screens */
+            padding: 1rem 0.8rem;
+        }
+        #backButton {
+            left: calc(200px + 0.8rem); /* Adjust back button position */
+            top: 1rem; /* Move back button closer to top on mobile */
+            padding: 0.3rem 0.8rem;
+            font-size: 14px;
+        }
+         #themeToggle {
+             top: 0.8rem;
+             right: 0.8rem;
+             width: 35px;
+             height: 35px;
+             font-size: 18px;
+         }
+        #content {
+            margin-left: 200px; /* Adjust content margin */
+            padding-right: 0.5rem;
+        }
+        .content-wrapper {
+            max-width: 95%; /* Allow content to take more width */
+            padding: 0 1rem;
+        }
+        .content-wrapper img {
+            max-width: 90%; /* Allow images to be larger */
+        }
+         .maintainer {
+             font-size: 1rem; /* Further reduce maintainer font size */
+             padding-left: 0.5rem;
+         }
+         .content-wrapper h1 {
+             font-size: 1.8em;
+         }
+         .content-wrapper h2 {
+             font-size: 1.5em;
+         }
+         .content-wrapper h3 {
+             font-size: 1.2em;
+         }
+         .content-wrapper pre {
+             padding: 0.8rem;
+         }
+         .content-wrapper table th,
+         .content-wrapper table td {
+             padding: 0.5em 0.8em;
+         }
+    }
+
   </style>
 </head>
 <body>
@@ -508,12 +586,14 @@
     <div class="nav-container">
       <ul id="navList">
         <li><a href="#README.md">Home</a></li>
-        <li><span class="folder">Backbone">Backbone</span>
+        <li>
+          <a href="https://github.com/rekkles2/Fed_WSVAD/tree/main/Backbone" target="_blank" rel="noopener noreferrer">Backbone</a>
           <ul>
             <li><a href="#Backbone/README.md">Feature Extraction Guide (VideoMAE V2 Backbone)</a></li>
           </ul>
         </li>
-        <li><span class="folder">Fed_VAD">Fed_VAD</span>
+        <li>
+          <a href="https://github.com/rekkles2/Fed_WSVAD/tree/main/Fed_VAD" target="_blank" rel="noopener noreferrer">Fed-VAD</a>
           <ul>
             <li><a href="#Fed_VAD/Jetson%20AGX%20Xavier%20Deployment%20Guide.md">Jetson AGX Xavier Deployment Guide</a></li>
             <li><a href="#Fed_VAD/README.md">Federated Setup (Fed-WSVAD)</a></li>
@@ -704,7 +784,6 @@
                 }
 
                 // Final fallback: Try to find an element whose text content closely matches the link text
-                // This is less reliable but can help with some cases where IDs are unpredictable.
                  if (!targetElement) {
                      const linkText = link.textContent.trim();
                      if (linkText) {
@@ -810,8 +889,12 @@
           const navHref = navLink.getAttribute('href');
           // Only apply 'active' to internal hash links
           if (navHref && navHref.startsWith('#')) {
-            const navFilePath = navHref.substring(1).split('#')[0]; // Compare file path part of the hash
-            navLink.classList.toggle('active', navFilePath === filePath);
+            const hashParts = navHref.substring(1).split('#');
+            const navFilePathEncoded = hashParts[0]; // The file path part from the link href (might be encoded)
+            const navFilePathDecoded = decodeURIComponent(navFilePathEncoded); // Decode the link's file path
+
+            // Compare the decoded link file path with the current loaded file path
+            navLink.classList.toggle('active', navFilePathDecoded === filePath);
           } else {
             navLink.classList.remove('active'); // External links should not be marked active
           }
