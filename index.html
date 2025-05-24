@@ -314,10 +314,10 @@
         padding-left: 1.2em;
     }
 
-     .content-wrapper ol:first-of-type ul li,
-     .content-wrapper ul:first-of-type ul li {
+      .content-wrapper ol:first-of-type ul li,
+      .content-wrapper ul:first-of-type ul li {
         margin-bottom: 0.4em;
-    }
+      }
 
     /* Custom marker for ToC list items */
     .content-wrapper ol:first-of-type li::before,
@@ -330,13 +330,13 @@
         font-size: 0.8em;
         font-weight: bold;
     }
-     .content-wrapper ol:first-of-type ul li::before,
-     .content-wrapper ul:first-of-type ul li::before {
-         content: "•";
-         color: var(--footer-text);
-         font-size: 1em;
-         top: 0.2em;
-     }
+      .content-wrapper ol:first-of-type ul li::before,
+      .content-wrapper ul:first-of-type ul li::before {
+          content: "•";
+          color: var(--footer-text);
+          font-size: 1em;
+          top: 0.2em;
+      }
 
     .content-wrapper li a {
         font-weight: 400;
@@ -512,22 +512,53 @@
         margin-bottom: 1.5em;
     }
 
-     .content-wrapper ul:not(:first-of-type) li {
-         margin-bottom: 0.8em;
-         position: relative;
-     }
+      .content-wrapper ul:not(:first-of-type) li {
+          margin-bottom: 0.8em;
+          position: relative;
+      }
 
-     /* Custom marker for Key Contributions list items */
-     .content-wrapper ul:not(:first-of-type) li::before {
-         content: "→";
-         color: var(--link);
-         position: absolute;
-         left: -1.5em;
-         top: 0.1em;
-         font-weight: bold;
-     }
+      /* Custom marker for Key Contributions list items */
+      .content-wrapper ul:not(:first-of-type) li::before {
+          content: "→";
+          color: var(--link);
+          position: absolute;
+          left: -1.5em;
+          top: 0.1em;
+          font-weight: bold;
+      }
 
-     /* Responsive adjustments */
+    /* —— Clustrmaps Specific Styles —— */
+    #pageFooter {
+      text-align: center; /* Center the clustrmaps */
+      padding: 2em 0 3em 0; /* Add top and bottom padding */
+      margin-top: 3em; /* Space above the footer */
+      border-top: 1px solid var(--sidebar-border); /* Subtle separator */
+      background-color: var(--sidebar-bg); /* Match sidebar/code block background */
+      color: var(--footer-text);
+      font-size: 0.9em;
+      box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    }
+
+    #clustrmapsContainer {
+      display: inline-block; /* Allow centering of block-level map */
+      max-width: 100%; /* Ensure it's responsive */
+      height: auto;
+      overflow: hidden; /* Hide any overflow */
+      border-radius: 8px; /* Consistent rounded corners */
+      box-shadow: 0 4px 12px var(--img-shadow); /* Consistent shadow */
+      background-color: var(--bg); /* Clustrmaps itself might have a transparent background, provide one */
+      padding: 5px; /* Small inner padding if needed */
+    }
+
+    #clustrmapsContainer img {
+      display: block; /* Remove extra space below image */
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px; /* Slightly smaller border radius for the image itself */
+    }
+
+
+      /* Responsive adjustments */
     @media (max-width: 768px) {
         #sidebar {
             width: 200px; /* Slightly reduce sidebar width on smaller screens */
@@ -539,13 +570,13 @@
             padding: 0.3rem 0.8rem;
             font-size: 14px;
         }
-         #themeToggle {
-             top: 0.8rem;
-             right: 0.8rem;
-             width: 35px;
-             height: 35px;
-             font-size: 18px;
-         }
+          #themeToggle {
+              top: 0.8rem;
+              right: 0.8rem;
+              width: 35px;
+              height: 35px;
+              font-size: 18px;
+          }
         #content {
             margin-left: 200px; /* Adjust content margin */
             padding-right: 0.5rem;
@@ -557,26 +588,26 @@
         .content-wrapper img {
             max-width: 90%; /* Allow images to be larger */
         }
-         .maintainer {
-             font-size: 1rem; /* Further reduce maintainer font size */
-             padding-left: 0.5rem;
-         }
-         .content-wrapper h1 {
-             font-size: 1.8em;
-         }
-         .content-wrapper h2 {
-             font-size: 1.5em;
-         }
-         .content-wrapper h3 {
-             font-size: 1.2em;
-         }
-         .content-wrapper pre {
-             padding: 0.8rem;
-         }
-         .content-wrapper table th,
-         .content-wrapper table td {
-             padding: 0.5em 0.8em;
-         }
+          .maintainer {
+              font-size: 1rem; /* Further reduce maintainer font size */
+              padding-left: 0.5rem;
+          }
+          .content-wrapper h1 {
+              font-size: 1.8em;
+          }
+          .content-wrapper h2 {
+              font-size: 1.5em;
+          }
+          .content-wrapper h3 {
+              font-size: 1.2em;
+          }
+          .content-wrapper pre {
+              padding: 0.8rem;
+          }
+          .content-wrapper table th,
+          .content-wrapper table td {
+              padding: 0.5em 0.8em;
+          }
     }
 
   </style>
@@ -632,6 +663,15 @@
     <div class="content-wrapper">
       <p>Loading...</p>
     </div>
+    <footer id="pageFooter">
+      <div id="clustrmapsContainer">
+        <noscript>
+          <a href='https://clustrmaps.com/site/1c67u' title='Visit tracker'>
+            <img id="clustrmapsNoJs" src='//clustrmaps.com/map_v2.png?cl=ffffff&w=a&t=tt&d=5vXVLxUQJKZmhtb1zgYwBSdr65TUyHOP2wBiSDJj2Os'/>
+          </a>
+        </noscript>
+      </div>
+    </footer>
   </main>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.7/marked.min.js"></script>
@@ -647,7 +687,7 @@
       if (theme === 'dark') {
         document.body.classList.add('dark');
         if (lightStyle) lightStyle.disabled = true;
-        if (darkStyle) darkStyle.disabled = true;
+        if (darkStyle) darkStyle.disabled = false;
         themeToggleBtn.textContent = '☀️'; // Sun icon for dark mode
       } else {
         document.body.classList.remove('dark');
@@ -655,6 +695,7 @@
         if (darkStyle) darkStyle.disabled = true;
         themeToggleBtn.textContent = '🌙'; // Moon icon for light mode
       }
+      updateClustrmapsTheme(theme === 'dark');
     }
 
     // Apply saved theme or system preference on load
@@ -668,27 +709,25 @@
     });
 
     // --- Markdown Loading and Processing ---
-    const contentDiv = document.getElementById('content');
-    const contentWrapperDiv = contentDiv.querySelector('.content-wrapper');
+    const contentDiv = document.querySelector('.content-wrapper');
     let currentFile = null; // Tracks the currently loaded markdown file
     const GITHUB_REPO_RAW_BASE_URL = 'https://raw.githubusercontent.com/rekkles2/Fed_WSVAD/main/';
     const HOME_README_URL = 'https://raw.githubusercontent.com/rekkles2/page/main/README.md';
 
-
     // Generates a valid HTML ID from a string (e.g., for heading anchors)
     function generateValidId(input) {
-        // Replace invalid characters with hyphens, remove leading/trailing hyphens
-        return input.trim().toLowerCase()
-                    .replace(/[^\w\s-]/g, '')
-                    .replace(/\s+/g, '-')
-                    .replace(/-+/g, '-')
-                    .replace(/^-+|-+$/g, '');
+      // Replace invalid characters with hyphens, remove leading/trailing hyphens
+      return input.trim().toLowerCase()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-+|-+$/g, '');
     }
 
     // Fetches and renders Markdown content
-    async function loadMarkdown(filePath) {
+    async function loadContent(filePath) { // Renamed from loadMarkdown to loadContent for consistency
       // Clear previous content and display loading message
-      contentWrapperDiv.innerHTML = '<p>Loading content...</p>';
+      contentDiv.innerHTML = '<p>Loading content...</p>';
 
       try {
         // Determine the correct URL for the markdown file
@@ -705,19 +744,19 @@
         let parsedHtml = marked.parse(markdownText);
 
         // Insert parsed markdown into the content wrapper
-        contentWrapperDiv.innerHTML = parsedHtml;
+        contentDiv.innerHTML = parsedHtml;
 
 
         // --- Link Handling ---
         // Determine the base URL for resolving relative links within the current markdown file
         const currentFileDirectory = filePath.includes('/') ? filePath.substring(0, filePath.lastIndexOf('/') + 1) : '';
         const baseUrlForRelativeLinks = (isHomePage) ?
-                                       new URL(HOME_README_URL).href.substring(0, new URL(HOME_README_URL).href.lastIndexOf('/') + 1) : // Base of the 'page' repo
-                                       new URL(currentFileDirectory, GITHUB_REPO_RAW_BASE_URL).href;
+                                         new URL(HOME_README_URL).href.substring(0, new URL(HOME_README_URL).href.lastIndexOf('/') + 1) : // Base of the 'page' repo
+                                         new URL(currentFileDirectory, GITHUB_REPO_RAW_BASE_URL).href;
 
         // After inserting HTML, find all links and headings to correct internal links
-        const headings = contentWrapperDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
-        const links = contentWrapperDiv.querySelectorAll('a');
+        const headings = contentDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        const links = contentDiv.querySelectorAll('a');
 
         // Generate IDs for headings if they don't have them
         headings.forEach(heading => {
@@ -742,13 +781,13 @@
                 // Resolve relative path based on the current markdown file's directory
                 absolutePath = new URL(pathPart, baseUrlForRelativeLinks).pathname;
                 // Make path relative to GITHUB_REPO_RAW_BASE_URL's path part if it's not the home page
-                 if (!isHomePage) {
-                     let baseRepoPath = new URL(GITHUB_REPO_RAW_BASE_URL).pathname;
-                     if (absolutePath.startsWith(baseRepoPath)) {
-                        absolutePath = absolutePath.substring(baseRepoPath.length);
-                     }
-                 }
-                 absolutePath = absolutePath.replace(/^\//, ''); // Ensure no leading slash for hash
+                   if (!isHomePage) {
+                       let baseRepoPath = new URL(GITHUB_REPO_RAW_BASE_URL).pathname;
+                       if (absolutePath.startsWith(baseRepoPath)) {
+                         absolutePath = absolutePath.substring(baseRepoPath.length);
+                       }
+                   }
+                   absolutePath = absolutePath.replace(/^\//, ''); // Ensure no leading slash for hash
 
                 link.setAttribute('href', '#' + absolutePath + internalHashPart); // Use original path in hash
 
@@ -780,48 +819,48 @@
                 // This is necessary because Markdown parsers might generate IDs differently
                 // for list items compared to headings.
                 if (!targetElement) {
-                     targetElement = contentWrapperDiv.querySelector('#' + originalSectionId);
+                   targetElement = contentDiv.querySelector('#' + originalSectionId);
                 }
 
                 // Final fallback: Try to find an element whose text content closely matches the link text
-                 if (!targetElement) {
-                     const linkText = link.textContent.trim();
-                     if (linkText) {
-                         // Look for any element that might contain this text and is a potential target
-                         // This is a broad search and might need refinement based on actual HTML structure
-                         // We'll try to find a heading with matching text content first
-                         targetElement = headingsArray.find(heading => heading.textContent.trim() === linkText);
+                  if (!targetElement) {
+                      const linkText = link.textContent.trim();
+                      if (linkText) {
+                          // Look for any element that might contain this text and is a potential target
+                          // This is a broad search and might need refinement based on actual HTML structure
+                          // We'll try to find a heading with matching text content first
+                          targetElement = headingsArray.find(heading => heading.textContent.trim() === linkText);
 
-                         // If not found in headings, try a broader search within the content wrapper
-                         if (!targetElement) {
-                             targetElement = contentWrapperDiv.querySelector(`*:has(a[href="${href}"])`); // Find the parent element of the link
-                             if (targetElement && targetElement !== link.parentElement) {
-                                  // If the parent is found and it's not just the link itself,
-                                  // try to find a heading or other block element within it
-                                  targetElement = targetElement.querySelector('h1, h2, h3, h4, h5, h6, p, div'); // Broad search
-                             }
-                         }
-                         // As a last resort, try finding any element with a matching generated ID from the link text
-                         if (!targetElement) {
-                              const generatedIdFromLinkText = generateValidId(linkText);
-                              targetElement = contentWrapperDiv.querySelector('#' + generatedIdFromLinkText);
-                         }
-                     }
-                 }
+                          // If not found in headings, try a broader search within the content wrapper
+                          if (!targetElement) {
+                              targetElement = contentDiv.querySelector(`*:has(a[href="${href}"])`); // Find the parent element of the link
+                              if (targetElement && targetElement !== link.parentElement) {
+                                   // If the parent is found and it's not just the link itself,
+                                   // try to find a heading or other block element within it
+                                   targetElement = targetElement.querySelector('h1, h2, h3, h4, h5, h6, p, div'); // Broad search
+                              }
+                          }
+                          // As a last resort, try finding any element with a matching generated ID from the link text
+                          if (!targetElement) {
+                               const generatedIdFromLinkText = generateValidId(linkText);
+                               targetElement = contentDiv.querySelector('#' + generatedIdFromLinkText);
+                          }
+                      }
+                  }
 
 
                 if (targetElement && targetElement.id) {
-                     // If a target element with an ID is found, update the link href to point to its ID
-                     link.setAttribute('href', '#' + filePath + '#' + targetElement.id); // Format: #FilePath.md#target-id
+                    // If a target element with an ID is found, update the link href to point to its ID
+                    link.setAttribute('href', '#' + filePath + '#' + targetElement.id); // Format: #FilePath.md#target-id
                 } else {
                     console.warn(`Could not find a reliable target element for internal link: ${href} in ${filePath}. Link text: "${link.textContent.trim()}"`);
-                     // If target not found, modify to a potentially invalid hash that includes the file path
-                     link.setAttribute('href', '#' + filePath + href); // Keep original hash part but add file path
+                    // If target not found, modify to a potentially invalid hash that includes the file path
+                    link.setAttribute('href', '#' + filePath + href); // Keep original hash part but add file path
                 }
             }
 
-             // Ensure all external HTTP/HTTPS links open in a new tab
-             if ((href.startsWith('http://') || href.startsWith('https://')) && !link.getAttribute('href').startsWith('#')) {
+              // Ensure all external HTTP/HTTPS links open in a new tab
+              if ((href.startsWith('http://') || href.startsWith('https://')) && !link.getAttribute('href').startsWith('#')) {
                 // Check if it's not already targeting _blank and not an internal SPA link
                 if (link.getAttribute('target') !== '_blank') {
                     try {
@@ -832,188 +871,200 @@
                             link.setAttribute('rel', 'noopener noreferrer');
                         }
                     } catch (e) {
-                        console.error("Error processing link URL for target='_blank':", href, e);
-                        // Fallback for potentially malformed relative links that became absolute
-                        if (!link.href.startsWith(window.location.origin + window.location.pathname)) {
-                             link.setAttribute('target', '_blank');
-                             link.setAttribute('rel', 'noopener noreferrer');
-                        }
+                        console.error("Error processing link URL:", e);
                     }
                 }
             }
           }
         });
 
-        // Add IDs to headings if they don't have them (Redundant after first pass, but harmless)
-        headings.forEach(heading => {
-            if (!heading.id) {
-                 heading.id = generateValidId(heading.textContent.trim());
+        // --- Image Handling ---
+        const images = contentDiv.querySelectorAll('img');
+        images.forEach(img => {
+            const src = img.getAttribute('src');
+            if (src && !src.startsWith('http://') && !src.startsWith('https://')) {
+                // Resolve relative image paths to absolute raw GitHub URLs
+                const absoluteImgUrl = new URL(src, baseUrlForRelativeLinks).href;
+                img.setAttribute('src', absoluteImgUrl);
             }
         });
 
 
-        // Add "Copy" buttons to code blocks
-        contentWrapperDiv.querySelectorAll('pre').forEach(preElement => {
-          if (preElement.querySelector('code') && !preElement.querySelector('.copy-btn')) {
-            const copyButton = document.createElement('button');
-            copyButton.className = 'copy-btn';
-            copyButton.textContent = 'Copy';
-            copyButton.setAttribute('aria-label', 'Copy code to clipboard');
-            copyButton.onclick = () => {
-              const codeToCopy = preElement.querySelector('code').innerText;
-              navigator.clipboard.writeText(codeToCopy).then(() => {
-                copyButton.textContent = 'Copied!';
-                copyButton.classList.add('copied');
-                setTimeout(() => {
-                  copyButton.textContent = 'Copy';
-                  copyButton.classList.remove('copied');
-                }, 2000);
-              }).catch(err => {
-                console.error('Failed to copy text: ', err);
-                copyButton.textContent = 'Error';
-                setTimeout(() => { copyButton.textContent = 'Copy'; }, 2000);
-              });
-            };
-            preElement.appendChild(copyButton);
-          }
+        // Highlight code blocks after content is loaded
+        document.querySelectorAll('pre code').forEach((block) => {
+          hljs.highlightElement(block);
         });
 
-        // Apply syntax highlighting using highlight.js
-        if (typeof hljs !== 'undefined') {
-            hljs.highlightAll();
-        }
+        // Add copy buttons to code blocks
+        document.querySelectorAll('pre').forEach(pre => {
+          const button = document.createElement('button');
+          button.className = 'copy-btn';
+          button.textContent = 'Copy';
+          pre.appendChild(button); // Append to the pre element
 
+          button.addEventListener('click', () => {
+            const code = pre.querySelector('code').textContent;
+            // Use document.execCommand('copy') as navigator.clipboard.writeText() might not work in iframes
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
 
-        // Update active link in the sidebar navigation
-        document.querySelectorAll('#navList a').forEach(navLink => {
-          const navHref = navLink.getAttribute('href');
-          // Only apply 'active' to internal hash links
-          if (navHref && navHref.startsWith('#')) {
-            const hashParts = navHref.substring(1).split('#');
-            const navFilePathEncoded = hashParts[0]; // The file path part from the link href (might be encoded)
-            const navFilePathDecoded = decodeURIComponent(navFilePathEncoded); // Decode the link's file path
-
-            // Compare the decoded link file path with the current loaded file path
-            navLink.classList.toggle('active', navFilePathDecoded === filePath);
-          } else {
-            navLink.classList.remove('active'); // External links should not be marked active
-          }
+            button.textContent = 'Copied!';
+            button.classList.add('copied');
+            setTimeout(() => {
+              button.textContent = 'Copy';
+              button.classList.remove('copied');
+            }, 2000);
+          });
         });
 
-        // Scroll to the top of the content or to a specific section if a hash is present
-        const urlHash = window.location.hash;
-        if (urlHash) {
-          const hashContent = decodeURIComponent(urlHash.slice(1));
-          const hashParts = hashContent.split('#');
-          const filePartOfHash = hashParts[0]; // e.g., README.md or Backbone/README.md
-          const sectionHashPart = hashParts.length > 1 ? hashParts[1] : ''; // e.g., introduction
-
-          // Only scroll if the file part of the hash matches the currently loaded file
-          if (filePartOfHash === filePath && sectionHashPart) {
-            // Find the element with the valid ID matching the section hash (which should be the generated ID)
-            const elementToScroll = contentWrapperDiv.querySelector('#' + sectionHashPart);
-            if (elementToScroll && contentWrapperDiv.contains(elementToScroll)) {
-              elementToScroll.scrollIntoView({ behavior: 'smooth' });
-            } else {
-              console.warn(`Element with ID #${sectionHashPart} not found in ${filePath}.`);
-              contentDiv.scrollTop = 0; // Scroll to top if section not found
-            }
-          } else if (filePartOfHash === filePath) { // File matches, but no specific section
-            contentDiv.scrollTop = 0;
-          }
-          // If filePartOfHash does not match filePath, scrolling is handled by the new page load.
-        } else {
-          contentDiv.scrollTop = 0; // Scroll to top if no hash at all
-        }
-
-        currentFile = filePath; // Update the currently loaded file
+        // Update current file tracker
+        currentFile = filePath;
+        updateActiveNavLink(filePath); // Update active link in sidebar
+        // No need to call handleHashChange here, it's the caller
+        // Scroll to section if hash exists (handled by handleHashChange's initial call)
       } catch (error) {
-        console.error('Failed to load Markdown:', error);
-        contentWrapperDiv.innerHTML = `<p style="color:red; font-weight:bold;">Failed to load content for "${filePath}".</p><p style="color:var(--text);">Error: ${error.message}</p><p>Please check the console for more details.</p>`;
+        console.error('Error loading markdown:', error);
+        contentDiv.innerHTML = `<p style="color: red;">Failed to load content: ${error.message}. Please try again later.</p>`;
       }
     }
 
-    // Handles URL hash changes for navigation
-    function onHashChange() {
-      let hash = decodeURIComponent(location.hash.slice(1));
+    // --- Clustrmaps Theme Update Function ---
+    function updateClustrmapsTheme(isDarkMode) {
+      const clustrmapsContainer = document.getElementById('clustrmapsContainer');
+      if (!clustrmapsContainer) return;
 
-      if (!hash) { // If no hash, load default README.md
-        hash = 'README.md';
-        history.replaceState(null, '', '#' + hash); // Update URL without triggering hashchange
+      const mapColor = isDarkMode ? '212529' : 'ffffff'; // Dark mode: matches body background, Light mode: white
+      const siteId = '5vXVLxUQJKZmhtb1zgYwBSdr65TUyHOP2wBiSDJj2Os'; // Your Clustrmaps site ID
+
+      // Update the No-JS image fallback's src
+      const noJsImage = document.getElementById('clustrmapsNoJs');
+      if (noJsImage) {
+        const currentSrc = noJsImage.src;
+        const newSrc = currentSrc.replace(/cl=[a-fA-F0-9]{6}/, `cl=${mapColor}`);
+        if (newSrc !== currentSrc) {
+          noJsImage.src = newSrc;
+        }
       }
 
-      const hashParts = hash.split('#');
-      const filePathFromHash = hashParts[0]; // This is the path to the .md file
+      // Remove existing Clustrmaps script to ensure it reloads with new parameters
+      let existingScript = document.getElementById('clustrmaps');
+      if (existingScript) {
+        existingScript.remove();
+      }
 
-      if (filePathFromHash && filePathFromHash.toLowerCase().endsWith('.md')) {
-        // If the file path from hash is different from currentFile, load it.
-        // Or, if it's the same file but currentFile is null (initial load), load it.
-        if (filePathFromHash !== currentFile || currentFile === null) {
-          loadMarkdown(filePathFromHash);
-        } else {
-          // Same file is already loaded, just handle scrolling to section if specified
-          const sectionHashPart = hashParts.length > 1 ? hashParts[1] : '';
-          if (sectionHashPart) {
-            // Find the element with the valid ID matching the section hash (which is a generated ID)
-            const elementToScroll = contentWrapperDiv.querySelector('#' + sectionHashPart);
-            if (elementToScroll && contentWrapperDiv.contains(elementToScroll)) {
-              elementToScroll.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                 console.warn(`Element with ID #${sectionHashPart} not found for same-file scroll in ${filePathFromHash}.`);
-                 contentDiv.scrollTop = 0; // Scroll to top if section not found
-            }
-          } else {
-            contentDiv.scrollTop = 0; // Scroll to top if no internal hash for the same file
+      // Create and append new Clustrmaps script
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.id = 'clustrmaps'; // Assign an ID for future reference
+      script.src = `//cdn.clustrmaps.com/map_v2.js?cl=${mapColor}&w=a&t=tt&d=${siteId}`; // Corrected URL format
+      clustrmapsContainer.appendChild(script);
+    }
+
+    // --- Navigation and Routing ---
+    const navList = document.getElementById('navList');
+    const backButton = document.getElementById('backButton');
+    let historyStack = []; // To manage navigation history
+
+    function updateActiveNavLink(filePath) {
+      document.querySelectorAll('#navList a').forEach(link => {
+        link.classList.remove('active');
+      });
+
+      // Find the link that matches the current filePath (after decoding URI components)
+      const targetLink = Array.from(document.querySelectorAll('#navList a')).find(link => {
+          try {
+              const linkHashPath = decodeURIComponent(link.hash.substring(1).split('#')[0]);
+              return linkHashPath === filePath;
+          } catch (e) {
+              console.error("Error decoding URI component for nav link:", link.hash, e);
+              return false;
           }
+      });
+
+      if (targetLink) {
+        targetLink.classList.add('active');
+        // Expand parent ul if it's a nested link
+        let parentUl = targetLink.closest('ul');
+        while (parentUl && parentUl !== navList) {
+            parentUl.style.display = 'block'; // Or toggle a class that sets display: block
+            parentUl = parentUl.parentElement.closest('ul');
         }
-      } else if (filePathFromHash) { // If hash is not an .md file but exists
-        console.warn(`Invalid or non-Markdown file path in hash: "${filePathFromHash}". Loading default README.md`);
-        history.replaceState(null, '', '#README.md');
-        loadMarkdown('README.md');
       }
-      // If filePathFromHash is empty (e.g. URL is just `#`), it defaults to README.md due to the `!hash` check earlier.
     }
 
-    // Ensure sidebar links and badge links are correctly formatted for external targets
-    document.querySelectorAll('#sidebar a, #topBadges a').forEach(link => {
-        const href = link.getAttribute('href');
-        if (href && (href.startsWith('http://') || href.startsWith('https://'))) {
-            // Check if it's not already targeting _blank and not an internal SPA link
-            if (!link.hasAttribute('target') || link.getAttribute('target') !== '_blank') {
-                try {
-                    const linkUrl = new URL(link.href); // Use link.href to get absolute URL
-                    const currentLocUrl = new URL(window.location.href);
-                    if (linkUrl.hostname !== currentLocUrl.hostname || linkUrl.protocol !== currentLocUrl.protocol) {
-                        link.setAttribute('target', '_blank');
-                        link.setAttribute('rel', 'noopener noreferrer');
-                    }
-                } catch (e) {
-                    console.error("Error processing link URL for target='_blank':", href, e);
-                     link.setAttribute('target', '_blank');
-                     link.setAttribute('rel', 'noopener noreferrer');
-                }
-            }
+    function handleHashChange() {
+      const hash = window.location.hash.substring(1); // Get hash without '#'
+      let filePathToLoad = 'README.md'; // Default to home README
+
+      let sectionId = '';
+      if (hash) {
+        const parts = hash.split('#');
+        filePathToLoad = parts[0];
+        if (parts.length > 1) {
+          sectionId = parts.slice(1).join('#'); // Re-join if there were multiple hashes
         }
-    });
-
-    // Add event listener for the back button
-    document.getElementById('backButton').addEventListener('click', () => {
-        history.back();
-    });
-
-
-    // Event listeners for page load and hash changes
-    window.addEventListener('hashchange', onHashChange);
-    window.addEventListener('load', () => {
-      if (typeof hljs !== 'undefined') {
-        // Ensure highlight.js is available before calling
-        hljs.configure({ ignoreUnescapedHTML: true }); // Optional: good for robustness
-        // Initial highlighting might be better done after first loadMarkdown completes
       }
-      onHashChange(); // Initial content load based on hash or default
-    });
-  </script>
 
-  
+      if (filePathToLoad !== currentFile) {
+        loadContent(filePathToLoad).then(() => {
+          if (sectionId) {
+            setTimeout(() => { // Give browser a moment to render content
+              const targetElement = document.getElementById(sectionId);
+              if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+              } else {
+                console.warn(`Section ID '${sectionId}' not found in ${filePathToLoad}.`);
+              }
+            }, 100);
+          }
+        });
+      } else if (sectionId) {
+        // If only the section changed on the same page
+        const targetElement = document.getElementById(sectionId);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          console.warn(`Section ID '${sectionId}' not found on current page.`);
+        }
+      }
+    }
+
+    // Event listener for navigation links
+    navList.addEventListener('click', (event) => {
+      const target = event.target.closest('a');
+      if (target && target.hash) {
+        event.preventDefault(); // Prevent default hash jump
+        const newHash = target.hash;
+        if (window.location.hash !== newHash) {
+          historyStack.push(window.location.hash); // Save current state
+          window.location.hash = newHash; // Update URL hash
+        }
+      }
+    });
+
+    // Event listener for back button
+    backButton.addEventListener('click', () => {
+      if (historyStack.length > 0) {
+        const prevHash = historyStack.pop();
+        window.location.hash = prevHash;
+      } else {
+        // If no history, go to home or a default page
+        window.location.hash = '#README.md';
+      }
+    });
+
+    // Listen for hash changes (browser back/forward, or direct hash change)
+    window.addEventListener('hashchange', handleHashChange);
+
+    // Initial load based on URL hash or default
+    window.addEventListener('load', () => {
+      handleHashChange();
+    });
+
+  </script>
 </body>
 </html>
