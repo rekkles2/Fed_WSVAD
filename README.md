@@ -2,7 +2,7 @@
 
 <!-- Optimized Badge Block -->
 <p align="center" style="margin: 0 0 12px;">
-  <a href="https://ieeexplore.ie.pubapi.xyz/document/11036561" target="_blank" rel="noopener" title="IEEE TII Paper on IEEE Xplore">
+  <a href="https://ieeexplore.ieee.org/document/11036561" target="_blank" rel="noopener" title="IEEE TII Paper on IEEE Xplore">
     <img src="https://img.shields.io/badge/IEEE%20TII-Paper-0050FF?style=flat-square&logo=ieee&logoColor=white" alt="IEEE TII Paper" style="margin:2px;"/>
   </a>
   <a href="https://github.com/rekkles2/Fed_WSVAD" title="GitHub Repository Stars">
