@@ -141,7 +141,20 @@ Aligned feature files will be saved under the `shanghaitech` directory.
 
 ## 📚 Citation
 
-If you use VideoMAE V2, please cite:
+If you use VideoMAE V2 as backbone, please cite:
+```bibtex
+@ARTICLE{11036561,
+  author={Su, Yong and Li, Jiahang and An, Simin and Xu, Hengpeng and Peng, Weilong},
+  journal={IEEE Transactions on Industrial Informatics},
+  title={Dual-Detector Reoptimization for Federated Weakly Supervised Video Anomaly Detection via Adaptive Dynamic Recursive Mapping},
+  year={2025},
+  volume={},
+  number={},
+  pages={1-11},
+  keywords={Adaptation models;Training;Anomaly detection;Feature extraction;Surveillance;Optimization;Accuracy;Privacy;Detectors;Semantics;Adaptive dynamic recursive mapping;adaptive local aggregation;federated;scene-similarity;video anomaly detection (VAD);weakly supervised},
+  doi={10.1109/TII.2025.3574406}
+}
+```
 
 ```bibtex
 @inproceedings{wang2023videomae,
