@@ -1,6 +1,6 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/dual-detector-re-optimization-for-federated/weakly-supervised-video-anomaly-detection-on)](https://paperswithcode.com/sota/weakly-supervised-video-anomaly-detection-on?p=dual-detector-re-optimization-for-federated)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/dual-detector-re-optimization-for-federated/weakly-supervised-video-anomaly-detection-on-1)](https://paperswithcode.com/sota/weakly-supervised-video-anomaly-detection-on-1?p=dual-detector-re-optimization-for-federated)
-<h1 align="center">📹 Dual-detector Re-optimization for Federated Weakly Supervised Video Anomaly Detection Via Adaptive Dynamic Recursive Mapping</h1>
+<h1 align="center">📹 Dual-Detector Reoptimization for Federated Weakly Supervised Video Anomaly Detection via Adaptive Dynamic Recursive Mapping</h1>
 
 <!-- Optimized Badge Block -->
 <p align="center" style="margin: 0 0 12px;">
