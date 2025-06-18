@@ -3,6 +3,14 @@
 
 This guide provides comprehensive instructions for setting up and running the **Federated Weakly Supervised Video Anomaly Detection (Fed-WSVAD)** framework. Follow these steps to successfully deploy and execute your federated learning experiments.
 
+<p align="center">
+  <img src="https://github.com/rekkles2/Fed_WSVAD/raw/main/Figure/Jetson.jpg" alt="Figure 1. NVIDIA Jetson AGX Xavier." width="40%"/>
+  <br>
+  <em>Figure 1: NVIDIA Jetson AGX Xavier.</em>
+</p>
+
+
+
 ---
 
 ## 1. Preparation 🛠️
