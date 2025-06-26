@@ -26,10 +26,9 @@
   <strong>⭐ If you find our code useful, please consider starring this repository and citing our paper!</strong>
 </p>
 
-<details open>
+<details>
   <summary><strong>📋 BibTeX Citation (click to expand)</strong></summary>
-
-  ```bibtex
+  <pre><code>
   @ARTICLE{11036561,
     author={Su, Yong and Li, Jiahang and An, Simin and Xu, Hengpeng and Peng, Weilong},
     journal={IEEE Transactions on Industrial Informatics},
@@ -41,7 +40,7 @@
     keywords={Adaptation models;Training;Anomaly detection;Feature extraction;Surveillance;Optimization;Accuracy;Privacy;Detectors;Semantics;Adaptive dynamic recursive mapping;adaptive local aggregation;federated;scene-similarity;video anomaly detection (VAD);weakly supervised},
     doi={10.1109/TII.2025.3574406}
   }
-  ```
+  </code></pre>
 </details>
 
 ## 📄 Abstract
