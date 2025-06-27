@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fed-WSVAD Documentation</title>
 
+    <!-- Highlight.js CSS for code syntax highlighting (light theme) -->
     <link id="hljs-light" rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css" />
+    <!-- Highlight.js CSS for code syntax highlighting (dark theme), initially disabled -->
     <link id="hljs-dark" rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css"
         disabled />
 
+    <!-- Google Fonts for custom typography -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-
 
     <style>
         /* —— Color Variables (Refined Palette) —— */
@@ -40,6 +42,7 @@
             --table-row-even-bg: #f2f2f2; /* More distinct zebra stripe */
         }
 
+        /* Dark mode variables */
         body.dark {
             --bg: #212529; /* Dark background */
             --text: #dee2e6; /* Light text */
@@ -244,7 +247,7 @@
         #topBadges {
             display: flex;
             justify-content: flex-start;
-            align-items: center;
+            align-items: flex-start; /* Changed from center to flex-start for top alignment */
             gap: 0.5rem; /* Added small gap between badges */
             margin: 1.5em auto; /* Centered horizontally */
             width: 70%; /* Matches content-wrapper width */
@@ -254,23 +257,23 @@
             align-self: flex-start;
         }
 
+        /* All images within topBadges will now maintain their natural aspect ratio */
         #topBadges img {
-                max-width: none;
-                height: auto;
-                display: inline-block;
-                margin: 0; /* This line is crucial. It sets margin to 0 for all #topBadges img */
+                max-width: 100%; /* Ensure images don't overflow their container */
+                height: auto; /* Allow height to adjust based on aspect ratio */
+                width: auto; /* Allow width to adjust based on aspect ratio */
+                display: inline-block; /* Keep inline-block or flex item behavior */
+                margin: 0; /* Remove individual margins as gap handles spacing */
                 border-radius: 4px;
                 box-shadow: 0 2px 6px rgba(0,0,0,0.15);
                 background-color: transparent;
-                /* Ensure images don't cause horizontal scroll */
-                max-width: 100%;
+                /* vertical-align: top; Removed, as align-items: flex-start handles this for flex items */
         }
 
-        /* Specific style for the IEEE badge to make it 3x larger */
+        /* Specific style for the IEEE badge - now follows general img rules for height/width */
         #ieee-badge {
-            height: 60px; /* 3 times the assumed default height of 20px for shield badges */
-            width: auto; /* Maintain aspect ratio */
-            margin: 2px; /* Reapply 2px margin for consistency with other badges */
+            /* No specific height or width needed here; it will scale naturally */
+            /* No need for margin here, gap property on #topBadges handles it */
         }
 
         #topBadges a {
@@ -585,67 +588,83 @@
                     padding: 0.5em 0.8em;
                 }
         }
-
     </style>
 </head>
 <body>
+    <!-- Sidebar Navigation -->
     <nav id="sidebar">
         <div class="nav-container">
             <ul id="navList">
                 <li><a href="#README.md">Home</a></li>
                 <li>
+                    <!-- Link to external GitHub folder for Backbone -->
                     <a href="https://github.com/rekkles2/Fed_WSVAD/tree/main/Backbone" target="_blank" rel="noopener noreferrer">Backbone</a>
                     <ul>
+                        <!-- Internal link to a Markdown file within the Backbone folder -->
                         <li><a href="#Backbone/README.md">Feature Extraction Guide (VideoMAE V2 Backbone)</a></li>
                     </ul>
                 </li>
                 <li>
+                    <!-- Link to external GitHub folder for Fed-VAD -->
                     <a href="https://github.com/rekkles2/Fed_WSVAD/tree/main/Fed_VAD" target="_blank" rel="noopener noreferrer">Fed-VAD</a>
                     <ul>
+                        <!-- Internal links to Markdown files within the Fed_VAD folder -->
                         <li><a href="#Fed_VAD/Jetson%20AGX%20Xavier%20Deployment%20Guide.md">Jetson AGX Xavier Deployment Guide</a></li>
                         <li><a href="#Fed_VAD/README.md">Federated Setup (Fed-WSVAD)</a></li>
                     </ul>
                 </li>
+                <!-- External link to DeepWiki Code Navigator -->
                 <li><a href="https://deepwiki.com/rekkles2/Fed_WSVAD" target="_blank" rel="noopener noreferrer">DeepWiki Code Navigator</a></li>
             </ul>
         </div>
+        <!-- Maintainer information at the bottom of the sidebar -->
         <div class="maintainer">Maintained by Jiahang Li</div>
     </nav>
 
+    <!-- Theme Toggle Button (Moon/Sun icon) -->
     <button id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
+    <!-- Back Button for navigation history -->
     <button id="backButton">← Back</button>
 
+    <!-- Main Content Area -->
     <main id="content">
-        <div id="topBadges">
-                <a href="https://ieeexplore.ieee.org/document/11036561" target="_blank" rel="noopener noreferrer" title="IEEE TII Paper on IEEE Xplore">
-                    <img id="ieee-badge" src="https://img.shields.io/badge/IEEE%20TII-Paper-0050FF?style=flat-square&logo=ieee&logoColor=white" alt="IEEE TII Paper"/>
-                </a>
-            <a href="https://rekkles2.github.io/Fed_WSVAD/Figure/Appendix.pdf" target="_blank" rel="noopener noreferrer" title="Supplementary Appendix (PDF)">
-                <img src="https://img.shields.io/badge/📄%20Appendix-PDF-6c757d?style=flat-square&logo=adobeacrobatreader&logoColor=white" alt="Appendix PDF" style="margin:2px;"/>
+        <!-- Top Badges Section (Dynamically loaded project badges) -->
+        <div id="topBadges">
+            <a href="https://ieeexplore.ieee.org/document/11036561" target="_blank" rel="noopener noreferrer" title="IEEE TII Paper on IEEE Xplore">
+                <img id="ieee-badge" src="https://img.shields.io/badge/IEEE%20TII-Paper-0050FF?style=flat-square&logo=ieee&logoColor=white" alt="IEEE TII Paper"/>
             </a>
-                            <a href="https://github.com/rekkles2/Fed_WSVAD" target="_blank" rel="noopener noreferrer" title="GitHub Repository Stars">
-                    <img src="https://img.shields.io/github/stars/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white&color=FFD700" alt="GitHub Stars" style="margin:2px;"/>
-                </a>
-                <a href="https://github.com/rekkles2/Fed_WSVAD/fork" target="_blank" rel="noopener noreferrer" title="GitHub Repository Forks">
-                    <img src="https://img.shields.io/github/forks/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white&color=orange" alt="GitHub Forks" style="margin:2px;"/>
-                </a>
-                <a href="https://rekkles2.github.io/Fed_WSVAD/#README.md" target="_blank" rel="noopener noreferrer" title="Project Home Page">
-                    <img src="https://img.shields.io/badge/%F0%9F%8C%90-Project%20Page-0084FF?style=flat-square" alt="Project Page" style="margin:2px;"/>
-                </a>
-                <a href="https://github.com/rekkles2/Fed_WSVAD/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" title="Apache 2.0 License">
-                    <img src="https://img.shields.io/github/license/rekkles2/Fed_WSVAD?style=flat-square&logo=apache&logoColor=white&color=brightgreen" alt="License" style="margin:2px;"/>
-                </a>
-        </div>
-        <div class="content-wrapper">
-            <p>Loading...</p>
-        </div>
+            <!-- Updated Appendix Badge -->
+            <a href="https://rekkles2.github.io/Fed_WSVAD/Figure/Appendix.pdf" target="_blank" rel="noopener noreferrer" title="Supplementary Appendix (PDF)">
+                <img src="https://img.shields.io/badge/%F0%9F%93%84%20Appendix-PDF-6c757d?style=flat-square&logo=adobeacrobatreader&logoColor=white" alt="Appendix PDF"/>
+            </a>
+            <a href="https://github.com/rekkles2/Fed_WSVAD" target="_blank" rel="noopener noreferrer" title="GitHub Repository Stars">
+                <img src="https://img.shields.io/github/stars/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white&color=FFD700" alt="GitHub Stars"/>
+            </a>
+            <a href="https://github.com/rekkles2/Fed_WSVAD/fork" target="_blank" rel="noopener noreferrer" title="GitHub Repository Forks">
+                <img src="https://img.shields.io/github/forks/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white&color=orange" alt="GitHub Forks"/>
+            </a>
+            <a href="https://rekkles2.github.io/Fed_WSVAD/#README.md" target="_blank" rel="noopener noreferrer" title="Project Home Page">
+                <img src="https://img.shields.io/badge/%F0%9F%8C%90-Project%20Page-0084FF?style=flat-square" alt="Project Page"/>
+            </a>
+            <a href="https://github.com/rekkles2/Fed_WSVAD/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" title="Apache 2.0 License">
+                <img src="https://img.shields.io/github/license/rekkles2/Fed_WSVAD?style=flat-square&logo=apache&logoColor=white&color=brightgreen" alt="License"/>
+            </a>
+        </div>
+        <!-- Content Wrapper for Markdown content -->
+        <div class="content-wrapper">
+            <p>Loading...</p>
+        </div>
     </main>
 
+    <!-- Clustrmaps visitor counter (external script) -->
     <div id="clustrmaps-container">
         <script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=ffffff&w=a&t=tt&d=5vXVLxUQJKZmhtb1zgYwBSdr65TUyHOP2wBiSDJj2Os'></script>
     </div>
 
+    <!-- JavaScript Libraries -->
+    <!-- Marked.js for Markdown parsing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.7/marked.min.js"></script>
+    <!-- Highlight.js for code syntax highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
     <script>
         // --- Theme Toggle Functionality ---
@@ -654,14 +673,20 @@
         const darkStyle = document.getElementById('hljs-dark');
         const savedTheme = localStorage.getItem('theme');
 
+        /**
+         * Applies the specified theme to the document.
+         * @param {string} theme - 'light' or 'dark'.
+         */
         function applyTheme(theme) {
             if (theme === 'dark') {
                 document.body.classList.add('dark');
+                // Disable light theme stylesheet and enable dark theme stylesheet for highlight.js
                 if (lightStyle) lightStyle.disabled = true;
-                if (darkStyle) darkStyle.disabled = true;
+                if (darkStyle) darkStyle.disabled = false; // Corrected: should be enabled for dark mode
                 themeToggleBtn.textContent = '☀️'; // Sun icon for dark mode
             } else {
                 document.body.classList.remove('dark');
+                // Enable light theme stylesheet and disable dark theme stylesheet for highlight.js
                 if (lightStyle) lightStyle.disabled = false;
                 if (darkStyle) darkStyle.disabled = true;
                 themeToggleBtn.textContent = '🌙'; // Moon icon for light mode
@@ -682,11 +707,18 @@
         const contentDiv = document.getElementById('content');
         const contentWrapperDiv = contentDiv.querySelector('.content-wrapper');
         let currentFile = null; // Tracks the currently loaded markdown file
+        // Base URL for raw content from the GitHub repository
         const GITHUB_REPO_RAW_BASE_URL = 'https://raw.githubusercontent.com/rekkles2/Fed_WSVAD/main/';
+        // Special URL for the home README, which might be in a different repo/branch
         const HOME_README_URL = 'https://raw.githubusercontent.com/rekkles2/page/main/README.md';
 
 
-        // Generates a valid HTML ID from a string (e.g., for heading anchors)
+        /**
+         * Generates a valid HTML ID from a string, suitable for heading anchors.
+         * Converts text to lowercase, replaces invalid characters with hyphens, and trims hyphens.
+         * @param {string} input - The string to convert.
+         * @returns {string} - A valid HTML ID.
+         */
         function generateValidId(input) {
             // Replace invalid characters with hyphens, remove leading/trailing hyphens
             return input.trim().toLowerCase()
@@ -696,7 +728,11 @@
                                 .replace(/^-+|-+$/g, '');
         }
 
-        // Fetches and renders Markdown content
+        /**
+         * Fetches and renders Markdown content into the main content area.
+         * Handles internal and external link rewriting, code highlighting, and copy buttons.
+         * @param {string} filePath - The path to the Markdown file (e.g., 'README.md', 'Backbone/README.md').
+         */
         async function loadMarkdown(filePath) {
             // Clear previous content and display loading message
             contentWrapperDiv.innerHTML = '<p>Loading content...</p>';
@@ -723,8 +759,8 @@
                 // Determine the base URL for resolving relative links within the current markdown file
                 const currentFileDirectory = filePath.includes('/') ? filePath.substring(0, filePath.lastIndexOf('/') + 1) : '';
                 const baseUrlForRelativeLinks = (isHomePage) ?
-                                                new URL(HOME_README_URL).href.substring(0, new URL(HOME_README_URL).href.lastIndexOf('/') + 1) : // Base of the 'page' repo
-                                                new URL(currentFileDirectory, GITHUB_REPO_RAW_BASE_URL).href;
+                                                        new URL(HOME_README_URL).href.substring(0, new URL(HOME_README_URL).href.lastIndexOf('/') + 1) : // Base of the 'page' repo
+                                                        new URL(currentFileDirectory, GITHUB_REPO_RAW_BASE_URL).href;
 
                 // After inserting HTML, find all links and headings to correct internal links
                 const headings = contentWrapperDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
@@ -736,7 +772,6 @@
                             heading.id = generateValidId(heading.textContent.trim());
                     }
                 });
-
 
                 links.forEach(link => {
                     const href = link.getAttribute('href');
@@ -831,28 +866,28 @@
                                 }
                         }
 
-                            // Ensure all external HTTP/HTTPS links open in a new tab
-                            if ((href.startsWith('http://') || href.startsWith('https://')) && !link.getAttribute('href').startsWith('#')) {
-                                // Check if it's not already targeting _blank and not an internal SPA link
-                                if (link.getAttribute('target') !== '_blank') {
-                                    try {
-                                        const linkUrl = new URL(link.href); // Use link.href to get absolute URL
-                                        const currentLocUrl = new URL(window.location.href);
-                                        if (linkUrl.hostname !== currentLocUrl.hostname || linkUrl.protocol !== currentLocUrl.protocol) {
-                                            link.setAttribute('target', '_blank');
-                                            link.setAttribute('rel', 'noopener noreferrer');
-                                        }
-                                    } catch (e) {
-                                        console.error("Error processing link URL for target='_blank':", href, e);
-                                        // Fallback for potentially malformed relative links that became absolute
-                                        if (!link.href.startsWith(`${window.location.origin}`)) {
-                                            link.setAttribute('target', '_blank');
-                                            link.setAttribute('rel', 'noopener noreferrer');
+                                // Ensure all external HTTP/HTTPS links open in a new tab
+                                if ((href.startsWith('http://') || href.startsWith('https://')) && !link.getAttribute('href').startsWith('#')) {
+                                    // Check if it's not already targeting _blank and not an internal SPA link
+                                    if (link.getAttribute('target') !== '_blank') {
+                                        try {
+                                            const linkUrl = new URL(link.href); // Use link.href to get absolute URL
+                                            const currentLocUrl = new URL(window.location.href);
+                                            if (linkUrl.hostname !== currentLocUrl.hostname || linkUrl.protocol !== currentLocUrl.protocol) {
+                                                link.setAttribute('target', '_blank');
+                                                link.setAttribute('rel', 'noopener noreferrer');
+                                            }
+                                        } catch (e) {
+                                            console.error("Error processing link URL for target='_blank':", href, e);
+                                            // Fallback for potentially malformed relative links that became absolute
+                                            if (!link.href.startsWith(`${window.location.origin}`)) {
+                                                link.setAttribute('target', '_blank');
+                                                link.setAttribute('rel', 'noopener noreferrer');
+                                            }
                                         }
                                     }
                                 }
-                            }
-                        }
+                    }
                 });
 
                 // Highlight code blocks after content is loaded
@@ -896,7 +931,7 @@
                     });
                 });
 
-                // Scroll to target heading if hash exists
+                // Scroll to target heading if hash exists in the URL
                 if (window.location.hash) {
                     const hash = window.location.hash.substring(1); // Remove leading #
                     const parts = hash.split('#'); // Split by # to get file and target ID
@@ -922,7 +957,10 @@
         // --- Sidebar Navigation ---
         const navList = document.getElementById('navList');
 
-        // Function to update active class in sidebar based on current URL hash
+        /**
+         * Updates the 'active' class on sidebar navigation links based on the currently loaded file.
+         * @param {string} filePath - The path of the Markdown file currently displayed.
+         */
         function updateSidebarActiveState(filePath) {
             navList.querySelectorAll('a').forEach(link => {
                 let linkHref = link.getAttribute('href');
