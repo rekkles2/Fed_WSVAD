@@ -2,25 +2,30 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/dual-detector-re-optimization-for-federated/weakly-supervised-video-anomaly-detection-on-1)](https://paperswithcode.com/sota/weakly-supervised-video-anomaly-detection-on-1?p=dual-detector-re-optimization-for-federated)
 <h1 align="center">📹 Dual-Detector Reoptimization for Federated Weakly Supervised Video Anomaly Detection via Adaptive Dynamic Recursive Mapping</h1>
 
-<!-- Optimized Badge Block -->
+<!-- Consistent Badge Block -->
 <p align="center" style="margin: 0 0 12px;">
-  <a href="https://ieeexplore.ieee.org/document/11036561" target="_blank" rel="noopener" title="IEEE TII Paper on IEEE Xplore">
-    <img src="https://img.shields.io/badge/IEEE%20TII-Paper-0050FF?style=flat-square&logo=ieee&logoColor=white" alt="IEEE TII Paper" style="margin:2px;"/>
+  <a href="https://ieeexplore.ieee.org/document/11036561" target="_blank" rel="noopener" title="View Paper on IEEE Xplore">
+    <img src="https://img.shields.io/badge/IEEE%20TII-Paper-0050FF?style=flat-square&logo=ieee&logoColor=white" alt="IEEE TII Paper" style="margin:2px;"/>
   </a>
-  <a href="https://github.com/rekkles2/Fed_WSVAD" title="GitHub Repository Stars">
-    <img src="https://img.shields.io/github/stars/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white&color=FFD700" alt="GitHub Stars" style="margin:2px;"/>
+  <a href="https://rekkles2.github.io/Fed_WSVAD/#README.md" target="_blank" rel="noopener" title="Visit the Project Page">
+    <img src="https://img.shields.io/badge/🌐%20Project%20Page-View-0050FF?style=flat-square" alt="Project Page" style="margin:2px;"/>
   </a>
-  <a href="https://github.com/rekkles2/Fed_WSVAD/fork" title="GitHub Repository Forks">
-    <img src="https://img.shields.io/github/forks/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white&color=orange" alt="GitHub Forks" style="margin:2px;"/>
+  <a href="Figure/Appendix.pdf" target="_blank" rel="noopener" title="Read the Supplementary Appendix (PDF)">
+    <img src="https://img.shields.io/badge/📄%20Appendix-PDF-0050FF?style=flat-square&logo=adobeacrobatreader&logoColor=white" alt="Appendix PDF" style="margin:2px;"/>
   </a>
-  <a href="https://rekkles2.github.io/Fed_WSVAD/#README.md" title="Project Home Page">
-    <img src="https://img.shields.io/badge/%F0%9F%8C%90-Project%20Page-0084FF?style=flat-square" alt="Project Page" style="margin:2px;"/>
+  <a href="https://github.com/rekkles2/Fed_WSVAD" target="_blank" rel="noopener" title="GitHub Repository Stars">
+    <img src="https://img.shields.io/github/stars/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white&color=gold" alt="GitHub Stars" style="margin:2px;"/>
   </a>
-  <a href="https://github.com/rekkles2/Fed_WSVAD/blob/main/LICENSE" title="Apache 2.0 License">
+  <a href="https://github.com/rekkles2/Fed_WSVAD/forks" target="_blank" rel="noopener" title="GitHub Repository Forks">
+    <img src="https://img.shields.io/github/forks/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white&color=lightgrey" alt="GitHub Forks" style="margin:2px;"/>
+  </a>
+  <a href="https://github.com/rekkles2/Fed_WSVAD/blob/main/LICENSE" target="_blank" rel="noopener" title="Apache 2.0 License">
     <img src="https://img.shields.io/github/license/rekkles2/Fed_WSVAD?style=flat-square&logo=apache&logoColor=white&color=brightgreen" alt="License" style="margin:2px;"/>
   </a>
 </p>
-<!-- /Optimized Badge Block -->
+<!-- /Consistent Badge Block -->
+
+
 
 <p align="center">
   <strong>⭐ If you find our code useful, please consider starring this repository and citing our paper!</strong>
