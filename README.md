@@ -139,8 +139,8 @@ Performance comparison (AUC / FAR) on standard benchmarks.
 
 | Dataset                                                                                                    | Centralized (AUC / FAR) | FedSSALA (AUC / FAR) | Pretrained Models                                                                                      |
 | :--------------------------------------------------------------------------------------------------------- | :---------------------- | :------------------- | :----------------------------------------------------------------------------------------------------- |
-| [🔗 ShanghaiTech](https://drive.google.com/drive/folders/1gArYo-e11ddrWj0lj3w055jPmGPywMqF?usp=drive_link) | **97.91% / 0.04%**      | **97.86% / 0.03%**   | [📥 Download](https://drive.google.com/drive/folders/1s7QWEfbHbb5LfaaHqBFw9pKSXDJtocAK?usp=drive_link) |
-| [🔗 UBnormal](https://drive.google.com/drive/folders/1J_6UTtcjibtJ7qiOFeHeLMiJ6xAciWK3?usp=drive_link)     | **70.91% / 0.00%**      | **76.51% / 0.00%**   | [📥 Download](https://drive.google.com/drive/folders/1s7QWEfbHbb5LfaaHqBFw9pKSXDJtocAK?usp=drive_link) |
+| [🔗 ShanghaiTech](https://drive.google.com/file/d/1lJ_M7HaQUSC2dQGKehlrKqNEfcNym8j4/view?usp=sharing) | **97.91% / 0.04%**      | **97.86% / 0.03%**   | [📥 Download](https://drive.google.com/drive/folders/1s7QWEfbHbb5LfaaHqBFw9pKSXDJtocAK?usp=drive_link) |
+| [🔗 UBnormal](https://drive.google.com/file/d/1pAwRXrkDKH6XyYkRF3n5A0LkliFzH4Vp/view?usp=sharing)     | **70.91% / 0.00%**      | **76.51% / 0.00%**   | [📥 Download](https://drive.google.com/drive/folders/1s7QWEfbHbb5LfaaHqBFw9pKSXDJtocAK?usp=drive_link) |
 
 ---
 
