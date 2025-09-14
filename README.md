@@ -34,19 +34,26 @@
 <details>
   <summary><strong>📋 BibTeX Citation (click to expand)</strong></summary>
   <pre><code>
-  @ARTICLE{11036561,
+    @ARTICLE{11036561,
     author={Su, Yong and Li, Jiahang and An, Simin and Xu, Hengpeng and Peng, Weilong},
-    journal={IEEE Transactions on Industrial Informatics},
-    title={Dual-Detector Reoptimization for Federated Weakly Supervised Video Anomaly Detection via Adaptive Dynamic Recursive Mapping},
+    journal={IEEE Transactions on Industrial Informatics}, 
+    title={Dual-Detector Reoptimization for Federated Weakly Supervised Video Anomaly Detection via Adaptive Dynamic Recursive Mapping}, 
     year={2025},
-    volume={},
-    number={},
-    pages={1-11},
+    volume={21},
+    number={9},
+    pages={7046-7056},
     keywords={Adaptation models;Training;Anomaly detection;Feature extraction;Surveillance;Optimization;Accuracy;Privacy;Detectors;Semantics;Adaptive dynamic recursive mapping;adaptive local aggregation;federated;scene-similarity;video anomaly detection (VAD);weakly supervised},
-    doi={10.1109/TII.2025.3574406}
-  }
-  </code></pre>
+    doi={10.1109/TII.2025.3574406}}
+    </code></pre>
 </details>
+
+## 🔥 News
+
+* 📂 Model Release: We are excited to announce the release of our best-performing model weights! The weights are available [here](#model-performance).
+* 🎉 Video Feature: The Shanghaitech and UBnormal video features, extracted using VideoMAEv2, are now available for download. You can find them [here](#model-performance).
+
+
+
 
 ## 📄 Abstract
 
@@ -133,7 +140,7 @@ python VAD/inference.py --inference_model='shanghaitech.pkl'
 
 ---
 
-## 📊 Model Performance Summary
+## 📊 Model Performance Summary <a name="model-performance"></a>
 
 Performance comparison (AUC / FAR) on standard benchmarks.
 
