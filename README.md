@@ -48,6 +48,7 @@
 </details>
 
 ## 🔥 News
+* ***📂 2025.10 Guide Released:*** We have uploaded the first complete guide for deploying federated learning on the NVIDIA Jetson AGX Xavier. You could view it [here](https://github.com/rekkles2/Fed_WSVAD/blob/main/Fed_VAD/Jetson%20AGX%20Xavier%20Deployment%20Guide.md).
 * ***📄 2025.09 Supplementary Appendix Released:*** We have submitted our Supplementary Appendix. You could view it [here](Figure/Appendix.pdf).
 * ***✨ 2025.08 Model Release:*** We are excited to announce the release of our best-performing model weights! The weights are available [here](#model-performance).
 * ***🎉 2025.08 Video Feature:*** The Shanghaitech and UBnormal video features, extracted using VideoMAEv2, are now available for download. You can find them [here](#model-performance).
