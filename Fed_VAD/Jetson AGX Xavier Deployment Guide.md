@@ -142,7 +142,7 @@ sudo reboot
 
 ---
 
-### 4. Let the Fan Spin Up ☺
+### 4. Let the Fan Spin Up 😀
 
 <p align="center">
   <table>
@@ -175,6 +175,12 @@ If an error occurs during installation or when starting `jtop`, check the servic
 
 ```bash
 journalctl -u jtop.service
+```
+
+Then run：
+
+```bash
+jtop
 ```
 
 ---
@@ -273,4 +279,5 @@ pip3 install --no-cache-dir --force-reinstall -Iv grpcio==1.62.1
 ```
 
 Now, all conditions are prepared. Thanks for following! ❤
+
 
