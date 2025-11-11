@@ -13,12 +13,6 @@
   <a href="Figure/Appendix.pdf" target="_blank" rel="noopener" title="Read the Supplementary Appendix (PDF)">
     <img src="https://img.shields.io/badge/📄%20Appendix-PDF-0050FF?style=flat-square&logo=adobeacrobatreader&logoColor=white" alt="Appendix PDF" style="margin:2px;"/>
   </a>
-  <a href="https://github.com/rekkles2/Fed_WSVAD" target="_blank" rel="noopener" title="GitHub Repository Stars">
-    <img src="https://img.shields.io/github/stars/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white&color=gold" alt="GitHub Stars" style="margin:2px;"/>
-  </a>
-  <a href="https://github.com/rekkles2/Fed_WSVAD/forks" target="_blank" rel="noopener" title="GitHub Repository Forks">
-    <img src="https://img.shields.io/github/forks/rekkles2/Fed_WSVAD?style=flat-square&logo=github&logoColor=white&color=lightgrey" alt="GitHub Forks" style="margin:2px;"/>
-  </a>
   <a href="https://github.com/rekkles2/Fed_WSVAD/blob/main/LICENSE" target="_blank" rel="noopener" title="Apache 2.0 License">
     <img src="https://img.shields.io/github/license/rekkles2/Fed_WSVAD?style=flat-square&logo=apache&logoColor=white&color=brightgreen" alt="License" style="margin:2px;"/>
   </a>
